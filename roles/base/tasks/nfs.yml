@@ -1,0 +1,7 @@
+---
+- name: install nfs utils
+  pacman:
+      name: nfs-utils
+      state: installed
+  tags:
+      - nfs

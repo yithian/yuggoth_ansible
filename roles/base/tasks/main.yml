@@ -1,6 +1,7 @@
 ---
 - include: tasks/fakehwclock.yml
 - include: tasks/cron.yml
+- include: tasks/nfs.yml
 - include: tasks/user.yml
 - include: tasks/ssh.yml
 - include: tasks/iptables.yml
