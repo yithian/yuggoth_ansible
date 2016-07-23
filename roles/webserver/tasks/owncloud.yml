@@ -85,6 +85,17 @@
   tags:
       - owncloud
 
+- name: cron owncloud's cron.php
+  cron:
+      name: owncloud cron.php
+      user: http
+      minute: "*/15"
+      job: php -f /usr/share/webapps/owncloud/cron.php > /dev/null 2>&1
+      state: present
+  tags:
+      - owncloud
+      - cron
+
 - name: configure owncloud httpd virtual host
   template:
       src: templates/httpd/extra/owncloud.conf.j2
