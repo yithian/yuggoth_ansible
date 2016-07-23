@@ -1,0 +1,2 @@
+ddclient_login: "{{ vault_ddclient_login }}"
+ddclient_password: "{{ vault_ddclient_password }}"

@@ -1,0 +1,47 @@
+---
+- name: install ddclient
+  pacman:
+      name: ddclient
+      state: present
+  tags:
+      - ddclient
+
+- name: ensure ddclient systemd override directory exists
+  file:
+      path: /etc/systemd/system/ddclient.service.d
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+  notify: reload systemd
+  tags:
+      - ddclient
+
+- name: land ddclient systemd override
+  copy:
+      src: files/ddclient/override.conf
+      dest: /etc/systemd/system/ddclient.service.d/override.conf
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - ddclient
+
+- name: configure ddclient
+  template:
+      src: templates/ddclient/ddclient.conf.j2
+      dest: /etc/ddclient/ddclient.conf
+      owner: root
+      group: root
+      mode: 0600
+  notify: reload ddclient
+  tags:
+      - ddclient
+
+- name: ensure ddclient is running
+  service:
+      name: ddclient
+      enabled: yes
+      state: started
+  tags:
+      - ddclient

@@ -1,0 +1,11 @@
+#
+# /etc/hosts: static lookup table for host names
+#
+
+#<ip-address>	<hostname.domain.org>	<hostname>
+127.0.0.1	localhost.localdomain	localhost
+::1		localhost.localdomain	localhost
+{{ ansible_default_ipv4.address }}	void mail owncloud www
+{{ storage_host_ip }}	{{ storage_subdomain }}
+
+# End of file
