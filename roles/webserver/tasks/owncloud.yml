@@ -1,0 +1,80 @@
+---
+- name: mount owncloud storage
+  mount:
+      src: "{{ storage_host }}:{{ oc_volume }}"
+      name: "{{ oc_mountpoint }}"
+      fstype: nfs
+      opts: _netdev
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - owncloud
+      - storage
+
+- name: ensure httpd systemd override directory exists
+  file:
+      path: /etc/systemd/system/httpd.service.d
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+  notify: reload systemd
+  tags:
+      - owncloud
+
+- name: land httpd systemd override
+  template:
+      src: templates/httpd/override.conf.j2
+      dest: /etc/systemd/system/httpd.service.d/override.conf
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - owncloud
+
+- name: install owncloud core
+  pacman:
+      name: owncloud
+      state: installed
+  notify: restart httpd
+  tags:
+      - owncloud
+
+- name: install owncloud apps
+  pacman:
+      name: "{{ item }}"
+      state: installed
+  with_items:
+      - owncloud-app-bookmarks
+      - owncloud-app-calendar
+      - owncloud-app-contacts
+      - owncloud-app-documents
+  notify: restart httpd
+  tags:
+      - owncloud
+      - owncloud_apps
+
+- name: configure owncloud
+  template:
+      src: templates/owncloud/config.php.j2
+      dest: /etc/webapps/owncloud/config/config.php
+      owner: http
+      group: http
+      mode: 0640
+  become_user: http
+  notify: restart httpd
+  tags:
+      - owncloud
+
+- name: configure owncloud httpd virtual host
+  template:
+      src: templates/httpd/extra/owncloud.conf.j2
+      dest: /etc/httpd/conf/extra/owncloud.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - owncloud
+      - httpd

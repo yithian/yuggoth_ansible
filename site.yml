@@ -3,3 +3,4 @@
 - include: dnsserver.yml
 - include: mailserver.yml
 - include: dbserver.yml
+- include: webserver.yml

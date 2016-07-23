@@ -1,0 +1,43 @@
+---
+- name: install openssl
+  pacman:
+      name: openssl
+      state: installed
+  tags:
+      - ssl
+
+- name: install certbot
+  pacman:
+      name: certbot
+      state: installed
+  tags:
+      - ssl
+
+- name: install certbot-apache
+  pacman:
+      name: certbot-apache
+      state: installed
+  tags:
+      - ssl
+
+- name: renew ssl certs every month
+  cron:
+      name: renew ssl certs every month
+      minute: 8
+      hour: 0
+      day: 1
+      job: systemctl stop httpd && certbot renew | logger -t letsencrypt && systemctl start httpd
+  tags:
+      - ssl
+      - cron
+
+- name: land httpd ssl config
+  template:
+      src: templates/httpd/extra/httpd-ssl.conf.j2
+      dest: /etc/httpd/conf/extra/httpd-ssl.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - ssl

@@ -1,0 +1,33 @@
+<?php
+$CONFIG = array (
+  'instanceid' => '{{ oc_instanceid }}',
+  'passwordsalt' => '{{ oc_passwordsalt }}',
+  'secret' => '{{ oc_secret }}',
+  'trusted_domains' =>
+  array (
+    0 => '{{ oc_host }}',
+  ),
+  'datadirectory' => '/usr/share/webapps/owncloud/data',
+  'overwrite.cli.url' => 'https://{{ oc_host }}',
+  'dbtype' => 'mysql',
+  'version' => '9.1.0.15',
+  'dbname' => 'owncloud',
+  'dbhost' => '{{ db_host }}',
+  'dbtableprefix' => 'oc_',
+  'dbuser' => '{{ oc_dbuser }}',
+  'dbpassword' => '{{ oc_dbpassword }}',
+  'logtimezone' => 'UTC',
+  'installed' => true,
+  'memcache.local' => '\\OC\\Memcache\\APCu',
+  'mail_smtpmode' => 'php',
+  'mail_smtpsecure' => 'ssl',
+  'mail_from_address' => 'admin',
+  'mail_domain' => '{{ oc_host }}',
+  'mail_smtphost' => 'localhost',
+  'mail_smtpport' => '587',
+  'theme' => '',
+  'loglevel' => 2,
+  'maintenance' => false,
+  'appstore.experimental.enabled' => true,
+  'htaccess.RewriteBase' => '/',
+);

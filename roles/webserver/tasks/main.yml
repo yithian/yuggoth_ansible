@@ -1,0 +1,7 @@
+---
+- include: tasks/httpd.yml
+- include: tasks/php.yml
+- include: tasks/ssl.yml
+- include: tasks/www.yml
+- include: tasks/owncloud.yml
+- include: tasks/roundcube.yml

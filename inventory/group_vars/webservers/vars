@@ -1,0 +1,21 @@
+web_port: 80
+ssl_port: 443
+
+oc_host: "{{ vault_oc_host }}"
+rc_host: "{{ vault_rc_host }}"
+
+db_host: localhost
+
+oc_volume: "{{ vault_oc_volume }}"
+oc_mountpoint: "{{ vault_oc_mountpoint }}"
+
+oc_instanceid: "{{ vault_oc_instanceid }}"
+oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
+oc_secret: "{{ vault_oc_secret }}"
+
+oc_dbuser: "{{ vault_oc_dbuser }}"
+oc_dbpassword: "{{ vault_oc_dbpassword }}"
+
+rc_dbuser: "{{ vault_rc_dbuser }}"
+rc_dbpassword: "{{ vault_rc_dbpassword }}"
+rc_des_key: "{{ vault_rc_des_key }}"

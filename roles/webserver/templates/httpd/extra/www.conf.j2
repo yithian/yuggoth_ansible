@@ -1,0 +1,10 @@
+<VirtualHost *:{{ web_port }}>
+    ServerAdmin {{ user }}@{{ domain }}
+    DocumentRoot /srv/http/
+    ServerName {{ web_host }}
+
+    Redirect permanent / https://{{ web_host }}/
+
+    ErrorLog /var/log/httpd/{{ web_host }}-error_log
+    CustomLog /var/log/httpd/{{ web_host }}-access_log common
+</VirtualHost>

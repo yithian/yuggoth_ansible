@@ -1,0 +1,48 @@
+Alias /roundcube "/usr/share/webapps/roundcubemail"
+<Directory "/usr/share/webapps/roundcubemail">
+    AllowOverride All
+    Options FollowSymlinks
+    Require all granted
+    php_admin_value open_basedir "/tmp/:/var/cache/roundcubemail:/usr/share/webapps/roundcubemail:/etc/webapps/roundcubemail:/usr/share/pear/:/var/log/roundcubemail:/etc/httpd/conf/mime.types"
+</Directory>
+
+<Directory /usr/share/webapps/roundcubemail/config>
+    Options -FollowSymLinks
+    AllowOverride None
+    Require all denied
+</Directory>
+
+<VirtualHost *:{{ web_port }}>
+    ServerAdmin {{ user }}@{{ domain }}
+    DocumentRoot /usr/share/webapps/roundcubemail
+    ServerName {{ rc_host }}
+
+    Redirect permanent / https://{{ rc_host }}/
+
+    ErrorLog /var/log/httpd/{{ rc_host }}-error_log
+    CustomLog /var/log/httpd/{{ rc_host }}-access_log common
+</VirtualHost>
+
+<VirtualHost *:{{ ssl_port }}>
+    ServerAdmin {{ user }}@{{ domain }}
+    DocumentRoot /usr/share/webapps/roundcubemail
+    ServerName {{ rc_host }}:{{ ssl_port }}
+
+    SSLEngine on
+    SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
+    SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
+    SSLCertificateChainFile "/etc/letsencrypt/live/{{ web_host }}/chain.pem"
+
+    <FilesMatch "\.(cgi|shtml|phtml|php)$">
+        SSLOptions +StdEnvVars
+    </FilesMatch>
+    <Directory "/srv/http/cgi-bin">
+        SSLOptions +StdEnvVars
+    </Directory>
+    BrowserMatch "MSIE [2-5]" \
+         nokeepalive ssl-unclean-shutdown \
+         downgrade-1.0 force-response-1.0
+    ErrorLog /var/log/httpd/ssl_{{ rc_host }}-error_log
+    CustomLog "/var/log/httpd/ssl_{{ rc_host }}-request_log" \
+          "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+</VirtualHost>
