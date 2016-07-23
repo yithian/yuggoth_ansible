@@ -12,6 +12,16 @@
       - database
       - storage
 
+- name: cron emails to root
+  cronvar:
+      user: mysql
+      name: MAILTO
+      value: root
+      state: present
+  tags:
+      - database
+      - cron
+
 - name: cron database backups
   cron:
       name: cron database backups
