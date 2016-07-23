@@ -1,4 +1,22 @@
 ---
+- name: create owncloud mariadb database
+  mysql_db:
+      name: "{{ oc_dbname }}"
+      state: present
+  tags:
+      - owncloud
+      - database
+
+- name: create owncloud mariadb user
+  mysql_user:
+      name: "{{ oc_dbuser }}"
+      password: "{{ oc_dbpassword }}"
+      priv: "{{ oc_dbname }}.*:ALL"
+      state: present
+  tags:
+      - owncloud
+      - database
+
 - name: mount owncloud storage
   mount:
       src: "{{ storage_host }}:{{ oc_volume }}"
