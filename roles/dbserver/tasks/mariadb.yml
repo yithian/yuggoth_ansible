@@ -12,10 +12,13 @@
       - database
       - storage
 
-- name: install mariadb
+- name: install mariadb (and python connectors)
   pacman:
-      name: mariadb
+      name: "{{ item }}"
       state: present
+  with_items:
+      - mariadb
+      - mysql-python
   tags:
       - database
 
@@ -40,20 +43,38 @@
   tags:
       - database
 
-- name: land extra mariadb configs
-  template:
-      src: templates/mariadb/my-extra.cnf.j2
-      dest: /etc/mysql/my-extra.cnf
-      owner: mysql
-      group: mysql
-      mode: 0600
-  tags:
-      - database
-
 - name: ensure mariadb is running
   service:
       name: mysqld
       enabled: yes
       state: started
+  tags:
+      - database
+
+- name: set mariadb root password
+  mysql_user:
+      name: root
+      password: "{{ db_root_password }}"
+      state: present
+  tags:
+      - database
+
+- name: land mariadb credentials files
+  template:
+      src: templates/mariadb/client.cnf.j2
+      dest: "{{ item.path }}"
+      owner: "{{ item.owner }}"
+      group: "{{ item.group }}"
+      mode: 0600
+  with_items:
+      - { path: '/root/.my.cnf', owner: 'root', group: 'root' }
+      - { path: '/etc/mysql/my-extra.cnf', owner: 'mysql', group: 'mysql' }
+  tags:
+      - database
+
+- name: remove the anonymous mariadb user
+  mysql_user:
+      name: ''
+      state: absent
   tags:
       - database
