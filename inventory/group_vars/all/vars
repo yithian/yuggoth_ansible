@@ -1,0 +1,23 @@
+---
+# common to all roles. mostly connection stuff
+
+ansible_user: "{{ user }}"
+ansible_become: true
+ansible_become_user: root
+
+# this is me!
+user: "{{ vault_user }}"
+uid: "{{ vault_uid }}"
+gid: "{{ vault_gid }}"
+shell: "{{ vault_shell }}"
+
+# site domain
+domain: "{{ vault_domain }}"
+web_host: "{{ vault_web_host }}"
+
+storage_subdomain: "{{ vault_storage_subdomain }}"
+storage_host: "{{ vault_storage_host }}"
+storage_host_ip: "{{ vault_storage_host_ip }}"
+
+# for compatibility; arch linux defaults to python3
+ansible_python_interpreter: /usr/bin/python2
