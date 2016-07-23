@@ -7,7 +7,7 @@ $CONFIG = array (
   array (
     0 => '{{ oc_host }}',
   ),
-  'datadirectory' => '/usr/share/webapps/owncloud/data',
+  'datadirectory' => '{{ oc_mountpoint }}',
   'overwrite.cli.url' => 'https://{{ oc_host }}',
   'dbtype' => 'mysql',
   'version' => '9.1.0.15',
