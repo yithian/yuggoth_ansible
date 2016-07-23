@@ -26,3 +26,24 @@
       - files/id_rsa.pub
   tags:
       - user
+
+- name: install sudo
+  pacman:
+      name: sudo
+      state: installed
+  tags:
+      - user
+
+- name: ensure wheel group can use sudo
+  lineinfile:
+      dest: /etc/sudoers
+      regexp: "^# %wheel ALL=(ALL) ALL$"
+      line: "%wheel ALL=(ALL) ALL"
+      backrefs: yes
+      validate: 'visudo -cf %s'
+      owner: root
+      group: root
+      mode: 0440
+      state: present
+  tags:
+      - user
