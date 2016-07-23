@@ -1,4 +1,22 @@
 ---
+- name: create roundcube mariadb database
+  mysql_db:
+      name: "{{ rc_dbname }}"
+      state: present
+  tags:
+      - roundcube
+      - database
+
+- name: create roundcube mariadb user
+  mysql_user:
+      name: "{{ rc_dbuser }}"
+      password: "{{ rc_dbpassword }}"
+      priv: "{{ rc_dbname }}.*:ALL"
+      state: present
+  tags:
+      - roundcube
+      - database
+
 - name: install roundcube
   pacman:
       name: roundcubemail
