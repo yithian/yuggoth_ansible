@@ -1,0 +1,18 @@
+---
+- name: ensure private group is present
+  group:
+      name: "{{ user }}"
+      gid: "{{ gid }}"
+      state: present
+  tags:
+      - user
+
+- name: ensure user is present
+  user:
+      name: "{{ user }}"
+      uid: "{{ uid }}"
+      group: "{{ user }}"
+      groups: 'wheel'
+      state: present
+  tags:
+      - user

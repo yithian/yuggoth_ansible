@@ -1,0 +1,5 @@
+---
+- include: tasks/fakehwclock.yml
+- include: tasks/user.yml
+- include: tasks/ssh.yml
+- include: tasks/iptables.yml

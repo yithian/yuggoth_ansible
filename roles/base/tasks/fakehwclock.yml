@@ -1,0 +1,22 @@
+---
+- name: install fake-hwclock
+  pacman:
+      name: fake-hwclock
+      state: present
+  tags:
+      - fake-hwclock
+
+- name: ensure fake-hwclock is running
+  service:
+      name: fake-hwclock
+      enabled: yes
+      state: running
+  tags:
+      - fake-hwclock
+
+- name: set fake-hwclock timer
+  service:
+      name: fake-hwclock-save.timer
+      enabled: yes
+  tags:
+      - fake-hwclock

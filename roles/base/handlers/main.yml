@@ -1,0 +1,13 @@
+---
+- name: reload systemd
+  command: /usr/bin/systemctl daemon-reload
+
+- name: reload sshd
+  service:
+      name: sshd
+      state: reloaded
+
+- name: reload iptables
+  service:
+      name: iptables
+      state: reloaded

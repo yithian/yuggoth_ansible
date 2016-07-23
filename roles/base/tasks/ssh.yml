@@ -1,0 +1,26 @@
+---
+- name: ensure ssh is installed
+  pacman:
+      name: openssh
+      state: present
+  tags:
+      - ssh
+
+- name: secure sshd
+  copy:
+      src: files/sshd/sshd_config
+      dest: /etc/ssh/sshd_config
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload sshd
+  tags:
+      - ssh
+
+- name: ensure ssh is running
+  service:
+      name: sshd
+      enabled: yes
+      state: started
+  tags:
+      - ssh
