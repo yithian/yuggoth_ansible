@@ -17,230 +17,60 @@
   tags:
       - dovecot
 
-- name: configure dovecot 10-auth
+- name: configure dovecot standard configs
+  file:
+      src: /usr/share/doc/dovecot/example-config/conf.d/{{ item }}
+      dest: /etc/dovecot/conf.d/{{ item }}
+      state: link
+  with_items:
+      - 10-director.conf
+      - 10-master.conf
+      - 15-mailboxes.conf
+      - 20-imap.conf
+      - 20-pop3.conf
+      - 90-acl.conf
+      - 90-plugin.conf
+      - 90-quota.conf
+      - auth-checkpassword.conf.ext
+      - auth-deny.conf.ext
+      - auth-dict.conf.ext
+      - auth-ldap.conf.ext
+      - auth-master.conf.ext
+      - auth-passwdfile.conf.ext
+      - auth-sql.conf.ext
+      - auth-static.conf.ext
+      - auth-system.conf.ext
+      - auth-vpopmail.conf.ext
+  notify: reload dovecot
+  tags:
+      - dovecot
+
+- name: configure dovecot non-standard configs
   copy:
-      src: files/dovecot/10-auth.conf
-      dest: /etc/dovecot/conf.d/10-auth.conf
+      src: files/dovecot/conf.d/{{ item }}
+      dest: /etc/dovecot/conf.d/{{ item }}
       owner: root
       group: root
       mode: 0644
+  with_items:
+      - 10-auth.conf
+      - 10-mail.conf
+      - 15-lda.conf
+      - 20-lmtp.conf
+      - 80-sieve.conf
   notify: reload dovecot
   tags:
       - dovecot
 
-- name: configure dovecot 10-director
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/10-director.conf
-      dest: /etc/dovecot/conf.d/10-director.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 10-mail
-  copy:
-      src: files/dovecot/conf.d/10-mail.conf
-      dest: /etc/dovecot/conf.d/10-mail.conf
-      owner: root
-      group: root
-      mode: 0644
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 10-master
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/10-master.conf
-      dest: /etc/dovecot/conf.d/10-master.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 10-ssl
+- name: configure dovecot customized configs
   template:
-      src: templates/dovecot/conf.d/10-ssl.conf.j2
-      dest: /etc/dovecot/conf.d/10-ssl.conf
+      src: templates/dovecot/conf.d/{{ item }}.j2
+      dest: /etc/dovecot/conf.d/{{ item }}
       owner: root
       group: root
       mode: 0644
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 15-lda
-  copy:
-      src: files/dovecot/conf.d/15-lda.conf
-      dest: /etc/dovecot/conf.d/15-lda.conf
-      owner: root
-      group: root
-      mode: 0644
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 15-mailboxes
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/15-mailboxes.conf
-      dest: /etc/dovecot/conf.d/15-mailboxes.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 20-imap
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/20-imap.conf
-      dest: /etc/dovecot/conf.d/20-imap.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 20-lmtp
-  copy:
-      src: files/dovecot/conf.d/20-lmtp.conf
-      dest: /etc/dovecot/conf.d/20-lmtp.conf
-      owner: root
-      group: root
-      mode: 0644
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 20-pop3
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/20-pop3.conf
-      dest: /etc/dovecot/conf.d/20-pop3.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 80-sieve
-  copy:
-      src: files/dovecot/conf.d/80-sieve.conf
-      dest: /etc/dovecot/conf.d/80-sieve.conf
-      owner: root
-      group: root
-      mode: 0644
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 90-acl
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/90-acl.conf
-      dest: /etc/dovecot/conf.d/90-acl.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 90-plugin
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/90-plugin.conf
-      dest: /etc/dovecot/conf.d/90-plugin.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot 90-quota
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/90-quota.conf
-      dest: /etc/dovecot/conf.d/90-quota.conf
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-checkpassword
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-checkpassword.conf.ext
-      dest: /etc/dovecot/conf.d/auth-checkpassword.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-deny
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-deny.conf.ext
-      dest: /etc/dovecot/conf.d/auth-deny.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-dict
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-dict.conf.ext
-      dest: /etc/dovecot/conf.d/auth-dict.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-ldap
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-ldap.conf.ext
-      dest: /etc/dovecot/conf.d/auth-ldap.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-master
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-master.conf.ext
-      dest: /etc/dovecot/conf.d/auth-master.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-passwdfile
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-passwdfile.conf.ext
-      dest: /etc/dovecot/conf.d/auth-passwdfile.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-sql
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-sql.conf.ext
-      dest: /etc/dovecot/conf.d/auth-sql.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-static
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-static.conf.ext
-      dest: /etc/dovecot/conf.d/auth-static.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-system
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-system.conf.ext
-      dest: /etc/dovecot/conf.d/auth-system.conf.ext
-      state: link
-  notify: reload dovecot
-  tags:
-      - dovecot
-
-- name: configure dovecot auth-vpopmail
-  file:
-      src: /usr/share/doc/dovecot/example-config/conf.d/auth-vpopmail.conf.ext
-      dest: /etc/dovecot/conf.d/auth-vpopmail.conf.ext
-      state: link
+  with_items:
+      - 10-ssl.conf
   notify: reload dovecot
   tags:
       - dovecot
