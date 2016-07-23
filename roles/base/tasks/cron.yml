@@ -1,0 +1,15 @@
+---
+- name: install cronie
+  pacman:
+      name: cronie
+      state: installed
+  tags:
+      - cron
+
+- name: ensure cron is running
+  service:
+      name: cronie
+      enabled: yes
+      state: started
+  tags:
+      - cron
