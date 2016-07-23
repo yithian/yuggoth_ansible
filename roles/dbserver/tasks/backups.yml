@@ -1,0 +1,36 @@
+---
+- name: mount mariadb storage
+  mount:
+      src: "{{ storage_host }}:{{ db_backup_volume }}"
+      name: "{{ db_backup_mountpoint }}"
+      fstype: nfs
+      opts: _netdev
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - database
+      - storage
+
+- name: cron database backups
+  cron:
+      name: cron database backups
+      user: mysql
+      minute: 1
+      job: mysqldump --defaults-extra-file=/etc/mysql/my-extra.cnf -u root -A | gzip - > /mnt/mysql_backup/dump_$(date +\%y\%m\%d).sql.gz
+      state: present
+  tags:
+      - database
+      - cron
+
+- name: only keep a month of backups though
+  cron:
+      name: only keep a month of backups though
+      user: mysql
+      minute: 31
+      hour: 0
+      job: find /mnt/mysql_backup/ -ctime +31 -exec rm {} \;
+      state: present
+  tags:
+      - database
+      - cron

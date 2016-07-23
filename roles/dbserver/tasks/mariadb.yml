@@ -1,0 +1,59 @@
+---
+- name: mount mariadb storage
+  mount:
+      src: "{{ storage_host }}:{{ db_volume }}"
+      name: "{{ db_mountpoint }}"
+      fstype: nfs
+      opts: _netdev
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - database
+      - storage
+
+- name: install mariadb
+  pacman:
+      name: mariadb
+      state: present
+  tags:
+      - database
+
+- name: ensure mariadb systemd override directory exists
+  file:
+      path: /etc/systemd/system/mysqld.service.d
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+  notify: reload systemd
+  tags:
+      - database
+
+- name: land mariadb systemd override
+  template:
+      src: templates/mariadb/override.conf.j2
+      dest: /etc/systemd/system/mysqld.service.d/override.conf
+      owner: root
+      group: root
+      mode: 0644
+  tags:
+      - database
+
+- name: land extra mariadb configs
+  template:
+      src: templates/mariadb/my-extra.cnf.j2
+      dest: /etc/mysql/my-extra.cnf
+      owner: mysql
+      group: mysql
+      mode: 0600
+  tags:
+      - database
+
+- name: ensure mariadb is running
+  service:
+      name: mysqld
+      enabled: yes
+      state: started
+  tags:
+      - database
