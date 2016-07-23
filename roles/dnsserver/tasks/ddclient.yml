@@ -34,7 +34,7 @@
       owner: root
       group: root
       mode: 0600
-  notify: reload ddclient
+  notify: restart ddclient
   tags:
       - ddclient
 
