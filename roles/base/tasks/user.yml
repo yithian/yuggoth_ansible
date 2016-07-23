@@ -16,3 +16,13 @@
       state: present
   tags:
       - user
+
+- name: land authorized key for user
+  authorized_key:
+      user: "{{ user }}"
+      key: "{{ item }}"
+      state: present
+  with_file:
+      - files/id_rsa.pub
+  tags:
+      - user
