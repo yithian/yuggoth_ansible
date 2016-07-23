@@ -13,6 +13,7 @@ oc_instanceid: "{{ vault_oc_instanceid }}"
 oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
 oc_secret: "{{ vault_oc_secret }}"
 
+oc_dbname: "{{ vault_oc_dbname }}"
 oc_dbuser: "{{ vault_oc_dbuser }}"
 oc_dbpassword: "{{ vault_oc_dbpassword }}"
 
