@@ -1,0 +1,27 @@
+---
+- name: install spamassassin
+  pacman:
+      name: spamassassin
+      state: installed
+  tags:
+      - spamassassin
+      - postfix
+
+- name: schedule spamassassin updates
+  cron:
+      name: schedule spamassassin updates
+      minute: 0
+      hour: 0
+      job: /usr/bin/vendor_perl/sa-update && systemctl restart spamassassin
+  tags:
+      - spamassassin
+      - cron
+
+- name: ensure spamassassin is running
+  service:
+      name: spamassassin
+      enabled: yes
+      state: started
+  tags:
+      - spamassassin
+      - postfix

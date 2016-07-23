@@ -1,0 +1,10 @@
+---
+- name: reload postfix
+  service:
+      name: postfix
+      state: reloaded
+
+- name: reload dovecot
+  service:
+      name: dovecot
+      state: reloaded

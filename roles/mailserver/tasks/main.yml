@@ -1,0 +1,4 @@
+---
+- include: tasks/spamassassin.yml
+- include: tasks/postfix.yml
+- include: tasks/dovecot.yml

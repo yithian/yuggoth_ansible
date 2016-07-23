@@ -1,0 +1,26 @@
+---
+- name: install postfix
+  pacman:
+      name: postfix
+      state: installed
+  tags:
+      - postfix
+
+- name: configure postfix
+  template:
+      src: templates/postfix/main.cf.j2
+      dest: /etc/postfix/main.cf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload postfix
+  tags:
+      - postfix
+
+- name: ensure postfix is started
+  service:
+      name: postfix
+      enabled: yes
+      state: started
+  tags:
+      - postfix

@@ -1,0 +1,2 @@
+mailserver: "{{ vault_mailserver }}"
+relayhost: "{{ vault_relayhost }}"
