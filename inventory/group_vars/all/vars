@@ -1,10 +1,6 @@
 ---
 # common to all roles. mostly connection stuff
 
-ansible_user: "{{ user }}"
-ansible_become: true
-ansible_become_user: root
-
 # this is me!
 user: "{{ vault_user }}"
 uid: "{{ vault_uid }}"
