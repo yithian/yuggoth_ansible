@@ -1,9 +1,15 @@
 ---
+- name: set timezone
+  command: /usr/bin/timedatectl set-timezone America/New_York
+  tags:
+      - timedate
+
 - name: install fake-hwclock
   pacman:
       name: fake-hwclock
       state: present
   tags:
+      - timedate
       - fake-hwclock
 
 - name: ensure fake-hwclock is running
@@ -12,6 +18,7 @@
       enabled: yes
       state: running
   tags:
+      - timedate
       - fake-hwclock
 
 - name: set fake-hwclock timer
@@ -19,4 +26,5 @@
       name: fake-hwclock-save.timer
       enabled: yes
   tags:
+      - timedate
       - fake-hwclock
