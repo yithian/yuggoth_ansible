@@ -5,7 +5,7 @@
 - name: restart ddclient
   service:
       name: ddclient
-      state: restart
+      state: restarted
 
 - name: reload dnsmasq
   service:
