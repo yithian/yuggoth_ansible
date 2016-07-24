@@ -3,6 +3,7 @@
   command: /usr/bin/timedatectl set-timezone America/New_York
   tags:
       - timedate
+  when: ansible_date_time.tz != 'EDT' and ansible_date_time.tz != 'EST'
 
 - name: install fake-hwclock
   pacman:
