@@ -1,0 +1,7 @@
+---
+- name: vim > emacs
+  pacman:
+      name: vim
+      state: installed
+  tags:
+      - std-utils
