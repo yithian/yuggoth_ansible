@@ -6,14 +6,17 @@
   with_items:
       - php
       - php-apache
-      - php-apcu-bc
-      - php-intl
-      - php-mcrypt
-      - pear-auth-sasl
-      - pear-mail-mime
-      - pear-net-idna2
-      - pear-net-smtp
-      - pear-net-socket
+      - php-apcu-bc # optional by owncloud
+      - php-gd # required by owncloud
+      - php-intl # recommended by owncloud
+      - php-mcrypt # recommended by owncloud and roundcube
+      - php-pspell # optional by roundcube
+      - pear-auth-sasl # required by roundcube
+      - pear-mail-mime # required by roundcube
+      - pear-net-idna2 # required by roundcube
+      - pear-net-sieve # optional for roundcube
+      - pear-net-smtp # required by roundcube
+      - pear-net-socket # required by roundcube
   notify: restart httpd
   tags:
       - php
