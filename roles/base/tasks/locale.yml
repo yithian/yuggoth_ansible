@@ -1,0 +1,20 @@
+---
+- name: configure locale.gen
+  lineinfile:
+      dest: /etc/locale.gen
+      regexp: "^#en_US.UTF-8 UTF-8\\s*$"
+      backrefs: yes
+      line: "en_US.UTF-8 UTF-8"
+      owner: root
+      group: root
+      mode: 0644
+      state: present
+  register: locale_gen
+  tags:
+      - std-utils
+
+- name: regen locale if needed
+  command: /usr/bin/locale-gen
+  when: locale_gen.changed == True
+  tags:
+      - std-utils
