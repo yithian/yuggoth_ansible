@@ -77,6 +77,16 @@
   tags:
       - owncloud
 
+- name: land the oc-perms script
+  copy:
+      src: files/owncloud/oc-perms
+      dest: /usr/local/bin/oc-perms
+      owner: root
+      group: root
+      mode: 0755
+  tags:
+      - owncloud
+
 - name: cron owncloud's cron.php
   cron:
       name: owncloud cron.php
