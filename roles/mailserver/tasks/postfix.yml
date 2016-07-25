@@ -17,6 +17,25 @@
   tags:
       - postfix
 
+- name: configure aliases
+  lineinfile:
+      dest: /etc/postfix/aliases
+      regexp: "^(?:#)?root:\\s+\\S+"
+      line: "root:          {{ user }}"
+      backrefs: yes
+      owner: root
+      group: root
+      mode: 0644
+  register: aliases_register
+  tags:
+      - postfix
+
+- name: configure aliases if necessary
+  command: /usr/bin/newaliases
+  when: aliases_register.changed == True
+  tags:
+      - postfix
+
 - name: ensure postfix is started
   service:
       name: postfix
