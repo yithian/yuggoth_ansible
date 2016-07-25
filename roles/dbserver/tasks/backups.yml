@@ -4,7 +4,7 @@
       src: "{{ storage_host }}:{{ db_backup_volume }}"
       name: "{{ db_backup_mountpoint }}"
       fstype: nfs
-      opts: _netdev
+      opts: _netdev,vers=3
       dump: 0
       passno: 0
       state: mounted
