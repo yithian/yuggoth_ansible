@@ -1,7 +1,22 @@
 ---
 - name: install nfs utils
   pacman:
-      name: nfs-utils
+      name: "{{ item }}"
       state: installed
+  with_items:
+      - nfs-utils
+      - rpcbind
+  tags:
+      - nfs
+
+- name: ensure nfs client services are started
+  service:
+      name: "{{ item }}"
+      enabled: yes
+      state: started
+  with_items:
+      #- rpcbind # https://github.com/ansible/ansible-modules-core/issues/3868
+      - nfs-client.target
+      - remote-fs.target
   tags:
       - nfs
