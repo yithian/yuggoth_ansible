@@ -6,31 +6,6 @@
   tags:
       - ssl
 
-- name: install certbot
-  pacman:
-      name: certbot
-      state: installed
-  tags:
-      - ssl
-
-- name: install certbot-apache
-  pacman:
-      name: certbot-apache
-      state: installed
-  tags:
-      - ssl
-
-- name: renew ssl certs every month
-  cron:
-      name: renew ssl certs every month
-      minute: 8
-      hour: 0
-      day: 1
-      job: systemctl stop httpd && certbot renew | logger -t letsencrypt && systemctl start httpd
-  tags:
-      - ssl
-      - cron
-
 - name: land httpd ssl config
   template:
       src: templates/httpd/extra/httpd-ssl.conf.j2

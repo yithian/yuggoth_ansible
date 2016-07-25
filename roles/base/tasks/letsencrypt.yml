@@ -1,0 +1,39 @@
+---
+- name: install certbot
+  pacman:
+      name: certbot
+      state: installed
+  tags:
+      - ssl
+
+- name: install certbot-apache
+  pacman:
+      name: certbot-apache
+      state: installed
+  tags:
+      - ssl
+
+- name: register with Let's Encrypt if necessary
+  command: /usr/bin/certbot register -n -m {{ user }}@{{ domain }} --agree-tos
+  args:
+      creates: /etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org/directory/*
+  tags:
+      - ssl
+
+- name: get a Let's Encrypt cert if necessary
+  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d {{ ansible_fqdn }} -d owncloud.{{ domain }} -d mail.{{ domain }}
+  args:
+      creates: /etc/letsencrypt/live/{{ web_host }}
+  tags:
+      - ssl
+
+- name: renew ssl certs every month
+  cron:
+      name: renew ssl certs every month
+      minute: 8
+      hour: 0
+      day: 1
+      job: systemctl stop httpd && certbot renew | logger -t letsencrypt && systemctl start httpd
+  tags:
+      - ssl
+      - cron
