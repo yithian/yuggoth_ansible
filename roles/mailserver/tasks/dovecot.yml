@@ -1,8 +1,11 @@
 ---
-- name: install dovecot
+- name: install dovecot and pigeonhole (sieve)
   pacman:
-      name: dovecot
+      name: "{{ item }}"
       state: installed
+  with_items:
+      - dovecot
+      - pigeonhole
   tags:
       - dovecot
 
