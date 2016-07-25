@@ -1,4 +1,17 @@
 ---
+- name: mount www storage
+  mount:
+      src: "{{ storage_host }}:{{ www_volume }}"
+      name: "{{ www_mountpoint }}"
+      fstype: nfs
+      opts: _netdev,vers=3
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - www
+      - storage
+
 - name: configure www httpd virtual host
   template:
       src: templates/httpd/extra/www.conf.j2

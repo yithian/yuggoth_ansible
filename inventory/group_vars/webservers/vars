@@ -6,6 +6,9 @@ rc_host: "{{ vault_rc_host }}"
 
 db_host: localhost
 
+www_volume: "{{ vault_www_volume }}"
+www_mountpoint: "{{ vault_www_mountpoint }}"
+
 oc_volume: "{{ vault_oc_volume }}"
 oc_mountpoint: "{{ vault_oc_mountpoint }}"
 
