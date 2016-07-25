@@ -51,19 +51,12 @@
   tags:
       - owncloud
 
-- name: install owncloud core
-  pacman:
-      name: owncloud
-      state: installed
-  notify: restart httpd
-  tags:
-      - owncloud
-
-- name: install owncloud apps
+- name: install owncloud
   pacman:
       name: "{{ item }}"
       state: installed
   with_items:
+      - owncloud
       - owncloud-app-bookmarks
       - owncloud-app-calendar
       - owncloud-app-contacts
@@ -71,7 +64,6 @@
   notify: restart httpd
   tags:
       - owncloud
-      - owncloud_apps
 
 - name: configure owncloud
   template:
