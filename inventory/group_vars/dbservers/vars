@@ -1,7 +1,4 @@
-db_volume: "{{ vault_db_volume }}"
 db_mountpoint: "{{ vault_db_mountpoint }}"
-
-db_backup_volume: "{{ vault_db_backup_volume }}"
 db_backup_mountpoint: "{{ vault_db_backup_mountpoint }}"
 
 db_root_password: "{{ vault_db_root_password }}"

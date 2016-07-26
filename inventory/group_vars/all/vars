@@ -11,6 +11,12 @@ shell: "{{ vault_shell }}"
 domain: "{{ vault_domain }}"
 web_host: "{{ vault_web_host }}"
 
+# storage nfs volumes
+www_volume: "{{ vault_www_volume }}"
+db_volume: "{{ vault_db_volume }}"
+db_backup_volume: "{{ vault_db_backup_volume }}"
+oc_volume: "{{ vault_oc_volume }}"
+
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"
 storage_host_ip: "{{ vault_storage_host_ip }}"

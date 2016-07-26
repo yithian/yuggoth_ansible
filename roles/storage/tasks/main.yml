@@ -1,0 +1,17 @@
+---
+- name: set up exports
+  template:
+      src: templates/exports.j2
+      dest: /etc/exports
+      owner: root
+      group: root
+      mode: 0644
+  register: exports
+  tags:
+      - exports
+
+- name: export filesystems if needed
+  command: /usr/sbin/exportfs -ra
+  when: exports.changed == True
+  tags:
+      - exports

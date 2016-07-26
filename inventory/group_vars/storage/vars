@@ -1,0 +1,19 @@
+ansible_python_interpreter: /usr/bin/python
+
+nfs_exports:
+  oc_storage:
+      volume: "{{ vault_oc_volume }}"
+      allowed: "{{ vault_nfs_exports['oc_storage']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['oc_storage']['opts'] }}"
+  db_storage:
+      volume: "{{ vault_db_volume }}"
+      allowed: "{{ vault_nfs_exports['db_storage']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['db_storage']['opts'] }}"
+  db_backup_storage:
+      volume: "{{ vault_db_backup_volume }}"
+      allowed: "{{ vault_nfs_exports['db_backup_storage']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['db_backup_storage']['opts'] }}"
+  www_storage:
+      volume: "{{ vault_www_volume }}"
+      allowed: "{{ vault_nfs_exports['www_storage']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['www_storage']['opts'] }}"

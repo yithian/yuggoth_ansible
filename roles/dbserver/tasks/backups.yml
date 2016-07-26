@@ -1,5 +1,5 @@
 ---
-- name: mount mariadb storage
+- name: mount mariadb backups storage
   mount:
       src: "{{ storage_host }}:{{ db_backup_volume }}"
       name: "{{ db_backup_mountpoint }}"
