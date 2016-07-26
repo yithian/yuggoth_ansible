@@ -1,5 +1,8 @@
+---
+# needed to override the site-wide python interpeter location
 ansible_python_interpreter: /usr/bin/python
 
+# define a dict of dicts containing nfs export info
 nfs_exports:
   oc_storage:
       volume: "{{ vault_oc_volume }}"

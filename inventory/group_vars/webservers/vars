@@ -1,3 +1,5 @@
+---
+# webserver variables
 web_port: 80
 ssl_port: 443
 
@@ -6,9 +8,11 @@ rc_host: "{{ vault_rc_host }}"
 
 db_host: localhost
 
+# webserver storage
 www_mountpoint: "{{ vault_www_mountpoint }}"
 oc_mountpoint: "{{ vault_oc_mountpoint }}"
 
+# owncloud config
 oc_instanceid: "{{ vault_oc_instanceid }}"
 oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
 oc_secret: "{{ vault_oc_secret }}"
@@ -17,6 +21,7 @@ oc_dbname: "{{ vault_oc_dbname }}"
 oc_dbuser: "{{ vault_oc_dbuser }}"
 oc_dbpassword: "{{ vault_oc_dbpassword }}"
 
+# roundcube config
 rc_dbname: "{{ vault_rc_dbname }}"
 rc_dbuser: "{{ vault_rc_dbuser }}"
 rc_dbpassword: "{{ vault_rc_dbpassword }}"

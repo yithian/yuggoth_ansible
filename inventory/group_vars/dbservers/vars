@@ -1,3 +1,5 @@
+---
+# database variables
 db_mountpoint: "{{ vault_db_mountpoint }}"
 db_backup_mountpoint: "{{ vault_db_backup_mountpoint }}"
 
