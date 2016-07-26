@@ -18,5 +18,6 @@
       #- rpcbind # https://github.com/ansible/ansible-modules-core/issues/3868
       - nfs-client.target
       - remote-fs.target
+      - systemd-networkd-wait-online
   tags:
       - nfs
