@@ -24,7 +24,7 @@
 
 - name: ensure mariadb systemd override directory exists
   file:
-      path: /etc/systemd/system/mysqld.service.d
+      path: /etc/systemd/system/mariadb.service.d
       owner: root
       group: root
       mode: 0755
@@ -36,7 +36,7 @@
 - name: land mariadb systemd override
   template:
       src: templates/mariadb/override.conf.j2
-      dest: /etc/systemd/system/mysqld.service.d/override.conf
+      dest: /etc/systemd/system/mariadb.service.d/override.conf
       owner: root
       group: root
       mode: 0644
@@ -45,7 +45,7 @@
 
 - name: ensure mariadb is running
   service:
-      name: mysqld
+      name: mariadb
       enabled: yes
       state: started
   tags:
