@@ -1,4 +1,7 @@
 ---
+- name: run newaliases
+  command: /usr/bin/newaliases
+
 - name: reload postfix
   service:
       name: postfix

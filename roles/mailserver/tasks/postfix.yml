@@ -26,13 +26,7 @@
       owner: root
       group: root
       mode: 0644
-  register: aliases_register
-  tags:
-      - postfix
-
-- name: configure aliases if necessary
-  command: /usr/bin/newaliases
-  when: aliases_register.changed == True
+  notify: run newaliases
   tags:
       - postfix
 
