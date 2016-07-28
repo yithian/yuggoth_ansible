@@ -4,7 +4,8 @@
       name: "{{ item }}"
       state: installed
   with_items:
-      - vim
       - archey3
+      - bind-tools
+      - vim
   tags:
       - std-utils
