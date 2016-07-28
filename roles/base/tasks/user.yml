@@ -27,6 +27,16 @@
   tags:
       - user
 
+- name: land archey3 config
+  copy:
+      name: files/user/archey3.cfg
+      dest: /home/{{ user }}/.archey3.cfg
+      owner: "{{ user }}"
+      group: "{{ user }}"
+      mode: 0644
+  tags:
+      - user
+
 - name: install sudo
   pacman:
       name: sudo
