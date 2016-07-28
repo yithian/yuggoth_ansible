@@ -17,6 +17,25 @@
   tags:
       - postfix
 
+- name: configure postfix daemon
+  copy:
+      src: files/postfix/master.cf
+      dest: /etc/postfix/master.cf
+      owner: root
+      group: root
+      mode: 0644
+  notify: restart postfix
+  tags:
+      - postfix
+
+- name: generate dhparams
+  command: /usr/bin/openssl dhparam -out /etc/postfix/dhparams.pem 2048
+  args:
+      creates: /etc/postfix/dhparams.pem
+  notify: restart postfix
+  tags:
+      - postfix
+
 - name: configure aliases
   lineinfile:
       dest: /etc/postfix/aliases
