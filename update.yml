@@ -1,0 +1,11 @@
+---
+- hosts: all:!storage
+  tasks:
+      - name: system updates
+        pacman:
+            upgrade: yes
+            update_cache: yes
+            state: present
+        tags:
+            - update
+        # TODO find a way to restart services that have been updated
