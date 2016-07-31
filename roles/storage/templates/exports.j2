@@ -1,3 +1,4 @@
+{{ ansible_managed | comment }}
 {% for export in nfs_exports %}
 "{{ nfs_exports[export]['volume'] }}" {{ nfs_exports[export]['allowed'] }}({{ nfs_exports[export]['opts'] }})
 {% endfor %}
