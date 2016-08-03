@@ -1,4 +1,5 @@
 ---
 - hosts: webservers
   roles:
+      - { role: rvm_io.rvm1-ruby, rvm1_rubies: ['2.3.1'], tags: ruby }
       - webserver
