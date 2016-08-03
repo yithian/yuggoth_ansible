@@ -6,6 +6,7 @@
   with_items:
       - archey3
       - bind-tools
+      - git
       - vim
   tags:
       - std-utils
