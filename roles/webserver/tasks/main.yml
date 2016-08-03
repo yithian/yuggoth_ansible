@@ -5,3 +5,4 @@
 - include: tasks/www.yml
 - include: tasks/owncloud.yml
 - include: tasks/roundcube.yml
+- include: tasks/passenger.yml

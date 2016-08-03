@@ -1,0 +1,12 @@
+---
+- name: install rails tools
+  pacman:
+      name: "{{ item }}"
+      state: installed
+  with_items:
+      - ruby
+      - passenger
+      - nodejs
+  tags:
+      - passenger
+      - personae
