@@ -2,5 +2,5 @@
 # ddclient credentials
 ddclient_login: "{{ vault_ddclient_login }}"
 ddclient_password: "{{ vault_ddclient_password }}"
-ddclient_personae_login: "{{ vault_personae_ddclient_login }}"
+ddclient_personae_login: "{{ vault_ddclient_personae_login }}"
 ddclient_personae_password: "{{ vault_ddclient_personae_password }}"
