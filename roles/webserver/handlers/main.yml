@@ -1,4 +1,40 @@
 ---
+- name: set up personae database
+  command: /usr/local/rvm/bin/rvm {{ personae_ruby }}@{{ personae_gemset }} do bundle exec rake db:setup
+  args:
+      chdir: "{{ personae_dir }}"
+  environment:
+      RAILS_ENV: production
+
+- name: install personae gems
+  bundler:
+      chdir: "{{ personae_dir }}"
+      clean: yes
+      deployment_mode: yes
+      state: present
+
+- name: run personae database migrations
+  command: /usr/local/rvm/bin/rvm {{ personae_ruby }}@{{ personae_gemset }} do bundle exec rake db:migrate
+  args:
+      chdir: "{{ personae_dir }}"
+  environment:
+      RAILS_ENV: production
+
+- name: precompile personae assets
+  command: /usr/local/rvm/bin/rvm {{ personae_ruby }}@{{ personae_gemset }} do bundle exec rake assets:precompile
+  args:
+      chdir: "{{ personae_dir }}"
+  environment:
+      RAILS_ENV: production
+
+- name: ensure the personae log file exists
+  file:
+      path: "{{ personae_dir }}/log/production.log"
+      owner: personae
+      group: personae
+      mode: 0664
+      state: touch
+
 - name: reload systemd
   command: /usr/bin/systemctl daemon-reload
 
@@ -11,10 +47,3 @@
   service:
       name: httpd
       state: restarted
-
-- name: install personae gems
-  bundler:
-      chdir: "{{ personae_dir }}"
-      clean: yes
-      deployment_mode: yes
-      state: present

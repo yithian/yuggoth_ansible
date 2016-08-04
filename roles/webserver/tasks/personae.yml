@@ -40,14 +40,14 @@
 - name: create the personae gemset
   command: /usr/local/rvm/bin/rvm gemset create personae
   args:
-      creates: /usr/local/rvm/gems/ruby-2.3.1@personae
+      creates: /usr/local/rvm/gems/ruby-{{ personae_ruby }}@{{ personae_gemset }}
   tags:
       - personae
 
 - name: install bundler in the personae gemset
-  shell: /usr/local/rvm/gems/ruby-2.3.1@personae/wrappers/gem install bundler
+  shell: /usr/local/rvm/bin/rvm do {{ personae_ruby }}@{{ personae_gemset }}/wrappers/gem install bundler
   args:
-      creates: /usr/local/rvm/gems/ruby-2.3.1@personae/gems/bundler-*
+      creates: /usr/local/rvm/gems/ruby-{{ personae_ruby }}@{{ personae_gemset }}/gems/bundler-*
   tags:
       - personae
 
@@ -56,11 +56,15 @@
       repo: https://github.com/yithian/personae.git
       dest: "{{ personae_dir }}"
       force: yes
-  notify: install personae gems
+  notify:
+      - install personae gems
+      - run personae database migrations
+      - precompile personae assets
+      - ensure the personae log file exists
   tags:
       - personae
 
-- name: land the personae config
+- name: land the personae database config
   template:
       src: templates/personae/database.yml.j2
       dest: "{{ personae_dir }}/config/database.yml"
@@ -69,18 +73,6 @@
       mode: 0640
   tags:
       - personae
-
-- name: ensure the personae log file exists
-  file:
-      path: "{{ personae_dir }}/log/production.log"
-      owner: personae
-      group: personae
-      mode: 0664
-      state: touch
-  tags:
-      - personae
-
-# TODO: compile assets
 
 - name: land the personae httpd config
   template:
@@ -93,3 +85,11 @@
   tags:
       - personae
       - httpd
+
+- name: link the personae config dir to /etc/webapps/
+  file:
+      src: "{{ personae_dir }}/config/"
+      path: /etc/webapps/personae
+      state: link
+  tags:
+      - personae
