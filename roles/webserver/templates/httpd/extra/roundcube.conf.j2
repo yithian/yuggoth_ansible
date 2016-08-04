@@ -16,18 +16,18 @@ Alias /roundcube "/usr/share/webapps/roundcubemail"
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
     DocumentRoot /usr/share/webapps/roundcubemail
-    ServerName {{ rc_host }}
+    ServerName {{ mail_host }}
 
-    Redirect permanent / https://{{ rc_host }}/
+    Redirect permanent / https://{{ mail_host }}/
 
-    ErrorLog /var/log/httpd/{{ rc_host }}-error_log
-    CustomLog /var/log/httpd/{{ rc_host }}-access_log common
+    ErrorLog /var/log/httpd/{{ mail_host }}-error_log
+    CustomLog /var/log/httpd/{{ mail_host }}-access_log common
 </VirtualHost>
 
 <VirtualHost *:{{ ssl_port }}>
     ServerAdmin {{ user }}@{{ domain }}
     DocumentRoot /usr/share/webapps/roundcubemail
-    ServerName {{ rc_host }}:{{ ssl_port }}
+    ServerName {{ mail_host }}:{{ ssl_port }}
 
     SSLEngine on
     SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
@@ -43,7 +43,7 @@ Alias /roundcube "/usr/share/webapps/roundcubemail"
     BrowserMatch "MSIE [2-5]" \
          nokeepalive ssl-unclean-shutdown \
          downgrade-1.0 force-response-1.0
-    ErrorLog /var/log/httpd/ssl_{{ rc_host }}-error_log
-    CustomLog "/var/log/httpd/ssl_{{ rc_host }}-request_log" \
+    ErrorLog /var/log/httpd/ssl_{{ mail_host }}-error_log
+    CustomLog "/var/log/httpd/ssl_{{ mail_host }}-request_log" \
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 </VirtualHost>
