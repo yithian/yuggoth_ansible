@@ -10,6 +10,10 @@ shell: "{{ vault_shell }}"
 # site domain
 domain: "{{ vault_domain }}"
 web_host: "{{ vault_web_host }}"
+mail_host: "{{ vault_mail_host }}"
+oc_host: "{{ vault_oc_host }}"
+personae_domain: "{{ vault_personae_domain }}"
+personae_host: "{{ vault_personae_host }}"
 
 # storage nfs volumes
 www_volume: "{{ vault_www_volume }}"
