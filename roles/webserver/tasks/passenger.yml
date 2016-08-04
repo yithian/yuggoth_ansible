@@ -5,6 +5,7 @@
       state: installed
   with_items:
       - ruby
+      - ruby-bundler
       - passenger
       - nodejs
   tags:
