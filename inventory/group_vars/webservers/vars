@@ -3,9 +3,6 @@
 web_port: 80
 ssl_port: 443
 
-oc_host: "{{ vault_oc_host }}"
-rc_host: "{{ vault_rc_host }}"
-
 db_host: localhost
 
 # webserver storage
@@ -13,6 +10,8 @@ www_mountpoint: "{{ vault_www_mountpoint }}"
 oc_mountpoint: "{{ vault_oc_mountpoint }}"
 
 # owncloud config
+oc_host: "{{ vault_oc_host }}"
+
 oc_instanceid: "{{ vault_oc_instanceid }}"
 oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
 oc_secret: "{{ vault_oc_secret }}"
@@ -22,12 +21,16 @@ oc_dbuser: "{{ vault_oc_dbuser }}"
 oc_dbpassword: "{{ vault_oc_dbpassword }}"
 
 # roundcube config
+rc_host: "{{ vault_rc_host }}"
+
 rc_dbname: "{{ vault_rc_dbname }}"
 rc_dbuser: "{{ vault_rc_dbuser }}"
 rc_dbpassword: "{{ vault_rc_dbpassword }}"
 rc_des_key: "{{ vault_rc_des_key }}"
 
 # personae config
+personae_host: "{{ vault_personae_host }}"
+
 personae_dbname: "{{ vault_personae_dbname }}"
 personae_dbuser: "{{ vault_personae_dbuser }}"
 personae_dbpassword: "{{ vault_personae_dbpassword }}"
@@ -35,5 +38,7 @@ personae_dbpassword: "{{ vault_personae_dbpassword }}"
 personae_user: "{{ vault_personae_user }}"
 personae_group: "{{ vault_personae_group }}"
 
-personae_host: "{{ vault_personae_host }}"
 personae_dir: /usr/share/webapps/personae
+
+personae_ruby: 2.3.1
+personae_gemset: personae
