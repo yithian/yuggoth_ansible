@@ -47,7 +47,7 @@
 - name: install bundler in the personae gemset
   shell: /usr/local/rvm/gems/ruby-2.3.1@personae/wrappers/gem install bundler
   args:
-      creates: /usr/local/rvm/gems/ruby-2.3.1@personae/bundler*
+      creates: /usr/local/rvm/gems/ruby-2.3.1@personae/gems/bundler-*
   tags:
       - personae
 
