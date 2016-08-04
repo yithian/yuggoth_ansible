@@ -1,0 +1,23 @@
+{{ ansible_managed | comment }}
+# configuration for the personae rails app
+LoadModule passenger_module modules/mod_passenger.so
+
+PassengerRuby /usr/local/rvm/gems/ruby-2.3.1@personae/wrappers/ruby
+PassengerRoot /usr/lib/passenger
+PassengerUser {{ personae_user }}
+PassengerGroup {{ personae_group }}
+
+<VirtualHost *:{{ web_port }}>
+    ServerAdmin {{ user }}@{{ domain }}
+    ServerName {{ personae_host }}
+    DocumentRoot /usr/share/webapps/personae/public
+
+    <Directory /usr/share/webapps/personae/public>
+        AllowOverride all
+        Options -MultiViews
+        Require all granted
+    </Directory>
+
+    ErrorLog /var/log/httpd/{{ personae_host }}-error_log
+    CustomLog /var/log/httpd/{{ personae_host }}-access_log common
+</VirtualHost>

@@ -1,0 +1,95 @@
+---
+- name: create personae mariadb database
+  mysql_db:
+      name: "{{ personae_dbname }}"
+      state: present
+  notify: set up personae database
+  tags:
+      - personae
+      - database
+
+- name: create personae mariadb user
+  mysql_user:
+      name: "{{ personae_dbuser }}"
+      password: "{{ personae_dbpassword }}"
+      priv: "{{ personae_dbname }}.*:ALL"
+      state: present
+  tags:
+      - personae
+      - database
+
+- name: create the personae sandbox group
+  group:
+      name: "{{ personae_group }}"
+      system: yes
+      state: present
+  tags:
+      - personae
+
+- name: create the personae sandbox user
+  user:
+      name: "{{ personae_user }}"
+      createhome: no
+      home: "{{ personae_dir }}"
+      shell: /bin/nologin
+      system: yes
+      state: present
+  tags:
+      - personae
+
+- name: create the personae gemset
+  command: /usr/local/rvm/bin/rvm gemset create personae
+  args:
+      creates: /usr/local/rvm/gems/ruby-2.3.1@personae
+  tags:
+      - personae
+
+- name: install bundler in the personae gemset
+  shell: /usr/local/rvm/gems/ruby-2.3.1@personae/wrappers/gem install bundler
+  args:
+      creates: /usr/local/rvm/gems/ruby-2.3.1@personae/bundler*
+  tags:
+      - personae
+
+- name: install the personae app
+  git:
+      repo: https://github.com/yithian/personae.git
+      dest: "{{ personae_dir }}"
+      force: yes
+  notify: install personae gems
+  tags:
+      - personae
+
+- name: land the personae config
+  template:
+      src: templates/personae/database.yml.j2
+      dest: "{{ personae_dir }}/config/database.yml"
+      owner: personae
+      group: personae
+      mode: 0640
+  tags:
+      - personae
+
+- name: ensure the personae log file exists
+  file:
+      path: "{{ personae_dir }}/log/production.log"
+      owner: personae
+      group: personae
+      mode: 0664
+      state: touch
+  tags:
+      - personae
+
+# TODO: compile assets
+
+- name: land the personae httpd config
+  template:
+      src: templates/httpd/extra/personae.conf.j2
+      dest: /etc/httpd/conf/extra/personae.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - personae
+      - httpd

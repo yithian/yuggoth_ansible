@@ -11,3 +11,10 @@
   service:
       name: httpd
       state: restarted
+
+- name: install personae gems
+  bundler:
+      chdir: "{{ personae_dir }}"
+      clean: yes
+      deployment_mode: yes
+      state: present

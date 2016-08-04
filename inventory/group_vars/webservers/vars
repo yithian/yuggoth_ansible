@@ -26,3 +26,14 @@ rc_dbname: "{{ vault_rc_dbname }}"
 rc_dbuser: "{{ vault_rc_dbuser }}"
 rc_dbpassword: "{{ vault_rc_dbpassword }}"
 rc_des_key: "{{ vault_rc_des_key }}"
+
+# personae config
+personae_dbname: "{{ vault_personae_dbname }}"
+personae_dbuser: "{{ vault_personae_dbuser }}"
+personae_dbpassword: "{{ vault_personae_dbpassword }}"
+
+personae_user: "{{ vault_personae_user }}"
+personae_group: "{{ vault_personae_group }}"
+
+personae_host: "{{ vault_personae_host }}"
+personae_dir: /usr/share/webapps/personae

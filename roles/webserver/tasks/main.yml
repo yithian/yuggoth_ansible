@@ -6,3 +6,4 @@
 - include: tasks/owncloud.yml
 - include: tasks/roundcube.yml
 - include: tasks/passenger.yml
+- include: tasks/personae.yml
