@@ -21,7 +21,7 @@
       - ssl
 
 - name: get a Let's Encrypt cert if necessary
-  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d {{ ansible_fqdn }} -d owncloud.{{ domain }} -d mail.{{ domain }}
+  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d {{ ansible_fqdn }} -d {{ mail_host }} -d {{ oc_host }} -d {{ personae_host }}
   args:
       creates: /etc/letsencrypt/live/{{ web_host }}
   tags:
