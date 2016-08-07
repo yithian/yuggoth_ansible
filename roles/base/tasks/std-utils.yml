@@ -5,8 +5,10 @@
       state: installed
   with_items:
       - archey3
+      - bash-completion
       - bind-tools
       - git
+      - gnu-netcat
       - vim
   tags:
       - std-utils
