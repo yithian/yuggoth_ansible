@@ -9,12 +9,6 @@
       group: root
       mode: 0644
       state: present
-  register: locale_gen
+  notify: regen locale
   tags:
-      - std-utils
-
-- name: regen locale if needed
-  command: /usr/bin/locale-gen
-  when: locale_gen.changed == True
-  tags:
-      - std-utils
+      - locale

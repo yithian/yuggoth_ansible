@@ -1,4 +1,7 @@
 ---
+- name: regen locale
+  command: /usr/bin/locale-gen
+
 - name: reload systemd
   command: /usr/bin/systemctl daemon-reload
 
