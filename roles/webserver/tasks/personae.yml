@@ -45,7 +45,7 @@
       - personae
 
 - name: install bundler in the personae gemset
-  shell: /usr/local/rvm/bin/rvm do {{ personae_ruby }}@{{ personae_gemset }}/wrappers/gem install bundler
+  shell: /usr/local/rvm/bin/rvm {{ personae_ruby }}@{{ personae_gemset }} do gem install bundler
   args:
       creates: /usr/local/rvm/gems/ruby-{{ personae_ruby }}@{{ personae_gemset }}/gems/bundler-*
   tags:
