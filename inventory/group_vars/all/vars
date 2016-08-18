@@ -14,6 +14,8 @@ mail_host: "{{ vault_mail_host }}"
 oc_host: "{{ vault_oc_host }}"
 personae_domain: "{{ vault_personae_domain }}"
 personae_host: "{{ vault_personae_host }}"
+dlyg_domain: "{{ vault_dlyg_domain }}"
+dlyg_host: "{{ vault_dlyg_host }}"
 
 # storage nfs volumes
 www_volume: "{{ vault_www_volume }}"

@@ -1,0 +1,95 @@
+---
+- name: create dlyg mariadb database
+  mysql_db:
+      name: "{{ dlyg_dbname }}"
+      state: present
+  notify: set up dlyg database
+  tags:
+      - dlyg
+      - database
+
+- name: create dlyg mariadb user
+  mysql_user:
+      name: "{{ dlyg_dbuser }}"
+      password: "{{ dlyg_dbpassword }}"
+      priv: "{{ dlyg_dbname }}.*:ALL"
+      state: present
+  tags:
+      - dlyg
+      - database
+
+- name: create the dlyg sandbox group
+  group:
+      name: "{{ dlyg_group }}"
+      system: yes
+      state: present
+  tags:
+      - dlyg
+
+- name: create the dlyg sandbox user
+  user:
+      name: "{{ dlyg_user }}"
+      createhome: no
+      home: "{{ dlyg_dir }}"
+      shell: /bin/nologin
+      system: yes
+      state: present
+  tags:
+      - dlyg
+
+- name: create the dlyg gemset
+  command: /usr/local/rvm/bin/rvm gemset create dlyg
+  args:
+      creates: /usr/local/rvm/gems/ruby-{{ dlyg_ruby }}@{{ dlyg_gemset }}
+  tags:
+      - dlyg
+
+- name: install bundler in the dlyg gemset
+  shell: /usr/local/rvm/bin/rvm {{ dlyg_ruby }}@{{ dlyg_gemset }} do gem install bundler
+  args:
+      creates: /usr/local/rvm/gems/ruby-{{ dlyg_ruby }}@{{ dlyg_gemset }}/gems/bundler-*
+  tags:
+      - dlyg
+
+- name: install the dlyg app
+  git:
+      repo: https://github.com/yithian/dlyg.git
+      dest: "{{ dlyg_dir }}"
+      force: yes
+  notify:
+      - install dlyg gems
+      - run dlyg database migrations
+      - precompile dlyg assets
+      - ensure the dlyg log file exists
+  tags:
+      - dlyg
+
+- name: land the dlyg database config
+  template:
+      src: templates/dlyg/database.yml.j2
+      dest: "{{ dlyg_dir }}/config/database.yml"
+      owner: dlyg
+      group: dlyg
+      mode: 0640
+  tags:
+      - dlyg
+
+- name: land the dlyg httpd config
+  template:
+      src: templates/httpd/extra/dlyg.conf.j2
+      dest: /etc/httpd/conf/extra/dlyg.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - dlyg
+      - httpd
+
+- name: link the dlyg config dir to /etc/webapps/
+  file:
+      src: "{{ dlyg_dir }}/config/"
+      path: /etc/webapps/dlyg
+      state: link
+  tags:
+      - dlyg

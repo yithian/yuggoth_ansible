@@ -36,3 +36,16 @@ personae_dir: /usr/share/webapps/personae
 
 personae_ruby: 2.3.1
 personae_gemset: personae
+
+# dlyg config
+dlyg_dbname: "{{ vault_dlyg_dbname }}"
+dlyg_dbuser: "{{ vault_dlyg_dbuser }}"
+dlyg_dbpassword: "{{ vault_dlyg_dbpassword }}"
+
+dlyg_user: "{{ vault_dlyg_user }}"
+dlyg_group: "{{ vault_dlyg_group }}"
+
+dlyg_dir: /usr/share/webapps/dlyg
+
+dlyg_ruby: 2.3.1
+dlyg_gemset: dlyg
