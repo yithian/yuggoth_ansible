@@ -49,3 +49,23 @@ dlyg_dir: /usr/share/webapps/dlyg
 
 dlyg_ruby: 2.3.1
 dlyg_gemset: dlyg
+
+# wordpress config
+wordpress_dbname: "{{ vault_wordpress_dbname }}"
+wordpress_dbuser: "{{ vault_wordpress_dbuser }}"
+wordpress_dbpassword: "{{ vault_wordpress_dbpassword }}"
+wordpress_dbprefix: "{{ vault_wordpress_dbprefix }}"
+
+wordpress_auth_key: "{{ vault_wordpress_auth_key }}"
+wordpress_secure_auth_key: "{{ vault_wordpress_secure_auth_key }}"
+wordpress_logged_in_key: "{{ vault_wordpress_logged_in_key }}"
+wordpress_nonce_key: "{{ vault_wordpress_nonce_key }}"
+wordpress_auth_salt: "{{ vault_wordpress_auth_salt }}"
+wordpress_secure_auth_salt: "{{ vault_wordpress_secure_auth_salt }}"
+wordpress_logged_in_salt: "{{ vault_wordpress_logged_in_salt }}"
+wordpress_nonce_salt: "{{ vault_wordpress_nonce_salt }}"
+
+wordpress_user: "{{ vault_wordpress_user }}"
+wordpress_group: "{{ vault_wordpress_group }}"
+
+wordpress_dir: /usr/share/webapps/wordpress

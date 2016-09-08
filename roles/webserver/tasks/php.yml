@@ -22,6 +22,7 @@
       - php
       - owncloud
       - roundcube
+      - wordpress
 
 - name: configure php
   copy:
@@ -35,6 +36,7 @@
       - php
       - owncloud
       - roundcube
+      - wordpress
 
 - name: configure apcu
   copy:
