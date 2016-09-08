@@ -2,11 +2,6 @@
 # configuration for the dlyg rails app
 LoadModule passenger_module modules/mod_passenger.so
 
-PassengerRuby /usr/local/rvm/gems/ruby-{{ dlyg_ruby }}@{{ dlyg_gemset }}/wrappers/ruby
-PassengerRoot /usr/lib/passenger
-PassengerUser {{ dlyg_user }}
-PassengerGroup {{ dlyg_group }}
-
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ dlyg_host }}
@@ -19,6 +14,11 @@ PassengerGroup {{ dlyg_group }}
 </VirtualHost>
 
 <VirtualHost *:{{ ssl_port }}>
+    PassengerRuby /usr/local/rvm/gems/ruby-{{ dlyg_ruby }}@{{ dlyg_gemset }}/wrappers/ruby
+    PassengerRoot /usr/lib/passenger
+    PassengerUser {{ dlyg_user }}
+    PassengerGroup {{ dlyg_group }}
+
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ dlyg_host }}
     DocumentRoot {{ dlyg_dir }}/public
