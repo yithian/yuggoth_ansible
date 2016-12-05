@@ -9,6 +9,7 @@
       - bind-tools
       - git
       - gnu-netcat
+      - nmap
       - vim
   tags:
       - std-utils
