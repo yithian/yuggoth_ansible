@@ -2,3 +2,6 @@
 # postfix configs
 mailserver: "{{ vault_mailserver }}"
 relayhost: "{{ vault_relayhost }}"
+
+# dkim config
+dkim_selector: "{{ vault_dkim_selector }}"

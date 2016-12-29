@@ -1,0 +1,56 @@
+---
+- name: install opendkim
+  pacman:
+      name: opendkim
+      state: installed
+  tags:
+      - dkim
+
+- name: create dkim private key
+  command: /usr/bin/opendkim-genkey -r -s {{ dkim_selector }} -d {{ domain }} -D /etc/opendkim/
+  args:
+      creates: "/etc/opendkim/{{ dkim_selector }}.private"
+  become_user: opendkim
+  notify: restart opendkim
+  tags:
+      - dkim
+
+- name: ensure opendkim systemd override directory exists
+  file:
+      path: /etc/systemd/system/opendkim.service.d
+      owner: root
+      group: root
+      mode: 0755
+      state: directory
+  tags:
+      - dkim
+
+- name: land opendkim systemd override
+  copy:
+      src: files/opendkim/override.conf.j2
+      dest: /etc/systemd/system/opendkim.service.d/override.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload systemd
+  tags:
+      - dkim
+
+- name: configure opendkim
+  template:
+      src: templates/opendkim/opendkim.conf.j2
+      dest: /etc/opendkim/opendkim.conf
+      owner: opendkim
+      group: root
+      mode: 0600
+  notify: restart opendkim
+  tags:
+      - dkim
+
+- name: start opendkim
+  service:
+      name: opendkim
+      enabled: yes
+      state: started
+  tags:
+      - dkim

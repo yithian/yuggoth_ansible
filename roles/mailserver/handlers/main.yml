@@ -1,4 +1,7 @@
 ---
+- name: reload systemd
+  command: /usr/bin/systemctl daemon-reload
+
 - name: run newaliases
   command: /usr/bin/newaliases
 
@@ -16,3 +19,8 @@
   service:
       name: dovecot
       state: reloaded
+
+- name: restart opendkim
+  service:
+      name: opendkim
+      state: restarted
