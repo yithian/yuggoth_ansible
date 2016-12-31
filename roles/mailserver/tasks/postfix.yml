@@ -16,6 +16,7 @@
   notify: reload postfix
   tags:
       - postfix
+      - dkim
 
 - name: configure postfix daemon
   copy:

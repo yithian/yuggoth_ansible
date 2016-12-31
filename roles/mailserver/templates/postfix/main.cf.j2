@@ -685,6 +685,9 @@ inet_protocols = ipv4
 meta_directory = /etc/postfix
 shlib_directory = /usr/lib/postfix
 
+smtpd_milters = unix:/run/opendkim/opendkim.sock
+non_smtpd_milters = unix:/run/opendkim/opendkim.sock
+
 smtpd_sasl_auth_enable = yes
 broken_sasl_auth_clients = yes
 smtpd_sasl_security_options = noanonymous
