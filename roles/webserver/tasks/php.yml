@@ -6,10 +6,10 @@
   with_items:
       - php
       - php-apache
-      - php-apcu-bc # optional by owncloud
-      - php-gd # required by owncloud
-      - php-intl # recommended by owncloud
-      - php-mcrypt # recommended by owncloud and roundcube
+      - php-apcu-bc # optional by nextcloud
+      - php-gd # required by nextcloud
+      - php-intl # recommended by nextcloud
+      - php-mcrypt # recommended by nextcloud and roundcube
       - php-pspell # optional by roundcube
       - pear-auth-sasl # required by roundcube
       - pear-mail-mime # required by roundcube
@@ -20,7 +20,7 @@
   notify: restart httpd
   tags:
       - php
-      - owncloud
+      - nextcloud
       - roundcube
       - wordpress
 
@@ -34,7 +34,7 @@
   notify: restart httpd
   tags:
       - php
-      - owncloud
+      - nextcloud
       - roundcube
       - wordpress
 
@@ -48,5 +48,5 @@
   notify: restart httpd
   tags:
       - php
-      - owncloud
+      - nextcloud
       - roundcube

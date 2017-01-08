@@ -1,23 +1,23 @@
 ---
-- name: create owncloud mariadb database
+- name: create nextcloud mariadb database
   mysql_db:
       name: "{{ oc_dbname }}"
       state: present
   tags:
-      - owncloud
+      - nextcloud
       - database
 
-- name: create owncloud mariadb user
+- name: create nextcloud mariadb user
   mysql_user:
       name: "{{ oc_dbuser }}"
       password: "{{ oc_dbpassword }}"
       priv: "{{ oc_dbname }}.*:ALL"
       state: present
   tags:
-      - owncloud
+      - nextcloud
       - database
 
-- name: mount owncloud storage
+- name: mount nextcloud storage
   mount:
       src: "{{ storage_host }}:{{ oc_volume }}"
       name: "{{ oc_mountpoint }}"
@@ -27,7 +27,7 @@
       passno: 0
       state: mounted
   tags:
-      - owncloud
+      - nextcloud
       - storage
 
 - name: ensure httpd systemd override directory exists
@@ -39,7 +39,7 @@
       state: directory
   notify: reload systemd
   tags:
-      - owncloud
+      - nextcloud
 
 - name: land httpd systemd override
   template:
@@ -49,65 +49,50 @@
       group: root
       mode: 0644
   tags:
-      - owncloud
+      - nextcloud
 
-- name: install owncloud
-  pacman:
-      name: "{{ item }}"
-      state: installed
-  with_items:
-      - imagemagick
-      - ffmpeg
-      - owncloud
-      - owncloud-app-bookmarks
-      - owncloud-app-calendar
-      - owncloud-app-contacts
-      - owncloud-app-documents
-  notify: restart httpd
+- name: ensure nextcloud config directory symlinks to /etc
+  file:
+      state: link
+      src: /usr/share/webapps/nextcloud/config
+      dest: /etc/webapps/nextcloud/config
+      owner: http
+      group: http
+      mode: 0640
   tags:
-      - owncloud
+      - nextcloud
 
-- name: configure owncloud
+- name: configure nextcloud
   template:
-      src: templates/owncloud/config.php.j2
-      dest: /etc/webapps/owncloud/config/config.php
+      src: templates/nextcloud/config.php.j2
+      dest: /etc/webapps/nextcloud/config/config.php
       owner: http
       group: http
       mode: 0640
   become_user: http
   notify: restart httpd
   tags:
-      - owncloud
+      - nextcloud
 
-- name: land the oc-perms script
-  copy:
-      src: files/owncloud/oc-perms
-      dest: /usr/local/bin/oc-perms
-      owner: root
-      group: root
-      mode: 0755
-  tags:
-      - owncloud
-
-- name: cron owncloud's cron.php
+- name: cron nextcloud's cron.php
   cron:
-      name: owncloud cron.php
+      name: nextcloud cron.php
       user: http
       minute: "*/15"
-      job: php -f /usr/share/webapps/owncloud/cron.php > /dev/null 2>&1
+      job: php -f /usr/share/webapps/nextcloud/cron.php > /dev/null 2>&1
       state: present
   tags:
-      - owncloud
+      - nextcloud
       - cron
 
-- name: configure owncloud httpd virtual host
+- name: configure nextcloud httpd virtual host
   template:
-      src: templates/httpd/extra/owncloud.conf.j2
-      dest: /etc/httpd/conf/extra/owncloud.conf
+      src: templates/httpd/extra/nextcloud.conf.j2
+      dest: /etc/httpd/conf/extra/nextcloud.conf
       owner: root
       group: root
       mode: 0644
   notify: reload httpd
   tags:
-      - owncloud
+      - nextcloud
       - httpd

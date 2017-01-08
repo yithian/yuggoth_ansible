@@ -3,7 +3,7 @@
 - include: tasks/php.yml
 - include: tasks/ssl.yml
 - include: tasks/www.yml
-- include: tasks/owncloud.yml
+- include: tasks/nextcloud.yml
 - include: tasks/roundcube.yml
 - include: tasks/passenger.yml
 - include: tasks/personae.yml

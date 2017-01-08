@@ -9,7 +9,7 @@ db_host: localhost
 www_mountpoint: "{{ vault_www_mountpoint }}"
 oc_mountpoint: "{{ vault_oc_mountpoint }}"
 
-# owncloud config
+# nextcloud config
 oc_instanceid: "{{ vault_oc_instanceid }}"
 oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
 oc_secret: "{{ vault_oc_secret }}"
