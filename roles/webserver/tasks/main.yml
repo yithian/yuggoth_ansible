@@ -4,7 +4,6 @@
 - include: tasks/ssl.yml
 - include: tasks/www.yml
 - include: tasks/nextcloud.yml
-- include: tasks/roundcube.yml
 - include: tasks/passenger.yml
 - include: tasks/personae.yml
 - include: tasks/dlyg.yml

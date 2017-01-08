@@ -9,19 +9,11 @@
       - php-apcu-bc # optional by nextcloud
       - php-gd # required by nextcloud
       - php-intl # recommended by nextcloud
-      - php-mcrypt # recommended by nextcloud and roundcube
-      - php-pspell # optional by roundcube
-      - pear-auth-sasl # required by roundcube
-      - pear-mail-mime # required by roundcube
-      - pear-net-idna2 # required by roundcube
-      - pear-net-sieve # optional for roundcube
-      - pear-net-smtp # required by roundcube
-      - pear-net-socket # required by roundcube
+      - php-mcrypt # recommended by nextcloud
   notify: restart httpd
   tags:
       - php
       - nextcloud
-      - roundcube
       - wordpress
 
 - name: configure php
@@ -35,7 +27,6 @@
   tags:
       - php
       - nextcloud
-      - roundcube
       - wordpress
 
 - name: configure apcu
@@ -49,4 +40,3 @@
   tags:
       - php
       - nextcloud
-      - roundcube
