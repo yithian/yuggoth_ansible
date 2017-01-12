@@ -5,11 +5,6 @@
 - name: reload systemd
   command: /usr/bin/systemctl daemon-reload
 
-- name: reload vsftpd
-  service:
-      name: vsftpd
-      state: reloaded
-
 - name: reload httpd
   service:
       name: httpd

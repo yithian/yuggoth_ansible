@@ -1,5 +1,4 @@
 ---
-- include: tasks/ftp.yml
 - include: tasks/httpd.yml
 - include: tasks/php.yml
 - include: tasks/ssl.yml

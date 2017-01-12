@@ -3,8 +3,7 @@
 web_port: 80
 ssl_port: 443
 
-ftp_user: "{{ vault_ftp_user }}"
-db_host: "{{ vault_db_host }}"
+db_host: localhost
 
 # webserver storage
 www_mountpoint: "{{ vault_www_mountpoint }}"
