@@ -30,7 +30,7 @@
       dest: /usr/share/webapps/wordpress/wp-config.php
       owner: http
       group: http
-      mode: 0440
+      mode: 0640
   notify: restart httpd
   tags:
       - wordpress

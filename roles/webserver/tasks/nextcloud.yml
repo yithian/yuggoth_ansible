@@ -58,7 +58,7 @@
       dest: /etc/webapps/nextcloud/config
       owner: http
       group: http
-      mode: 0640
+      mode: 0777
   tags:
       - nextcloud
 
