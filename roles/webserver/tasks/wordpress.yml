@@ -24,6 +24,21 @@
   tags:
       - wordpress
 
+- name: land the wp-perms script
+  copy:
+      src: files/wordpress/wp-perms
+      dest: /usr/local/bin/wp-perms
+      owner: root
+      group: root
+      mode: 0755
+  tags:
+      - wordpress
+
+- name: set wordpress permissions
+  command: /usr/local/bin/wp-perms
+  tags:
+      - wordpress
+
 - name: configure wordpress
   template:
       src: templates/wordpress/wp-config.php.j2
@@ -46,14 +61,3 @@
   tags:
       - wordpress
       - httpd
-
-- name: land the wp-perms script
-  copy:
-      src: files/wordpress/wp-perms
-      dest: /usr/local/bin/wp-perms
-      owner: root
-      group: root
-      mode: 0755
-  tags:
-      - wordpress
-

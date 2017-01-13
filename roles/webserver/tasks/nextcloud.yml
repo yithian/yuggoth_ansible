@@ -51,6 +51,11 @@
   tags:
       - nextcloud
 
+- name: set nextcloud permissions
+  command: /usr/bin/set-nc-perms
+  tags:
+      - nextcloud
+
 - name: ensure nextcloud config directory symlinks to /etc
   file:
       state: link
