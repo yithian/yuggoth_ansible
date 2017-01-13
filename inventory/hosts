@@ -1,6 +1,9 @@
 [dnsservers]
 void.yuggoth.space
 
+[vpnservers]
+void.yuggoth.space
+
 [mailservers]
 void.yuggoth.space
 

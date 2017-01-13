@@ -1,0 +1,89 @@
+---
+- name: install openvpn
+  pacman:
+      name: "{{ item }}"
+      state: installed
+  with_items:
+      - openvpn
+      - easy-rsa
+  tags:
+      - vpn
+
+- name: create clean easyrsa pki
+  shell: easyrsa init-pki
+  args:
+      chdir: /etc/easy-rsa/
+      creates: /etc/easy-rsa/pki
+  tags:
+      - vpn
+
+- name: create easyrsa ca
+  expect:
+    command: easyrsa build-ca nopass
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/ca.crt
+    responses:
+        Common Name: 'Easy-RSA CA'
+  tags:
+      - vpn
+
+- name: create DH params file
+  command: openssl dhparam -out /etc/openvpn/server/dh.pem 2048
+  tags:
+      - vpn
+
+- name: create HMAC key
+  command: openvpn --genkey --secret /etc/openvpn/server/ta.key
+  tags:
+      - vpn
+
+- name: create openvpn server cert csr/key
+  expect:
+    command: easyrsa gen-req void.yuggoth.space nopass
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/reqs/void.yuggoth.space.req
+    responses:
+        Common Name: 'void.yuggoth.space'
+  tags:
+      - vpn
+
+- name: sign openvpn server cert
+  expect:
+    command: easyrsa sign-req server void.yuggoth.space
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/issued/void.yuggoth.space.crt
+    responses:
+        Confirm request details: 'yes'
+  notify:
+      - copy openvpn server cert into place
+      - copy openvpn server key into place
+  tags:
+      - vpn
+
+- name: create openvpn client cert csr/key
+  expect:
+    command: easyrsa gen-req client1 nopass
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/reqs/client.req
+    responses:
+        Common Name: 'client1'
+  tags:
+      - vpn
+
+- name: sign openvpn client cert
+  expect:
+    command: easyrsa sign-req client client1
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/issued/client1.crt
+    responses:
+        Confirm request details: 'yes'
+
+- name: land the openvpn server config
+  template:
+      src: templates/openvpn/server.conf.j2
+      dest: /etc/openvpn/server/server.conf
+      owner: root
+      group: root
+      mode: 660
+  tags:
+      - vpn

@@ -1,0 +1,6 @@
+---
+- name: copy openvpn server cert into place
+  command: cp /etc/easy-rsa/pki/issued/void.yuggoth.space.crt /etc/openvpn/server/server.crt
+
+- name: copy openvpn server key into place
+  command: cp /etc/easy-rsa/pki/private/void.yuggoth.space.key /etc/openvpn/server/server.key

@@ -5,3 +5,4 @@
 - include: mailserver.yml
 - include: dbserver.yml
 - include: webserver.yml
+- include: vpnserver.yml
