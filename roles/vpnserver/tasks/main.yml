@@ -91,11 +91,31 @@
   tags:
       - vpn
 
+- name: create second openvpn client cert csr/key
+  expect:
+    command: easyrsa gen-req client2 nopass
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/reqs/client2.req
+    responses:
+        Common Name: 'client2'
+  tags:
+      - vpn
+
 - name: sign openvpn client cert
   expect:
     command: easyrsa sign-req client client1
     chdir: /etc/easy-rsa/
     creates: /etc/easy-rsa/pki/issued/client1.crt
+    responses:
+        Confirm request details: 'yes'
+  tags:
+      - vpn
+
+- name: sign second openvpn client cert
+  expect:
+    command: easyrsa sign-req client client2
+    chdir: /etc/easy-rsa/
+    creates: /etc/easy-rsa/pki/issued/client2.crt
     responses:
         Confirm request details: 'yes'
   tags:
