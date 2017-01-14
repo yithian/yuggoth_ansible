@@ -24,16 +24,27 @@
     creates: /etc/easy-rsa/pki/ca.crt
     responses:
         Common Name: 'Easy-RSA CA'
+  register: result
+  tags:
+      - vpn
+
+- name: copy openvpn ca cert into place
+  command: cp /etc/easy-rsa/pki/ca.crt /etc/openvpn/server/ca.crt
+  when: result|changed
   tags:
       - vpn
 
 - name: create DH params file
-  command: openssl dhparam -out /etc/openvpn/server/dh.pem 2048
+  command: openssl dhparam -out /etc/openvpn/server/dh2048.pem 2048
+  args:
+      creates: /etc/openvpn/server/dh2048.pem
   tags:
       - vpn
 
 - name: create HMAC key
   command: openvpn --genkey --secret /etc/openvpn/server/ta.key
+  args:
+      creates: /etc/openvpn/server/ta.key
   tags:
       - vpn
 
@@ -54,9 +65,19 @@
     creates: /etc/easy-rsa/pki/issued/void.yuggoth.space.crt
     responses:
         Confirm request details: 'yes'
-  notify:
-      - copy openvpn server cert into place
-      - copy openvpn server key into place
+  register: result
+  tags:
+      - vpn
+
+- name: copy openvpn server cert into place
+  command: cp /etc/easy-rsa/pki/issued/void.yuggoth.space.crt /etc/openvpn/server/server.crt
+  when: result|changed
+  tags:
+      - vpn
+
+- name: copy openvpn server key into place
+  command: cp /etc/easy-rsa/pki/private/void.yuggoth.space.key /etc/openvpn/server/server.key
+  when: result|changed
   tags:
       - vpn
 
@@ -64,7 +85,7 @@
   expect:
     command: easyrsa gen-req client1 nopass
     chdir: /etc/easy-rsa/
-    creates: /etc/easy-rsa/pki/reqs/client.req
+    creates: /etc/easy-rsa/pki/reqs/client1.req
     responses:
         Common Name: 'client1'
   tags:
@@ -77,13 +98,23 @@
     creates: /etc/easy-rsa/pki/issued/client1.crt
     responses:
         Confirm request details: 'yes'
+  tags:
+      - vpn
 
 - name: land the openvpn server config
-  template:
-      src: templates/openvpn/server.conf.j2
+  copy:
+      src: files/openvpn/server.conf
       dest: /etc/openvpn/server/server.conf
       owner: root
       group: root
       mode: 660
+  tags:
+      - vpn
+
+- name: ensure openvpn is running
+  service:
+      name: openvpn-server@server
+      enabled: yes
+      state: started
   tags:
       - vpn
