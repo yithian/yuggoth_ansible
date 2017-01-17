@@ -11,7 +11,7 @@ $CONFIG = array (
   'datadirectory' => '{{ oc_mountpoint }}',
   'overwrite.cli.url' => 'https://{{ oc_host }}',
   'dbtype' => 'mysql',
-  'version' => '11.0.0.10',
+  'version' => '11.0.1.2',
   'dbname' => '{{ oc_dbname }}',
   'dbhost' => '{{ db_host }}',
   'dbtableprefix' => 'oc_',
@@ -31,4 +31,5 @@ $CONFIG = array (
   'maintenance' => false,
   'appstore.experimental.enabled' => true,
   'htaccess.RewriteBase' => '/',
+  'updater.secret' => '{{ oc_updater_secret }}',
 );

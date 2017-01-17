@@ -13,6 +13,7 @@ oc_mountpoint: "{{ vault_oc_mountpoint }}"
 oc_instanceid: "{{ vault_oc_instanceid }}"
 oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
 oc_secret: "{{ vault_oc_secret }}"
+oc_updater_secret: "{{ vault_oc_updater_secret }}"
 
 oc_dbname: "{{ vault_oc_dbname }}"
 oc_dbuser: "{{ vault_oc_dbuser }}"
