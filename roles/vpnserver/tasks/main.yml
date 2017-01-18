@@ -122,12 +122,13 @@
       - vpn
 
 - name: land the openvpn server config
-  copy:
-      src: files/openvpn/server.conf
+  template:
+      src: templates/openvpn/server.conf.j2
       dest: /etc/openvpn/server/server.conf
       owner: root
       group: root
       mode: 660
+  notify: restart openvpn
   tags:
       - vpn
 
