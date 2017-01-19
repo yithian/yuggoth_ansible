@@ -200,6 +200,8 @@ push "route {{ vpn_subnet }} {{ vpn_subnet_mask }}"
 # DNS servers provided by opendns.com.
 ;push "dhcp-option DNS 208.67.222.222"
 ;push "dhcp-option DNS 208.67.220.220"
+push "dhcp-option DNS {{ ansible_default_ipv4.address }}"
+push "dhcp-option DOMAIN {{ domain }}"
 
 # Uncomment this directive to allow different
 # clients to be able to "see" each other.
