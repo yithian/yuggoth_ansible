@@ -192,6 +192,7 @@ push "route {{ vpn_subnet }} {{ vpn_subnet_mask }}"
 # or bridge the TUN/TAP interface to the internet
 # in order for this to work properly).
 ;push "redirect-gateway def1 bypass-dhcp"
+push "redirect-gateway bypass-dns"
 
 # Certain Windows-specific network settings
 # can be pushed to clients, such as DNS
