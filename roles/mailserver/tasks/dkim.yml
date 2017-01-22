@@ -27,7 +27,7 @@
 
 - name: land opendkim systemd override
   copy:
-      src: files/opendkim/override.conf.j2
+      src: files/opendkim/override.conf
       dest: /etc/systemd/system/opendkim.service.d/override.conf
       owner: root
       group: root
