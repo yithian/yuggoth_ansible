@@ -1,5 +1,15 @@
 ---
 - hosts: webservers
   roles:
-      - { role: rvm_io.rvm1-ruby, rvm1_rubies: ['{{ personae_ruby }}'], tags: ruby }
+      - {
+          role: rvm_io.ruby,
+          rvm1_rubies: [
+              '{{ personae_ruby }}',
+              '{{ dlyg_ruby }}'
+          ],
+          rvm1_user: root,
+          rvm1_install_path: /usr/local/rvm,
+          rvm1_install_flags: '--auto-dotfiles',
+          tags: ruby
+        }
       - webserver
