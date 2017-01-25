@@ -37,18 +37,6 @@
   tags:
       - user
 
-- name: configure sieve rules
-  copy:
-      src: files/user/dovecot.sieve
-      dest: "/home/{{ user }}/.dovecot.sieve"
-      owner: "{{ user }}"
-      group: "{{ user }}"
-      mode: 0644
-  register: sieve_rules
-  notify: compile sieve rules
-  tags:
-      - user
-
 - name: install sudo
   pacman:
       name: sudo

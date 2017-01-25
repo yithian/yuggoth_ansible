@@ -35,7 +35,6 @@ COMMIT
 -A TCP -p tcp -m tcp --dport 22 -m state --state NEW -m recent --update --seconds 90 --hitcount 4 --name DEFAULT --mask 255.255.255.255 --rsource -j LOG_REJECT
 -A TCP -p tcp -m tcp --dport 22 -j ACCEPT
 -A TCP -p tcp -m tcp --dport 25 -j ACCEPT
--A TCP -p tcp -m tcp --dport 993 -j ACCEPT
 -A TCP -p tcp -m tcp --dport 587 -j ACCEPT
 -A UDP -p udp -m udp --dport 1194 -j ACCEPT
 -A TCP -p tcp -j REJECT --reject-with tcp-reset

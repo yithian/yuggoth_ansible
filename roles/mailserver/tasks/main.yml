@@ -2,4 +2,3 @@
 - include: tasks/spamassassin.yml
 - include: tasks/postfix.yml
 - include: tasks/dkim.yml
-- include: tasks/dovecot.yml

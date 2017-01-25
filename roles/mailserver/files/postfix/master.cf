@@ -27,7 +27,7 @@ submission inet n       -       n       -       -       smtpd
   -o smtpd_recipient_restrictions=reject_non_fqdn_recipient,reject_unknown_recipient_domain,permit_sasl_authenticated,reject
 #  -o smtpd_relay_restrictions=permit_sasl_authenticated,reject
 #  -o milter_macro_daemon_name=ORIGINATING
-  -o smtpd_sasl_type=dovecot
+#  -o smtpd_sasl_type=dovecot
   -o smtpd_sasl_path=private/auth
   -o smtpd_sasl_security_options=noanonymous
   -o smtpd_sasl_local_domain=$myhostname
@@ -140,6 +140,3 @@ scache    unix  -       -       n       -       1       scache
 # spamassassin!
 spamassassin unix -     n       n       -       -       pipe
   flags=R user=spamd argv=/usr/bin/vendor_perl/spamc -e /usr/bin/sendmail -oi -f ${sender} ${recipient}
-# spamassassin, sieve!
-#dovecot   unix  -       n       n       -       -       pipe
-#   flags=DRhu user=vmail:vmail argv=/usr/bin/vendor_perl/spamc -u spamd -e /usr/lib/dovecot/dovecot-lda -f ${sender} -d ${recipient}

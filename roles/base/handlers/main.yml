@@ -14,7 +14,3 @@
   service:
       name: iptables
       state: reloaded
-
-- name: compile sieve rules
-  command: /usr/bin/sievec /home/{{ user }}/.dovecot.sieve /home/{{ user }}/.dovecot.svbin
-  become: "{{ user }}"

@@ -15,11 +15,6 @@
       name: postfix
       state: restarted
 
-- name: reload dovecot
-  service:
-      name: dovecot
-      state: reloaded
-
 - name: restart opendkim
   service:
       name: opendkim
