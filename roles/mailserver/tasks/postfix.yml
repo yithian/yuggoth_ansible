@@ -41,7 +41,7 @@
   lineinfile:
       dest: /etc/postfix/aliases
       regexp: "^(?:#)?root:\\s+\\S+"
-      line: "root:          {{ user }}"
+      line: "root:          {{ user }}@{{ domain }}"
       backrefs: yes
       owner: root
       group: root
