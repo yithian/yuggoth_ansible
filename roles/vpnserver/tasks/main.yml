@@ -1,4 +1,13 @@
 ---
+- name: enable tcp forwarding
+  sysctl:
+      name: net.ipv4.ip_forward
+      value: 1
+      sysctl_set: yes
+      state: present
+  tags:
+      - vpn
+
 - name: install openvpn
   pacman:
       name: "{{ item }}"
