@@ -17,6 +17,13 @@
       - nextcloud
       - database
 
+- name: install nextcloud
+  pacman:
+      name: nextcloud
+      state: present
+  tags:
+      - wordpress
+
 - name: mount nextcloud storage
   mount:
       src: "{{ storage_host }}:{{ oc_volume }}"
@@ -51,19 +58,18 @@
   tags:
       - nextcloud
 
-- name: set nextcloud permissions
-  command: /usr/bin/set-nc-perms
+- name: land the set-nc-perms script
+  copy:
+    src: files/nextcloud/set-nc-perms
+    dest: /usr/local/bin/set-nc-perms
+    owner: root
+    group: root
+    mode: 0755
   tags:
       - nextcloud
 
-- name: ensure nextcloud config directory symlinks to /etc
-  file:
-      state: link
-      src: /usr/share/webapps/nextcloud/config
-      dest: /etc/webapps/nextcloud/config
-      owner: http
-      group: http
-      mode: 0777
+- name: set nextcloud permissions
+  command: /usr/local/bin/set-nc-perms runtime
   tags:
       - nextcloud
 
