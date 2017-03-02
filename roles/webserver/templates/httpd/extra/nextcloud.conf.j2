@@ -1,18 +1,6 @@
 {{ ansible_managed | comment }}
-<IfModule mod_alias.c>
-    Alias /cloud /usr/share/webapps/nextcloud/
-</IfModule>
-
-<Directory /usr/share/webapps/nextcloud/>
-    Options FollowSymlinks
-    AllowOverride all
-    Require all granted
-    #php_admin_value open_basedir "/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/nextcloud/:/etc/webapps/nextcloud:/dev/urandom"
-</Directory>
-
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
-    DocumentRoot /usr/share/webapps/nextcloud
     ServerName {{ oc_host }}
 
     Redirect permanent / https://{{ oc_host }}/
@@ -29,6 +17,17 @@
     ServerAdmin {{ user }}@{{ domain }}
     DocumentRoot /usr/share/webapps/nextcloud
     ServerName {{ oc_host }}:{{ ssl_port }}
+
+    <IfModule mod_alias.c>
+        Alias /cloud /usr/share/webapps/nextcloud/
+    </IfModule>
+
+    <Directory /usr/share/webapps/nextcloud/>
+        Options FollowSymlinks
+        AllowOverride all
+        Require all granted
+        #php_admin_value open_basedir "/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/nextcloud/:/etc/webapps/nextcloud:/dev/urandom"
+    </Directory>
 
     SSLEngine on
     SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
