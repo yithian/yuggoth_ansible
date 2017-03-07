@@ -6,6 +6,11 @@
             upgrade: yes
             update_cache: yes
             state: present
+        register: pacman_result
         tags:
             - update
         # TODO find a way to restart services that have been updated
+
+      - name: display output
+        debug:
+          var: pacman_result

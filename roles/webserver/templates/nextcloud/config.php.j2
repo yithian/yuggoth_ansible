@@ -1,22 +1,22 @@
 <?php
 {{ ansible_managed | comment('c') }}
 $CONFIG = array (
-  'instanceid' => '{{ oc_instanceid }}',
-  'passwordsalt' => '{{ oc_passwordsalt }}',
-  'secret' => '{{ oc_secret }}',
+  'instanceid' => '{{ nc_instanceid }}',
+  'passwordsalt' => '{{ nc_passwordsalt }}',
+  'secret' => '{{ nc_secret }}',
   'trusted_domains' =>
   array (
-    0 => '{{ oc_host }}',
+    0 => '{{ nc_host }}',
   ),
-  'datadirectory' => '{{ oc_mountpoint }}',
-  'overwrite.cli.url' => 'https://{{ oc_host }}',
+  'datadirectory' => '{{ nc_mountpoint }}',
+  'overwrite.cli.url' => 'https://{{ nc_host }}',
   'dbtype' => 'mysql',
   'version' => '11.0.2.7',
-  'dbname' => '{{ oc_dbname }}',
+  'dbname' => '{{ nc_dbname }}',
   'dbhost' => '{{ db_host }}',
   'dbtableprefix' => 'oc_',
-  'dbuser' => '{{ oc_dbuser }}',
-  'dbpassword' => '{{ oc_dbpassword }}',
+  'dbuser' => '{{ nc_dbuser }}',
+  'dbpassword' => '{{ nc_dbpassword }}',
   'logtimezone' => 'UTC',
   'installed' => true,
   'memcache.local' => '\\OC\\Memcache\\APCu',

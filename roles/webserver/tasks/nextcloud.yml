@@ -1,7 +1,7 @@
 ---
 - name: create nextcloud mariadb database
   mysql_db:
-      name: "{{ oc_dbname }}"
+      name: "{{ nc_dbname }}"
       state: present
   tags:
       - nextcloud
@@ -9,9 +9,9 @@
 
 - name: create nextcloud mariadb user
   mysql_user:
-      name: "{{ oc_dbuser }}"
-      password: "{{ oc_dbpassword }}"
-      priv: "{{ oc_dbname }}.*:ALL"
+      name: "{{ nc_dbuser }}"
+      password: "{{ nc_dbpassword }}"
+      priv: "{{ nc_dbname }}.*:ALL"
       state: present
   tags:
       - nextcloud
@@ -26,8 +26,8 @@
 
 - name: mount nextcloud storage
   mount:
-      src: "{{ storage_host }}:{{ oc_volume }}"
-      name: "{{ oc_mountpoint }}"
+      src: "{{ storage_host }}:{{ nc_volume }}"
+      name: "{{ nc_mountpoint }}"
       fstype: nfs
       opts: _netdev,vers=3
       dump: 0

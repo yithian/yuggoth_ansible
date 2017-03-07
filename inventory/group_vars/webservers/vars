@@ -7,16 +7,16 @@ db_host: localhost
 
 # webserver storage
 www_mountpoint: "{{ vault_www_mountpoint }}"
-oc_mountpoint: "{{ vault_oc_mountpoint }}"
+nc_mountpoint: "{{ vault_nc_mountpoint }}"
 
 # nextcloud config
-oc_instanceid: "{{ vault_oc_instanceid }}"
-oc_passwordsalt: "{{ vault_oc_passwordsalt }}"
-oc_secret: "{{ vault_oc_secret }}"
+nc_instanceid: "{{ vault_nc_instanceid }}"
+nc_passwordsalt: "{{ vault_nc_passwordsalt }}"
+nc_secret: "{{ vault_nc_secret }}"
 
-oc_dbname: "{{ vault_oc_dbname }}"
-oc_dbuser: "{{ vault_oc_dbuser }}"
-oc_dbpassword: "{{ vault_oc_dbpassword }}"
+nc_dbname: "{{ vault_nc_dbname }}"
+nc_dbuser: "{{ vault_nc_dbuser }}"
+nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
 # personae config
 personae_dbname: "{{ vault_personae_dbname }}"

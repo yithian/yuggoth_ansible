@@ -1,12 +1,12 @@
 {{ ansible_managed | comment }}
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
-    ServerName {{ oc_host }}
+    ServerName {{ nc_host }}
 
-    Redirect permanent / https://{{ oc_host }}/
+    Redirect permanent / https://{{ nc_host }}/
 
-    ErrorLog /var/log/httpd/{{ oc_host }}-error_log
-    CustomLog /var/log/httpd/{{ oc_host }}-access_log common
+    ErrorLog /var/log/httpd/{{ nc_host }}-error_log
+    CustomLog /var/log/httpd/{{ nc_host }}-access_log common
 </VirtualHost>
 
 <VirtualHost *:{{ ssl_port }}>
@@ -16,7 +16,7 @@
 
     ServerAdmin {{ user }}@{{ domain }}
     DocumentRoot /usr/share/webapps/nextcloud
-    ServerName {{ oc_host }}:{{ ssl_port }}
+    ServerName {{ nc_host }}:{{ ssl_port }}
 
     <IfModule mod_alias.c>
         Alias /cloud /usr/share/webapps/nextcloud/
@@ -43,7 +43,7 @@
     BrowserMatch "MSIE [2-5]" \
          nokeepalive ssl-unclean-shutdown \
          downgrade-1.0 force-response-1.0
-    ErrorLog /var/log/httpd/ssl_{{ oc_host }}-error_log
-    CustomLog "/var/log/httpd/ssl_{{ oc_host }}-request_log" \
+    ErrorLog /var/log/httpd/ssl_{{ nc_host }}-error_log
+    CustomLog "/var/log/httpd/ssl_{{ nc_host }}-request_log" \
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 </VirtualHost>

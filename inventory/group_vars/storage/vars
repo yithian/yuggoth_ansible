@@ -4,10 +4,10 @@ ansible_python_interpreter: /usr/bin/python
 
 # define a dict of dicts containing nfs export info
 nfs_exports:
-  oc_storage:
-      volume: "{{ vault_oc_volume }}"
-      allowed: "{{ vault_nfs_exports['oc_storage']['allowed'] }}"
-      opts: "{{ vault_nfs_exports['oc_storage']['opts'] }}"
+  nc_storage:
+      volume: "{{ vault_nc_volume }}"
+      allowed: "{{ vault_nfs_exports['nc_storage']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['nc_storage']['opts'] }}"
   db_storage:
       volume: "{{ vault_db_volume }}"
       allowed: "{{ vault_nfs_exports['db_storage']['allowed'] }}"
