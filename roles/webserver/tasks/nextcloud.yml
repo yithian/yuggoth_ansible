@@ -22,7 +22,7 @@
       name: nextcloud
       state: present
   tags:
-      - wordpress
+      - nextcloud
 
 - name: mount nextcloud storage
   mount:
