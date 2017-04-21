@@ -6,6 +6,70 @@
             upgrade: yes
             update_cache: yes
             state: present
+        register: updates
         tags:
-            - update
-        # TODO find a way to restart services that have been updated
+            - always
+
+      - name: restart iptables if needed
+        service:
+            name: "{{ item }}"
+            state: restarted
+        when: '"iptables" in updates.packages'
+        with_items:
+            - iptables
+            - iptables6
+
+      - name: restart openssh if needed
+        service:
+            name: sshd
+            state: restarted
+        when: item in updates.packages
+        with_items:
+            - openssh
+            - openssl
+
+      - name: restart nfs services if needed
+        service:
+            name: "{{ item }}"
+            state: restarted
+        when: ('nfs-utils' in updates.packages) or
+              ('rpcbind' in updates.packages)
+        with_items:
+            - rpcbind
+            - nfs-client.target
+            - remote-fs.target
+            - systemd-networkd-wait-online
+
+      - name: restart httpd if needed
+        service:
+            name: httpd
+            state: restarted
+        when: item in updates.packages
+        with_items:
+            - httpd
+            - passenger
+            - php
+            - php-apache
+            - php-apcu-bc
+            - php-gd
+            - php-intl
+            - php-mcrypt
+            - nodejs
+            - openssl
+            - wordpress
+
+      - name: restart other services if needed
+        service:
+            name: "{{ item }}"
+            state: restarted
+        when: item in updates.packages
+        with_items:
+            - cronie
+            - iptables
+            - fake-hwclock
+            - mariadb
+            - ddclient
+            - dnsmasq
+            - opendkim
+            - postfix
+            - spamassassin
