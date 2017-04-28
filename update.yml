@@ -40,6 +40,14 @@
             - remote-fs.target
             - systemd-networkd-wait-online
 
+      - name: set wordpress permissions if needed
+        command: /usr/local/bin/wp-perms
+        when: '"wordpress" in updates.packages'
+
+      - name: set nextcloud permissions if needed
+        command: /usr/local/bin/set-nc-perms
+        when: '"nextcloud" in updates.packages'
+
       - name: restart httpd if needed
         service:
             name: httpd
