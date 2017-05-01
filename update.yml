@@ -23,10 +23,8 @@
         service:
             name: sshd
             state: restarted
-        when: item in updates.packages
-        with_items:
-            - openssh
-            - openssl
+        when: ('openssh' in updates.packages) or
+              ('openssl' in updates.packages)
 
       - name: restart nfs services if needed
         service:
@@ -52,19 +50,17 @@
         service:
             name: httpd
             state: restarted
-        when: item in updates.packages
-        with_items:
-            - httpd
-            - passenger
-            - php
-            - php-apache
-            - php-apcu-bc
-            - php-gd
-            - php-intl
-            - php-mcrypt
-            - nodejs
-            - openssl
-            - wordpress
+        when: ('apache' in updates.packages) or
+              ('passenger' in updates.packages) or
+              ('php' in updates.packages) or
+              ('php-apache' in updates.packages) or
+              ('php-apcu-bc' in updates.packages) or
+              ('php-gd' in updates.packages) or
+              ('php-intl' in updates.packages) or
+              ('php-mcrypt' in updates.packages) or
+              ('php-nodejs' in updates.packages) or
+              ('openssl' in updates.packages) or
+              ('wordpress' in updates.packages)
 
       - name: restart other services if needed
         service:
