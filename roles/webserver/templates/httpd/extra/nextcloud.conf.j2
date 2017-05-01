@@ -32,7 +32,6 @@
     SSLEngine on
     SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
     SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
-    SSLCertificateChainFile "/etc/letsencrypt/live/{{ web_host }}/chain.pem"
 
     <FilesMatch "\.(cgi|shtml|phtml|php)$">
         SSLOptions +StdEnvVars
