@@ -59,6 +59,7 @@
               ('php-intl' in updates.packages) or
               ('php-mcrypt' in updates.packages) or
               ('php-nodejs' in updates.packages) or
+              ('nodejs' in updates.packages) or
               ('openssl' in updates.packages) or
               ('wordpress' in updates.packages)
 
