@@ -28,7 +28,7 @@ personae_group: "{{ vault_personae_group }}"
 
 personae_dir: /usr/share/webapps/personae
 
-personae_ruby: 2.4.0
+personae_ruby: 2.4.1
 personae_gemset: personae
 
 # dlyg config
@@ -41,7 +41,7 @@ dlyg_group: "{{ vault_dlyg_group }}"
 
 dlyg_dir: /usr/share/webapps/dlyg
 
-dlyg_ruby: 2.4.0
+dlyg_ruby: 2.4.1
 dlyg_gemset: dlyg
 
 # wordpress config
