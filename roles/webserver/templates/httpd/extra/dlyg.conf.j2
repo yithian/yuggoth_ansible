@@ -5,7 +5,6 @@ LoadModule passenger_module modules/mod_passenger.so
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ dlyg_host }}
-    DocumentRoot {{ dlyg_dir}}/public
 
     Redirect permanent / https://{{ dlyg_host }}/
 
@@ -14,31 +13,16 @@ LoadModule passenger_module modules/mod_passenger.so
 </VirtualHost>
 
 <VirtualHost *:{{ ssl_port }}>
-    PassengerRuby /usr/local/rvm/gems/ruby-{{ dlyg_ruby }}@{{ dlyg_gemset }}/wrappers/ruby
-    PassengerRoot /usr/lib/passenger
-    PassengerUser {{ dlyg_user }}
-    PassengerGroup {{ dlyg_group }}
-
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ dlyg_host }}
-    DocumentRoot {{ dlyg_dir }}/public
 
-    <Directory {{ dlyg_dir }}/public>
-        AllowOverride all
-        Options -MultiViews
-        Require all granted
-    </Directory>
+    ProxyPass / http://localhost:{{ dlyg_port }}/
+    ProxyPassReverse / http://localhost:{{ dlyg_port }}/
 
     SSLEngine on
     SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
     SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
 
-    <FilesMatch "\.(cgi|shtml|phtml|php)$">
-        SSLOptions +StdEnvVars
-    </FilesMatch>
-    <Directory "/srv/http/cgi-bin">
-        SSLOptions +StdEnvVars
-    </Directory>
     BrowserMatch "MSIE [2-5]" \
          nokeepalive ssl-unclean-shutdown \
          downgrade-1.0 force-response-1.0

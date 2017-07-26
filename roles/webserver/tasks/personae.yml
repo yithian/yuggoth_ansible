@@ -3,7 +3,6 @@
   mysql_db:
       name: "{{ personae_dbname }}"
       state: present
-  notify: set up personae database
   tags:
       - personae
       - database
@@ -11,6 +10,7 @@
 - name: create personae mariadb user
   mysql_user:
       name: "{{ personae_dbuser }}"
+      host: '%'
       password: "{{ personae_dbpassword }}"
       priv: "{{ personae_dbname }}.*:ALL"
       state: present
@@ -18,61 +18,22 @@
       - personae
       - database
 
-- name: create the personae sandbox group
-  group:
-      name: "{{ personae_group }}"
-      system: yes
-      state: present
+- name: ensure the personae image is running
+  docker_container:
+      name: personae
+      image: yithian/personae-arm64v8
+      env:
+        OPENSHIFT_APP_NAME: "{{ personae_dbname }}"
+        OPENSHIFT_MYSQL_DB_USERNAME: "{{ personae_dbuser }}"
+        OPENSHIFT_MYSQL_DB_PASSWORD: "{{ personae_dbpassword }}"
+        OPENSHIFT_MYSQL_DB_HOST: "{{ ansible_docker0.ipv4.address }}"
+      published_ports: "{{ personae_port}}:9292"
+      restart_policy: always
+      pull: true
+      state: started
   tags:
       - personae
-
-- name: create the personae sandbox user
-  user:
-      name: "{{ personae_user }}"
-      createhome: no
-      home: "{{ personae_dir }}"
-      shell: /bin/nologin
-      system: yes
-      state: present
-  tags:
-      - personae
-
-- name: create the personae gemset
-  command: /usr/local/rvm/bin/rvm gemset create personae
-  args:
-      creates: /usr/local/rvm/gems/ruby-{{ personae_ruby }}@{{ personae_gemset }}
-  tags:
-      - personae
-
-- name: install bundler in the personae gemset
-  shell: /usr/local/rvm/bin/rvm {{ personae_ruby }}@{{ personae_gemset }} do gem install bundler
-  args:
-      creates: /usr/local/rvm/gems/ruby-{{ personae_ruby }}@{{ personae_gemset }}/gems/bundler-*
-  tags:
-      - personae
-
-- name: install the personae app
-  git:
-      repo: https://github.com/yithian/personae.git
-      dest: "{{ personae_dir }}"
-      force: yes
-  notify:
-      - install personae gems
-      - run personae database migrations
-      - precompile personae assets
-      - ensure the personae log file exists
-  tags:
-      - personae
-
-- name: land the personae database config
-  template:
-      src: templates/personae/database.yml.j2
-      dest: "{{ personae_dir }}/config/database.yml"
-      owner: personae
-      group: personae
-      mode: 0640
-  tags:
-      - personae
+      - docker
 
 - name: land the personae httpd config
   template:
@@ -85,11 +46,3 @@
   tags:
       - personae
       - httpd
-
-- name: link the personae config dir to /etc/webapps/
-  file:
-      src: "{{ personae_dir }}/config/"
-      path: /etc/webapps/personae
-      state: link
-  tags:
-      - personae

@@ -1,7 +1,4 @@
 ---
-- include: handlers/personae.yml
-- include: handlers/dlyg.yml
-
 - name: reload systemd
   command: /usr/bin/systemctl daemon-reload
 

@@ -19,30 +19,16 @@ nc_dbuser: "{{ vault_nc_dbuser }}"
 nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
 # personae config
+personae_port: 8081
 personae_dbname: "{{ vault_personae_dbname }}"
 personae_dbuser: "{{ vault_personae_dbuser }}"
 personae_dbpassword: "{{ vault_personae_dbpassword }}"
 
-personae_user: "{{ vault_personae_user }}"
-personae_group: "{{ vault_personae_group }}"
-
-personae_dir: /usr/share/webapps/personae
-
-personae_ruby: 2.4.1
-personae_gemset: personae
-
 # dlyg config
+dlyg_port: 8082
 dlyg_dbname: "{{ vault_dlyg_dbname }}"
 dlyg_dbuser: "{{ vault_dlyg_dbuser }}"
 dlyg_dbpassword: "{{ vault_dlyg_dbpassword }}"
-
-dlyg_user: "{{ vault_dlyg_user }}"
-dlyg_group: "{{ vault_dlyg_group }}"
-
-dlyg_dir: /usr/share/webapps/dlyg
-
-dlyg_ruby: 2.4.1
-dlyg_gemset: dlyg
 
 # wordpress config
 wordpress_dbname: "{{ vault_wordpress_dbname }}"

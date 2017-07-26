@@ -4,7 +4,7 @@
 - include: tasks/ssl.yml
 - include: tasks/www.yml
 - include: tasks/nextcloud.yml
-- include: tasks/passenger.yml
+- include: tasks/docker.yml
 - include: tasks/personae.yml
 - include: tasks/dlyg.yml
 - include: tasks/wordpress.yml
