@@ -5,7 +5,7 @@
       state: present
   with_items:
       - docker
-      - python2-docker-py
+      - python2-docker
   tags:
       - docker
 
