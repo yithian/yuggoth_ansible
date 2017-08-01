@@ -17,7 +17,7 @@
   service:
       name: fake-hwclock
       enabled: yes
-      state: running
+      state: started
   tags:
       - timedate
       - fake-hwclock
