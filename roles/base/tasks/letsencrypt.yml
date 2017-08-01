@@ -33,7 +33,7 @@
       minute: 8
       hour: 0
       day: 1
-      job: systemctl stop httpd && certbot renew | logger -t letsencrypt && systemctl start httpd
+      job: systemctl stop httpd && certbot renew && systemctl start httpd
   tags:
       - ssl
       - cron
