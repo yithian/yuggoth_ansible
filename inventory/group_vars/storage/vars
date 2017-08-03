@@ -20,3 +20,7 @@ nfs_exports:
       volume: "{{ vault_www_volume }}"
       allowed: "{{ vault_nfs_exports['www_storage']['allowed'] }}"
       opts: "{{ vault_nfs_exports['www_storage']['opts'] }}"
+  public:
+      volume: "{{ vault_public_volume }}"
+      allowed: "{{ vault_nfs_exports['public']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['public']['opts'] }}"
