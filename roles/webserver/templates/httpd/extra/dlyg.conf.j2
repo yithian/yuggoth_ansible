@@ -1,7 +1,5 @@
 {{ ansible_managed | comment }}
 # configuration for the dlyg rails app
-LoadModule passenger_module modules/mod_passenger.so
-
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ dlyg_host }}
