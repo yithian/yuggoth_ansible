@@ -76,3 +76,4 @@
             - opendkim
             - postfix
             - spamassassin
+            - docker
