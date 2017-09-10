@@ -7,4 +7,3 @@
 - include: tasks/docker.yml
 - include: tasks/personae.yml
 - include: tasks/dlyg.yml
-- include: tasks/wordpress.yml
