@@ -1,11 +1,11 @@
 ---
-- include: tasks/locale.yml
-- include: tasks/hostname.yml
-- include: tasks/timedate.yml
-- include: tasks/cron.yml
-- include: tasks/nfs.yml
-- include: tasks/user.yml
-- include: tasks/ssh.yml
-- include: tasks/iptables.yml
-- include: tasks/std-utils.yml
-- include: tasks/letsencrypt.yml
+- import_tasks: tasks/locale.yml
+- import_tasks: tasks/hostname.yml
+- import_tasks: tasks/timedate.yml
+- import_tasks: tasks/cron.yml
+- import_tasks: tasks/nfs.yml
+- import_tasks: tasks/user.yml
+- import_tasks: tasks/ssh.yml
+- import_tasks: tasks/iptables.yml
+- import_tasks: tasks/std-utils.yml
+- import_tasks: tasks/letsencrypt.yml

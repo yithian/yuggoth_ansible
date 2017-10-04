@@ -1,4 +1,4 @@
 ---
-- include: tasks/hosts.yml
-- include: tasks/dnsmasq.yml
-- include: tasks/ddclient.yml
+- import_tasks: tasks/hosts.yml
+- import_tasks: tasks/dnsmasq.yml
+- import_tasks: tasks/ddclient.yml

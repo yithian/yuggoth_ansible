@@ -1,4 +1,4 @@
 ---
-- include: tasks/spamassassin.yml
-- include: tasks/postfix.yml
-- include: tasks/dkim.yml
+- import_tasks: tasks/spamassassin.yml
+- import_tasks: tasks/postfix.yml
+- import_tasks: tasks/dkim.yml

@@ -1,3 +1,3 @@
 ---
-- include: tasks/mariadb.yml
-- include: tasks/backups.yml
+- import_tasks: tasks/mariadb.yml
+- import_tasks: tasks/backups.yml

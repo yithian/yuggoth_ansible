@@ -1,9 +1,9 @@
 ---
-- include: tasks/httpd.yml
-- include: tasks/php.yml
-- include: tasks/ssl.yml
-- include: tasks/www.yml
-- include: tasks/nextcloud.yml
-- include: tasks/docker.yml
-- include: tasks/personae.yml
-- include: tasks/dlyg.yml
+- import_tasks: tasks/httpd.yml
+- import_tasks: tasks/php.yml
+- import_tasks: tasks/ssl.yml
+- import_tasks: tasks/www.yml
+- import_tasks: tasks/nextcloud.yml
+- import_tasks: tasks/docker.yml
+- import_tasks: tasks/personae.yml
+- import_tasks: tasks/dlyg.yml
