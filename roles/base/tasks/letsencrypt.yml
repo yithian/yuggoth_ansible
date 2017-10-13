@@ -32,7 +32,7 @@
       name: renew ssl certs every month
       minute: 8
       hour: 0
-      day: 1
+      weekday: 0
       job: systemctl stop httpd && certbot renew && systemctl start httpd
   tags:
       - ssl
