@@ -21,7 +21,7 @@
       - ssl
 
 - name: get a Let's Encrypt cert if necessary
-  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d void.{{ domain }} -d {{ mail_host }} -d {{ nc_host }} -d {{ wordpress_host }} -d {{ personae_host }} -d {{ dlyg_host }}
+  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d void.{{ domain }} -d {{ mail_host }} -d {{ nc_host }} -d {{ personae_host }} -d {{ dlyg_host }}
   args:
       creates: /etc/letsencrypt/live/{{ web_host }}
   tags:
