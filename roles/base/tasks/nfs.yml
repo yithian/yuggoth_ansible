@@ -15,7 +15,7 @@
       enabled: yes
       state: started
   with_items:
-      #- rpcbind # https://github.com/ansible/ansible-modules-core/issues/3868
+      - rpcbind
       - nfs-client.target
       - remote-fs.target
       - systemd-networkd-wait-online
