@@ -55,7 +55,7 @@
       - database
 
 - name: ensure mariadb is running
-  service:
+  systemd:
       name: mariadb
       enabled: yes
       state: started

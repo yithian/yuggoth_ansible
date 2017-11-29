@@ -18,7 +18,7 @@
       - httpd
 
 - name: ensure httpd is started
-  service:
+  systemd:
       name: httpd
       enabled: yes
       state: started

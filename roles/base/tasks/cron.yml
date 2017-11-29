@@ -7,7 +7,7 @@
       - cron
 
 - name: ensure cron is running
-  service:
+  systemd:
       name: cronie
       enabled: yes
       state: started

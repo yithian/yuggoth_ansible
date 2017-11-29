@@ -18,7 +18,7 @@
       - dnsmasq
 
 - name: ensure dnsmasq is running
-  service:
+  systemd:
       name: dnsmasq
       enabled: yes
       state: started

@@ -10,7 +10,7 @@
       - nfs
 
 - name: ensure nfs client services are started
-  service:
+  systemd:
       name: "{{ item }}"
       enabled: yes
       state: started

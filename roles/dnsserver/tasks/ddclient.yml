@@ -39,7 +39,7 @@
       - ddclient
 
 - name: ensure ddclient is running
-  service:
+  systemd:
       name: ddclient
       enabled: yes
       state: started

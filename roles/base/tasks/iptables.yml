@@ -42,7 +42,7 @@
       - firewall
 
 - name: ensure iptables is running
-  service:
+  systemd:
       name: iptables
       enabled: yes
       state: started

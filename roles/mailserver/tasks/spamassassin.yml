@@ -18,7 +18,7 @@
       - cron
 
 - name: ensure spamassassin is running
-  service:
+  systemd:
       name: spamassassin
       enabled: yes
       state: started

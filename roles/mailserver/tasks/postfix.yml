@@ -51,7 +51,7 @@
       - postfix
 
 - name: ensure postfix is started
-  service:
+  systemd:
       name: postfix
       enabled: yes
       state: started

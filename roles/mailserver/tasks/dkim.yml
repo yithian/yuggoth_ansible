@@ -48,7 +48,7 @@
       - dkim
 
 - name: start opendkim
-  service:
+  systemd:
       name: opendkim
       enabled: yes
       state: started
