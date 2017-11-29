@@ -1,0 +1,15 @@
+---
+- name: install rng-tools
+  pacman:
+      name: rng-tools
+      state: installed
+  tags:
+      - rng
+
+- name: ensure rngd is running
+  systemd:
+      name: rngd
+      enabled: yes
+      state: started
+  tags:
+      - rng
