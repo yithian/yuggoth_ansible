@@ -10,6 +10,7 @@ www_mountpoint: "{{ vault_www_mountpoint }}"
 nc_mountpoint: "{{ vault_nc_mountpoint }}"
 
 # nextcloud config
+nc_version: "{{ vault_nc_version }}"
 nc_instanceid: "{{ vault_nc_instanceid }}"
 nc_passwordsalt: "{{ vault_nc_passwordsalt }}"
 nc_secret: "{{ vault_nc_secret }}"
