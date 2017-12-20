@@ -17,7 +17,7 @@
         when: '"iptables" in updates.packages'
         with_items:
             - iptables
-            - iptables6
+            - ip6tables
 
       - name: restart openssh if needed
         service:
@@ -68,7 +68,6 @@
         when: item in updates.packages
         with_items:
             - cronie
-            - iptables
             - fake-hwclock
             - mariadb
             - ddclient
