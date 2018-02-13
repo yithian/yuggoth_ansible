@@ -121,7 +121,7 @@ SSLSessionCacheTimeout  300
 
 <VirtualHost _default_:{{ ssl_port }}>
 #   General setup for the virtual host
-DocumentRoot "/srv/http"
+DocumentRoot "/srv/http/yuggoth/"
 ServerName {{ web_host }}:{{ ssl_port }}
 ServerAdmin {{ user }}@{{ domain }}
 ErrorLog "/var/log/httpd/ssl_error_log"

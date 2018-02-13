@@ -1,7 +1,7 @@
 {{ ansible_managed | comment }}
 <VirtualHost *:{{ web_port }}>
     ServerAdmin {{ user }}@{{ domain }}
-    DocumentRoot /srv/http/
+    DocumentRoot /srv/http/yuggoth/
     ServerName {{ web_host }}
 
     Redirect permanent / https://{{ web_host }}/
