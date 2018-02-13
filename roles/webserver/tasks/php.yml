@@ -4,14 +4,13 @@
       name: "{{ item }}"
       state: installed
   with_items:
-      - php71
-      - php71-apache
-      - php71-apcu # optional by nextcloud
-      - php71-gd # required by nextcloud
-      - php71-intl # recommended by nextcloud
-      - php71-mcrypt # recommended by nextcloud
-      - php71-sqlite # needed by pi-hole web
-      - php71-cgi # needed by py-hole web
+      - php
+      - php-apache
+      - php-apcu # optional by nextcloud
+      - php-gd # required by nextcloud
+      - php-intl # recommended by nextcloud
+      - php-sqlite # needed by pi-hole web
+      - php-cgi # needed by py-hole web
   notify: restart httpd
   tags:
       - php
