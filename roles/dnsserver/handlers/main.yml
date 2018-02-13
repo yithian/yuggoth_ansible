@@ -12,16 +12,6 @@
       name: dnsmasq
       state: reloaded
 
-- name: reload lighttpd
-  systemd:
-      name: lighttpd
-      state: reloaded
-
-- name: reload httpd
-  systemd:
-      name: httpd
-      state: reloaded
-
 - name: restart pi-hole-ftl
   systemd:
       name: pi-hole-ftl

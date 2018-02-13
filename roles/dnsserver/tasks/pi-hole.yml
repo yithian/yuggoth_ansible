@@ -5,8 +5,6 @@
     state: present
   with_items:
     - bc
-    - php-fpm
-    - php-cgi
     - lighttpd
   tags:
     - pi-hole
@@ -22,38 +20,6 @@
   tags:
     - pi-hole
     - dnsmasq
-
-- name: land the pi-hole lighttpd config
-  template:
-    src: templates/lighttpd/lighttpd.conf.j2
-    dest: /etc/lighttpd/lighttpd.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: reload lighttpd
-  tags:
-    - pi-hole
-    - lighttpd
-
-- name: start lighttpd for pi-hole
-  systemd:
-    name: lighttpd
-    state: started
-    enabled: yes
-  tags:
-    - pi-hole
-    - lighttpd
-
-- name: land pi-hole httpd virtual host
-  template:
-    src: templates/httpd/extra/pi-hole.conf.j2
-    dest: /etc/httpd/conf/extra/pi-hole.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: reload httpd
-  tags:
-    - pi-hole
 
 - name: configure pi-hole FTL
   template:
