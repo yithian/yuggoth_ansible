@@ -96,6 +96,17 @@
       - nextcloud
       - cron
 
+- name: cron nextcloud's preview pre-generate
+  cron:
+      name: nextcloud preview pre-generate
+      user: http
+      job: /usr/share/webapps/nextcloud/occ preview:pre-generate > /dev/null 2>&1
+      minute: "*/10"
+      state: present
+  tags:
+      - nextcloud
+      - cron
+
 - name: configure nextcloud httpd virtual host
   template:
       src: templates/httpd/extra/nextcloud.conf.j2
