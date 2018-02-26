@@ -4,7 +4,7 @@
       src: "{{ storage_host }}:{{ www_volume }}"
       name: "{{ www_mountpoint }}"
       fstype: nfs
-      opts: _netdev,vers=3
+      opts: vers=3,comment=systemd.automount
       dump: 0
       passno: 0
       state: mounted
