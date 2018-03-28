@@ -10,26 +10,33 @@
         tags:
             - always
 
+      - name: re-exec systemd if needed
+        command: /usr/bin/systemctl daemon-reexec
+        when: '"systemd" in updates.packages'
+
       - name: restart iptables if needed
-        service:
+        systemd:
             name: "{{ item }}"
             state: restarted
+            daemon_reload: yes
         when: '"iptables" in updates.packages'
         with_items:
             - iptables
             - ip6tables
 
       - name: restart openssh if needed
-        service:
+        systemd:
             name: sshd
             state: restarted
+            daemon_reload: yes
         when: ('openssh' in updates.packages) or
               ('openssl' in updates.packages)
 
       - name: restart nfs services if needed
-        service:
+        systemd:
             name: "{{ item }}"
             state: restarted
+            daemon_reload: yes
         when: ('nfs-utils' in updates.packages) or
               ('rpcbind' in updates.packages)
         with_items:
@@ -47,9 +54,10 @@
         when: '"nextcloud" in updates.packages'
 
       - name: restart httpd if needed
-        service:
+        systemd:
             name: httpd
             state: restarted
+            daemon_reload: yes
         when: ('apache' in updates.packages) or
               ('passenger' in updates.packages) or
               ('php' in updates.packages) or
@@ -62,9 +70,10 @@
               ('wordpress' in updates.packages)
 
       - name: restart other services if needed
-        service:
+        systemd:
             name: "{{ item }}"
             state: restarted
+            daemon_reload: yes
         when: item in updates.packages
         with_items:
             - cronie
