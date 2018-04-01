@@ -11,18 +11,6 @@
   tags:
     - pi-hole
 
-- name: land the pi-hole dnsmasq config
-  copy:
-    src: files/dnsmasq/dnsmasq.d/01-pihole.conf
-    dest: /etc/dnsmasq.d/01-pihole.conf
-    owner: root
-    group: root
-    mode: 0644
-  notify: reload dnsmasq
-  tags:
-    - pi-hole
-    - dnsmasq
-
 - name: land the pi-hole lighttpd config
   template:
     src: templates/lighttpd/lighttpd.conf.j2
