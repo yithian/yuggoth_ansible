@@ -11,9 +11,3 @@
   service:
       name: httpd
       state: restarted
-
-- name: reload lighttpd
-  systemd:
-      name: lighttpd
-      state: reloaded
-
