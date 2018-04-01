@@ -9,8 +9,6 @@
       - php-apcu # optional by nextcloud
       - php-gd # required by nextcloud
       - php-intl # recommended by nextcloud
-      - php-sqlite # needed by pi-hole web
-      - php-cgi # needed by py-hole web
   notify: restart httpd
   tags:
       - php

@@ -3,26 +3,11 @@
   command: /usr/bin/systemctl daemon-reload
 
 - name: restart ddclient
-  systemd:
+  service:
       name: ddclient
       state: restarted
 
 - name: reload dnsmasq
-  systemd:
+  service:
       name: dnsmasq
       state: reloaded
-
-- name: reload lighttpd
-  systemd:
-      name: lighttpd
-      state: reloaded
-
-- name: reload httpd
-  systemd:
-      name: httpd
-      state: reloaded
-
-- name: restart pi-hole-ftl
-  systemd:
-      name: pi-hole-ftl
-      state: restarted
