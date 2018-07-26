@@ -1,3 +1,4 @@
+#!/usr/bin/ansible-playbook
 ---
 - hosts: storage
   roles:
