@@ -1,8 +1,6 @@
 {{ ansible_managed | comment }}
 ######################################################################
 ##
-## $Id: sample-etc_ddclient.conf 171 2015-01-20 11:57:13Z wimpunk $
-##
 ## Define default global variables with lines like:
 ## 	var=value [, var=value]*
 ## These values will be used for each following host unless overridden
@@ -19,8 +17,8 @@
 ##          are mentioned here.
 ##
 ######################################################################
-daemon=600				# check every 300 seconds
-syslog=no				# log update msgs to syslog
+daemon=300				# check every 300 seconds
+syslog=yes				# log update msgs to syslog
 mail=root				# mail all msgs to root
 mail-failure=root			# mail failed update msgs to root
 pid=/var/run/ddclient.pid		# record PID in file.
@@ -167,18 +165,6 @@ login={{ ddclient_login }}				\
 password={{ ddclient_password }}	\
 {{ web_host }}, {{ mail_host }}, void.{{ domain }}, {{ nc_host }}
 
-protocol=namecheap,				\
-server=dynamicdns.park-your-domain.com,		\
-login={{ ddclient_personae_login }}			\
-password={{ ddclient_personae_password }}	\
-{{ personae_host }}
-
-protocol=namecheap,				\
-server=dynamicdns.park-your-domain.com,		\
-login={{ ddclient_dlyg_login }}			\
-password={{ ddclient_dlyg_password }}	\
-{{ dlyg_host }}
-
 ##
 ##
 ## Loopia (loopia.se)
@@ -216,7 +202,6 @@ password={{ ddclient_dlyg_password }}	\
 ##
 #protocol=cloudflare,        \
 #zone=domain.tld,            \
-#server=www.cloudflare.com,  \
 #login=your-login-email,     \
 #password=APIKey             \
 #domain.tld,my.domain.tld
@@ -228,3 +213,32 @@ password={{ ddclient_dlyg_password }}	\
 # login=my-auto-generated-username,
 # password=my-auto-generated-password
 # my.domain.tld, otherhost.domain.tld
+
+##
+## Duckdns (http://www.duckdns.org/)
+##
+#
+# password=my-auto-generated-password
+# protocol=duckdns hostwithoutduckdnsorg
+
+##
+## Freemyip (http://freemyip.com/)
+##
+#
+# protocol=freemyip,
+# password=my-token
+# myhost
+
+##
+## MyOnlinePortal (http://myonlineportal.net)
+##
+# protocol=dyndns2
+# ssl=yes
+# # ipv6=yes # optional
+# use=web, web=myonlineportal.net/checkip
+# # use=if, if=eth0     # alternative to use=web
+# # if-skip=Scope:Link  # alternative to use=web
+# login=your-myonlineportal-username
+# password=your-myonlineportal-password
+# domain.myonlineportal.net
+
