@@ -687,8 +687,8 @@ smtpd_milters = unix:/run/opendkim/opendkim.sock
 non_smtpd_milters = unix:/run/opendkim/opendkim.sock
 
 smtpd_sasl_auth_enable = yes
+smtp_sasl_password_maps = {{ sasl_password_map }}
 broken_sasl_auth_clients = yes
-smtpd_sasl_security_options = noanonymous
 
 #smtpd_recipient_restrictions = permit_mynetworks permit_sasl_authenticated reject_unauth_destination
 
