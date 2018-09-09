@@ -4,6 +4,3 @@
 - import_tasks: tasks/ssl.yml
 - import_tasks: tasks/www.yml
 - import_tasks: tasks/nextcloud.yml
-- import_tasks: tasks/docker.yml
-- import_tasks: tasks/personae.yml
-- import_tasks: tasks/dlyg.yml
