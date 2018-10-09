@@ -686,19 +686,18 @@ shlib_directory = /usr/lib/postfix
 smtpd_milters = unix:/run/opendkim/opendkim.sock
 non_smtpd_milters = unix:/run/opendkim/opendkim.sock
 
-smtpd_sasl_auth_enable = yes
+# sending mail
+smtp_use_tls = yes
+smtp_sasl_auth_enable = yes
 smtp_sasl_password_maps = {{ sasl_password_map }}
-broken_sasl_auth_clients = yes
+smtp_tls_mandatory_protocols = !SSLv2,!SSLv3
+smtp_tls_protocols = !SSLv2,!SSLv3
+smtp_sasl_security_options = noanonymous
 
-#smtpd_recipient_restrictions = permit_mynetworks permit_sasl_authenticated reject_unauth_destination
-
-#smtpd_tls_security_level = encrypt
-smtpd_tls_security_level = may
-smtpd_tls_auth_only = yes
-smtpd_tls_mandatory_protocols=!SSLv2,!SSLv3
-smtp_tls_mandatory_protocols=!SSLv2,!SSLv3
-smtpd_tls_protocols=!SSLv2,!SSLv3
-smtp_tls_protocols=!SSLv2,!SSLv3
+# accepting mail
+smtpd_tls_security_level = encrypt
+smtpd_tls_mandatory_protocols = !SSLv2,!SSLv3
+smtpd_tls_protocols = !SSLv2,!SSLv3
 smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5, PSK, aECDH, EDH-DSS-DES-CBC3-SHA, EDH-RSA-DES-CDC3-SHA, KRB5-DE5, CBC3-SHA
 
 smtpd_tls_dh1024_param_file = $config_directory/dhparams.pem
@@ -707,5 +706,3 @@ smtpd_tls_CAfile = /etc/letsencrypt/live/{{ web_host }}/fullchain.pem
 smtpd_tls_CApath = /etc/ssl/certs/
 smtpd_tls_cert_file = /etc/letsencrypt/live/{{ web_host }}/cert.pem
 smtpd_tls_key_file = /etc/letsencrypt/live/{{ web_host }}/privkey.pem
-
-#virtual_transport = dovecot
