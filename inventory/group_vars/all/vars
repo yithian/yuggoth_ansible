@@ -3,6 +3,7 @@
 
 # this is me!
 user: "{{ vault_user }}"
+email: "{{ vault_email }}"
 uid: "{{ vault_uid }}"
 gid: "{{ vault_gid }}"
 shell: "{{ vault_shell }}"
@@ -12,10 +13,6 @@ domain: "{{ vault_domain }}"
 web_host: "{{ vault_web_host }}"
 mail_host: "{{ vault_mail_host }}"
 nc_host: "{{ vault_nc_host }}"
-personae_domain: "{{ vault_personae_domain }}"
-personae_host: "{{ vault_personae_host }}"
-dlyg_domain: "{{ vault_dlyg_domain }}"
-dlyg_host: "{{ vault_dlyg_host }}"
 
 workstation_ip: "{{ vault_workstation_ip }}"
 workstation_subdomain: "{{ vault_workstation_subdomain }}"
