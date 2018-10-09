@@ -159,11 +159,12 @@ use=web, web=dynamicdns.park-your-domain.com/getip
 ##
 ## NameCheap (namecheap.com)
 ##
-protocol=namecheap,				\
-server=dynamicdns.park-your-domain.com,		\
-login={{ ddclient_login }}				\
-password={{ ddclient_password }}	\
-{{ web_host }}, {{ mail_host }}, void.{{ domain }}, {{ nc_host }}
+use=web, web=dynamicdns.park-your-domain.com/getip
+protocol=namecheap
+server=dynamicdns.park-your-domain.com
+login={{ ddclient_login }}
+password={{ ddclient_password }}
+{{ web_subdomain }}, {{ mail_subdomain }}, {{ void_subdomain }}, {{ nc_subdomain }}
 
 ##
 ##

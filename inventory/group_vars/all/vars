@@ -10,8 +10,12 @@ shell: "{{ vault_shell }}"
 
 # site domain
 domain: "{{ vault_domain }}"
+void_subdomain: "{{ vault_void_subdomain }}"
+web_subdomain: "{{ vault_web_subdomain }}"
 web_host: "{{ vault_web_host }}"
+mail_subdomain: "{{ vault_mail_subdomain }}"
 mail_host: "{{ vault_mail_host }}"
+nc_subdomain: "{{ vault_nc_subdomain }}"
 nc_host: "{{ vault_nc_host }}"
 
 workstation_ip: "{{ vault_workstation_ip }}"
