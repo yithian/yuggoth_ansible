@@ -21,6 +21,9 @@ nc_host: "{{ vault_nc_host }}"
 workstation_ip: "{{ vault_workstation_ip }}"
 workstation_subdomain: "{{ vault_workstation_subdomain }}"
 
+printer_ip: "{{ vault_printer_ip }}"
+printer_subdomain: "{{ vault_printer_subdomain }}"
+
 router_ip: "{{ vault_router_ip }}"
 router_subdomain: "{{ vault_router_subdomain }}"
 
