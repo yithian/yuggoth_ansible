@@ -1,4 +1,6 @@
 {{ ansible_managed | comment }}
-[Unit]
+[Service]
 Restart=on-failure
+
+[Unit]
 RequiresMountsFor={{ nc_mountpoint }}

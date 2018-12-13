@@ -46,6 +46,7 @@
       state: directory
   tags:
       - nextcloud
+      - httpd
 
 - name: land httpd systemd override
   template:
@@ -57,6 +58,7 @@
   notify: reload systemd
   tags:
       - nextcloud
+      - httpd
 
 - name: land the set-nc-perms script
   copy:
