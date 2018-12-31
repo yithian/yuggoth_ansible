@@ -46,10 +46,6 @@
             - remote-fs.target
             - systemd-networkd-wait-online
 
-      - name: set wordpress permissions if needed
-        command: /usr/local/bin/wp-perms
-        when: '"wordpress" in updates.packages'
-
       - name: set nextcloud permissions if needed
         command: /usr/local/bin/set-nc-perms
         when: '"nextcloud" in updates.packages'
@@ -86,3 +82,8 @@
             - postfix
             - spamassassin
             - docker
+
+      - name: reboot if needed
+        reboot:
+            msg: Kernel updated, rebooting...
+        when: '"linux-aarch64" in updates.packages'
