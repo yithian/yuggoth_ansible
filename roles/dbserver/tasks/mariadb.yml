@@ -43,17 +43,6 @@
   tags:
       - database
 
-- name: configure mariadb
-  template:
-      src: templates/mariadb/my.cnf.j2
-      dest: /etc/mysql/my.cnf
-      owner: root
-      group: root
-      mode: 0644
-  notify: restart mariadb
-  tags:
-      - database
-
 - name: ensure mariadb is running
   systemd:
       name: mariadb
