@@ -25,6 +25,7 @@
 -A TCP -p tcp -m tcp --dport 25 -j ACCEPT
 -A TCP -p tcp -m tcp --dport 587 -j ACCEPT
 -A TCP -p tcp -m tcp --dport 3306 -j ACCEPT
+-A TCP -p tcp -m tcp --dport 6697 -j ACCEPT
 -A TCP -p tcp -j REJECT --reject-with tcp-reset
 -A UDP -p udp -m udp --dport 53 -j ACCEPT
 -A UDP -p udp -j REJECT --reject-with icmp6-adm-prohibited

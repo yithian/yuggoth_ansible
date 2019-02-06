@@ -19,34 +19,5 @@ nc_dbname: "{{ vault_nc_dbname }}"
 nc_dbuser: "{{ vault_nc_dbuser }}"
 nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
-# personae config
-personae_port: 8081
-personae_dbname: "{{ vault_personae_dbname }}"
-personae_dbuser: "{{ vault_personae_dbuser }}"
-personae_dbpassword: "{{ vault_personae_dbpassword }}"
-
-# dlyg config
-dlyg_port: 8082
-dlyg_dbname: "{{ vault_dlyg_dbname }}"
-dlyg_dbuser: "{{ vault_dlyg_dbuser }}"
-dlyg_dbpassword: "{{ vault_dlyg_dbpassword }}"
-
-# wordpress config
-wordpress_dbname: "{{ vault_wordpress_dbname }}"
-wordpress_dbuser: "{{ vault_wordpress_dbuser }}"
-wordpress_dbpassword: "{{ vault_wordpress_dbpassword }}"
-wordpress_dbprefix: "{{ vault_wordpress_dbprefix }}"
-
-wordpress_auth_key: "{{ vault_wordpress_auth_key }}"
-wordpress_secure_auth_key: "{{ vault_wordpress_secure_auth_key }}"
-wordpress_logged_in_key: "{{ vault_wordpress_logged_in_key }}"
-wordpress_nonce_key: "{{ vault_wordpress_nonce_key }}"
-wordpress_auth_salt: "{{ vault_wordpress_auth_salt }}"
-wordpress_secure_auth_salt: "{{ vault_wordpress_secure_auth_salt }}"
-wordpress_logged_in_salt: "{{ vault_wordpress_logged_in_salt }}"
-wordpress_nonce_salt: "{{ vault_wordpress_nonce_salt }}"
-
-wordpress_user: "{{ vault_wordpress_user }}"
-wordpress_group: "{{ vault_wordpress_group }}"
-
-wordpress_dir: /usr/share/webapps/wordpress
+# znc config
+znc_port: 6697

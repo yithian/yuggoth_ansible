@@ -1,0 +1,11 @@
+#!/bin/bash
+{{ ansible_managed|comment }}
+
+LE_CERTS_DIR=/etc/letsencrypt/live/{{ web_host }}
+ZNC_DATA_DIR=/var/lib/docker/volumes/{{ znc_docker_volume }}/_data
+
+for p in fullchain.pem privkey.pem; do
+  cp ${LE_CERTS_DIR}/${p} ${ZNC_DATA_DIR}
+done
+
+docker restart {{ znc_container_name }}

@@ -1,0 +1,21 @@
+---
+- name: mount docker volume storage
+  mount:
+    src: "{{ storage_host }}:{{ docker_volumes }}"
+    name: "{{ docker_mountpoint }}"
+    fstype: nfs
+    opts: vers=3,comment=systemd.automount
+    dump: 0
+    passno: 0
+    state: mounted
+  tags:
+    - docker
+    - storage
+
+- name: ensure docker daemon is running
+  systemd:
+    name: docker
+    enabled: yes
+    state: started
+  tags:
+    - docker

@@ -1,0 +1,3 @@
+---
+# where docker volume storage mounts
+docker_mountpoint: "{{ vault_docker_mountpoint }}"

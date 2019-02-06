@@ -1,10 +1,13 @@
 [dnsservers]
 void.yuggoth.space
 
-[vpnservers]
+[mailservers]
 void.yuggoth.space
 
-[mailservers]
+[dockerservers]
+void.yuggoth.space
+
+[zncservers]
 void.yuggoth.space
 
 [dbservers]
