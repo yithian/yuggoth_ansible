@@ -22,8 +22,8 @@ nfs_exports:
       opts: "{{ vault_nfs_exports['www_storage']['opts'] }}"
   docker_volumes:
       volume: "{{ vault_docker_volumes }}"
-      allowed: "{{ vault_nfs_exports['www_storage']['allowed'] }}"
-      opts: "{{ vault_nfs_exports['www_storage']['opts'] }}"
+      allowed: "{{ vault_nfs_exports['docker_volumes']['allowed'] }}"
+      opts: "{{ vault_nfs_exports['docker_volumes']['opts'] }}"
   public:
       volume: "{{ vault_public_volume }}"
       allowed: "{{ vault_nfs_exports['public']['allowed'] }}"
