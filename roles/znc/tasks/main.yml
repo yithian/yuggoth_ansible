@@ -23,7 +23,7 @@
     name: "{{ znc_container_name }}"
     image: arm64v8/znc
     pull: yes
-    restart_policy: on-failure
+    restart_policy: always
     published_ports:
       - "{{ znc_port }}:6697"
     volumes:
