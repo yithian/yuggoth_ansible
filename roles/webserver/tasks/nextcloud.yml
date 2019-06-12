@@ -17,13 +17,6 @@
       - nextcloud
       - database
 
-- name: install nextcloud
-  pacman:
-      name: nextcloud
-      state: present
-  tags:
-      - nextcloud
-
 - name: mount nextcloud storage
   mount:
       src: "{{ storage_host }}:{{ nc_volume }}"

@@ -93,6 +93,7 @@ LoadModule auth_basic_module modules/mod_auth_basic.so
 LoadModule socache_shmcb_module modules/mod_socache_shmcb.so
 #LoadModule socache_dbm_module modules/mod_socache_dbm.so
 #LoadModule socache_memcache_module modules/mod_socache_memcache.so
+#LoadModule socache_redis_module modules/mod_socache_redis.so
 #LoadModule watchdog_module modules/mod_watchdog.so
 #LoadModule macro_module modules/mod_macro.so
 #LoadModule dbd_module modules/mod_dbd.so
@@ -113,6 +114,7 @@ LoadModule filter_module modules/mod_filter.so
 #LoadModule deflate_module modules/mod_deflate.so
 #LoadModule xml2enc_module modules/mod_xml2enc.so
 #LoadModule proxy_html_module modules/mod_proxy_html.so
+#LoadModule brotli_module modules/mod_brotli.so
 LoadModule mime_module modules/mod_mime.so
 #LoadModule ldap_module modules/mod_ldap.so
 LoadModule log_config_module modules/mod_log_config.so
@@ -137,6 +139,8 @@ LoadModule proxy_connect_module modules/mod_proxy_connect.so
 LoadModule proxy_http_module modules/mod_proxy_http.so
 #LoadModule proxy_fcgi_module modules/mod_proxy_fcgi.so
 #LoadModule proxy_scgi_module modules/mod_proxy_scgi.so
+#LoadModule proxy_uwsgi_module modules/mod_proxy_uwsgi.so
+#LoadModule proxy_fdpass_module modules/mod_proxy_fdpass.so
 #LoadModule proxy_wstunnel_module modules/mod_proxy_wstunnel.so
 #LoadModule proxy_ajp_module modules/mod_proxy_ajp.so
 #LoadModule proxy_balancer_module modules/mod_proxy_balancer.so
@@ -151,6 +155,8 @@ LoadModule slotmem_shm_module modules/mod_slotmem_shm.so
 LoadModule ssl_module modules/mod_ssl.so
 #LoadModule dialup_module modules/mod_dialup.so
 #LoadModule http2_module modules/mod_http2.so
+#LoadModule proxy_http2_module modules/mod_proxy_http2.so
+#LoadModule md_module modules/mod_md.so
 #LoadModule lbmethod_byrequests_module modules/mod_lbmethod_byrequests.so
 #LoadModule lbmethod_bytraffic_module modules/mod_lbmethod_bytraffic.so
 #LoadModule lbmethod_bybusyness_module modules/mod_lbmethod_bybusyness.so
