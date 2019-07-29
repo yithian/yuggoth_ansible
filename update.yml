@@ -46,10 +46,6 @@
             - remote-fs.target
             - systemd-networkd-wait-online
 
-      - name: set nextcloud permissions if needed
-        command: /usr/local/bin/set-nc-perms
-        when: '"nextcloud" in updates.packages'
-
       - name: restart httpd if needed
         systemd:
             name: httpd
