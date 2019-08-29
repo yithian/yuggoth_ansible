@@ -1,3 +1,7 @@
+[base]
+void.yuggoth.space
+pihole.yuggoth.space
+
 [dnsservers]
 void.yuggoth.space
 
