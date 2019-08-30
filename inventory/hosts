@@ -10,6 +10,7 @@ void.yuggoth.space
 
 [dockerservers]
 void.yuggoth.space
+pihole.yuggoth.space
 
 [zncservers]
 void.yuggoth.space
@@ -19,6 +20,9 @@ void.yuggoth.space
 
 [webservers]
 void.yuggoth.space
+
+[pihole]
+pihole.yuggoth.space
 
 [storage]
 storage.yuggoth.space

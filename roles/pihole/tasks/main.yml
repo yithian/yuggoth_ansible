@@ -1,0 +1,38 @@
+---
+- name: ensure the pihole volume is ready
+  docker_volume:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - "{{ pihole_docker_etcd_volume }}"
+    - "{{ pihole_docker_dnsmasqd_volume }}"
+  tags:
+    - docker
+    - pihole
+
+- name: ensure systemd-resolved is not running
+  systemd:
+    name: systemd-resolved
+    state: stopped
+    enabled: no
+
+- name: create a pihole container
+  docker_container:
+    name: pihole
+    image: pihole/pihole
+    state: started
+    restart_policy: always
+    published_ports:
+      - "53:53/tcp"
+      - "53:53/udp"
+      - "67:67/udp"
+      - "80:80/tcp"
+      - "443:443/tcp"
+    env:
+      DNS1: 208.67.222.222
+      DNS2: 208.67.220.220
+    volumes:
+      - "{{ pihole_docker_etcd_volume }}:/etc/pihole/"
+      - "{{ pihole_docker_dnsmasqd_volume }}:/etc/dnsmasq.d/"
+    dns_servers:
+      - 127.0.0.1

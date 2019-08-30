@@ -65,12 +65,8 @@ no-resolv
 # Add other name servers here, with domain specs if they are for
 # non-public domains.
 #server=/localnet/192.168.0.1
-# this is openNIC
-server=172.98.193.42
-server=162.248.241.94
-# this is at&t dns
-server=68.94.156.1
-server=68.94.157.1
+# this is pi-hole
+server={{ pihole_ip }}
 
 # Example of routing PTR queries to nameservers: this will send all
 # address->name queries for 192.168.3/24 to nameserver 10.1.2.3
