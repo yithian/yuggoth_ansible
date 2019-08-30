@@ -27,6 +27,7 @@ COMMIT
 :UDP - [0:0]
 -A INPUT -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
 -A INPUT -i lo -j ACCEPT
+-A INPUT -i docker0 -j ACCEPT
 -A INPUT -m conntrack --ctstate INVALID -j REJECT --reject-with icmp-port-unreachable
 -A INPUT -p icmp -m icmp --icmp-type 8 -m conntrack --ctstate NEW -j ACCEPT
 -A INPUT -p tcp -m tcp --tcp-flags FIN,SYN,RST,ACK SYN -m conntrack --ctstate NEW -j TCP
