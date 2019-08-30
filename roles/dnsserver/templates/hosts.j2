@@ -6,10 +6,10 @@
 #<ip-address>	<hostname.domain.org>	<hostname>
 127.0.0.1	localhost.localdomain	localhost
 ::1		localhost.localdomain	localhost
-{{ ansible_default_ipv4.address }}	{{ void_subdomain }} {{ mail_subdomain }} {{ nc_subdomain }} {{ web_subdomain }}
+{{ pihole_ip }}	{{ pihole_subdomain }}
+{{ void_ip }}	{{ void_subdomain }} {{ mail_subdomain }} {{ nc_subdomain }} {{ web_subdomain }}
 {{ storage_host_ip }}	{{ storage_subdomain }} {{ storage_subdomain }}.{{ domain }}
 {{ workstation_ip }}	{{ workstation_subdomain }} {{ workstation_subdomain }}.{{ domain }}
-{{ pihole_ip }}	{{ pihole_subdomain }}
 {{ router_ip }}	{{ router_subdomain }}
 
 # End of file
