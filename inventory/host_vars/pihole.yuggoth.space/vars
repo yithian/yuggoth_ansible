@@ -1,0 +1,3 @@
+---
+# docker storage
+docker_volumes: "{{ vault_docker_volumes }}"
