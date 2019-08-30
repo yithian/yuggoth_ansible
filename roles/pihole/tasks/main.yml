@@ -42,10 +42,11 @@
       - "80:80/tcp"
       - "443:443/tcp"
     env:
-      DNS1: 208.67.222.222
-      DNS2: 208.67.220.220
+      DNS1: 172.17.0.1#5353
+      DNS2: 66.70.228.164
     volumes:
       - "{{ pihole_docker_etcd_volume }}:/etc/pihole/"
       - "{{ pihole_docker_dnsmasqd_volume }}:/etc/dnsmasq.d/"
     dns_servers:
       - 127.0.0.1
+      - 66.70.228.164

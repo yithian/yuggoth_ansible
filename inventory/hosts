@@ -3,7 +3,10 @@ void.yuggoth.space
 pihole.yuggoth.space
 
 [dnsservers]
-void.yuggoth.space
+pihole.yuggoth.space
+
+[pihole]
+pihole.yuggoth.space
 
 [mailservers]
 void.yuggoth.space
@@ -20,9 +23,6 @@ void.yuggoth.space
 
 [webservers]
 void.yuggoth.space
-
-[pihole]
-pihole.yuggoth.space
 
 [storage]
 storage.yuggoth.space

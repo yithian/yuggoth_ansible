@@ -8,7 +8,7 @@
 # Listen on this specific port instead of the standard DNS port
 # (53). Setting this to zero completely disables DNS function,
 # leaving only DHCP and/or TFTP.
-#port=5353
+port=5353
 
 # The following two options make you a better netizen, since they
 # tell dnsmasq to filter out queries which the public DNS cannot
@@ -65,8 +65,9 @@ no-resolv
 # Add other name servers here, with domain specs if they are for
 # non-public domains.
 #server=/localnet/192.168.0.1
-# this is pi-hole
-server={{ pihole_ip }}
+# this is opennic
+server=66.70.228.164
+server=128.31.0.72
 
 # Example of routing PTR queries to nameservers: this will send all
 # address->name queries for 192.168.3/24 to nameserver 10.1.2.3
