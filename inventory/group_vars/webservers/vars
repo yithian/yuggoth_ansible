@@ -21,3 +21,7 @@ nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
 # znc config
 znc_port: 6697
+
+# ddclient credentials
+ddclient_login: "{{ vault_ddclient_login }}"
+ddclient_password: "{{ vault_ddclient_password }}"
