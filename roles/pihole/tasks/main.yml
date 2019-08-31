@@ -30,7 +30,6 @@
       - "443:443/tcp"
     env:
       DNS1: 172.17.0.1#5353
-      DNS2: 66.70.228.164
     volumes:
       - "{{ pihole_docker_etcd_volume }}:/etc/pihole/"
       - "{{ pihole_docker_dnsmasqd_volume }}:/etc/dnsmasq.d/"
