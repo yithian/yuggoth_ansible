@@ -11,10 +11,6 @@ pihole.yuggoth.space
 [mailservers]
 void.yuggoth.space
 
-[dockerservers]
-void.yuggoth.space
-pihole.yuggoth.space
-
 [zncservers]
 void.yuggoth.space
 
