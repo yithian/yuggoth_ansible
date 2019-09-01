@@ -4,8 +4,8 @@
     name: "{{ item }}"
     state: present
   with_items:
-    - "{{ pihole_docker_etcd_volume }}"
-    - "{{ pihole_docker_dnsmasqd_volume }}"
+    - "{{ docker_pihole_etc_volume }}"
+    - "{{ docker_pihole_dnsmasqd_volume }}"
   tags:
     - docker
     - pihole
@@ -31,8 +31,8 @@
     env:
       DNS1: 172.17.0.1#5353
     volumes:
-      - "{{ pihole_docker_etcd_volume }}:/etc/pihole/"
-      - "{{ pihole_docker_dnsmasqd_volume }}:/etc/dnsmasq.d/"
+      - "{{ docker_pihole_etc_volume }}:/etc/pihole/"
+      - "{{ docker_pihole_dnsmasqd_volume }}:/etc/dnsmasq.d/"
     dns_servers:
       - 127.0.0.1
       - 66.70.228.164

@@ -1,5 +1,5 @@
 ---
 # variables used for pihole
 pihole_container_name: pihole
-pihole_docker_etcd_volume: pihole-etcd
-pihole_docker_dnsmasqd_volume: pihole-etc-dnsmasqd
+docker_pihole_etc_volume: pihole-etc
+docker_pihole_dnsmasqd_volume: pihole-etc-dnsmasqd
