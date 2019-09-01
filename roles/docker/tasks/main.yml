@@ -12,6 +12,15 @@
     - docker
     - storage
 
+- name: install docker
+  pacman:
+    name:
+      - docker
+      - python2-docker-py
+    state: installed
+  tags:
+    - docker
+
 - name: ensure docker daemon is running
   systemd:
     name: docker
