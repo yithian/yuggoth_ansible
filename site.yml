@@ -2,6 +2,7 @@
 ---
 - import_playbook: storage.yml
 - import_playbook: base.yml
+- import_playbook: letsencrypt.yml
 - import_playbook: dnsserver.yml
 - import_playbook: mailserver.yml
 - import_playbook: docker.yml
