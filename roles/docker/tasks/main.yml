@@ -1,4 +1,10 @@
 ---
+- name: check kernel type
+  command: pacman -Qqs linux kernel and modules
+  register: kernel_type
+  tags:
+    - docker
+
 - name: mount docker volume storage
   mount:
     src: "{{ storage_host }}:{{ docker_volumes }}"
@@ -8,6 +14,7 @@
     dump: 0
     passno: 0
     state: mounted
+  when: "'raspberrypi' not in kernel_type and 'odroid' not in kernel_type"
   tags:
     - docker
     - storage
