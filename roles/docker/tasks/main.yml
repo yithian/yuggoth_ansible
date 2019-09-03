@@ -1,4 +1,13 @@
 ---
+- name: install docker
+  pacman:
+    name:
+      - docker
+      - python-docker
+    state: installed
+  tags:
+    - docker
+
 - name: check kernel type
   command: pacman -Qqs linux kernel and modules
   register: kernel_type
@@ -15,18 +24,10 @@
     passno: 0
     state: mounted
   when: "'raspberrypi' not in kernel_type and 'odroid' not in kernel_type"
+  notify: restart docker
   tags:
     - docker
     - storage
-
-- name: install docker
-  pacman:
-    name:
-      - docker
-      - python2-docker-py
-    state: installed
-  tags:
-    - docker
 
 - name: ensure docker daemon is running
   systemd:
