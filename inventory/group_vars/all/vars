@@ -37,6 +37,3 @@ nc_volume: "{{ vault_nc_volume }}"
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"
 storage_host_ip: "{{ vault_storage_host_ip }}"
-
-# for compatibility; arch linux defaults to python3
-ansible_python_interpreter: /usr/bin/python2
