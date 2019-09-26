@@ -82,4 +82,4 @@
       - name: reboot if needed
         reboot:
             msg: Kernel updated, rebooting...
-        when: '"linux-aarch64" in updates.packages or "linux-raspberrypi" in updates.packages'
+        when: '"linux-aarch64" in updates.packages or "linux-raspberrypi4" in updates.packages'
