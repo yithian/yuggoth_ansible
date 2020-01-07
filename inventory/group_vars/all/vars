@@ -28,6 +28,9 @@ pihole_subdomain: "{{ vault_pihole_subdomain }}"
 router_ip: "{{ vault_router_ip }}"
 router_subdomain: "{{ vault_router_subdomain }}"
 
+blog_ip: "{{ vault_blog_ip }}"
+blog_subdomain: "{{ vault_blog_subdomain }}"
+
 # storage nfs volumes
 www_volume: "{{ vault_www_volume }}"
 db_volume: "{{ vault_db_volume }}"
