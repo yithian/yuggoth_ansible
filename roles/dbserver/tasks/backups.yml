@@ -27,7 +27,7 @@
       name: cron database backups
       user: mysql
       minute: 1
-      job: mysqldump --defaults-extra-file=/etc/my-extra.cnf -u root -A | gzip - > /mnt/mysql_backup/dump_$(date +\%y\%m\%d).sql.gz
+      job: mysqldump --defaults-extra-file=/etc/my-extra.cnf -u root {{ nc_dbname }} | gzip - > /mnt/mysql_backup/dump_$(date +\%y\%m\%d).sql.gz
       state: present
   tags:
       - database

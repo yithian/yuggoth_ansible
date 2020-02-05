@@ -36,6 +36,7 @@ www_volume: "{{ vault_www_volume }}"
 db_volume: "{{ vault_db_volume }}"
 db_backup_volume: "{{ vault_db_backup_volume }}"
 nc_volume: "{{ vault_nc_volume }}"
+nc_dbname: "{{ vault_nc_dbname }}"
 
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"

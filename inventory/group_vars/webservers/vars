@@ -15,7 +15,6 @@ nc_instanceid: "{{ vault_nc_instanceid }}"
 nc_passwordsalt: "{{ vault_nc_passwordsalt }}"
 nc_secret: "{{ vault_nc_secret }}"
 
-nc_dbname: "{{ vault_nc_dbname }}"
 nc_dbuser: "{{ vault_nc_dbuser }}"
 nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
