@@ -36,3 +36,6 @@
     dns_servers:
       - 127.0.0.1
       - 66.70.228.164
+  tags:
+    - pihole
+    - container
