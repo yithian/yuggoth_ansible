@@ -2,11 +2,6 @@
 - name: reload systemd
   command: /usr/bin/systemctl daemon-reload
 
-- name: restart ddclient
-  service:
-      name: ddclient
-      state: restarted
-
 - name: reload dnsmasq
   service:
       name: dnsmasq

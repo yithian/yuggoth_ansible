@@ -18,6 +18,13 @@ mail_subdomain: "{{ vault_mail_subdomain }}"
 mail_host: "{{ vault_mail_host }}"
 nc_subdomain: "{{ vault_nc_subdomain }}"
 nc_host: "{{ vault_nc_host }}"
+foundry_server: "{{ vault_foundry_server }}"
+foundry_port: "{{ vault_foundry_port }}"
+foundry_subdomain: "{{ vault_foundry_subdomain }}"
+foundry_host: "{{ vault_foundry_host }}"
+
+celaeno_ip: "{{ vault_celaeno_ip }}"
+celaeno_subdomain: "{{ vault_celaeno_subdomain }}"
 
 workstation_ip: "{{ vault_workstation_ip }}"
 workstation_subdomain: "{{ vault_workstation_subdomain }}"

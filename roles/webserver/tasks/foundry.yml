@@ -1,0 +1,11 @@
+---
+- name: land httpd foundry config
+  template:
+      src: templates/httpd/extra/foundry.conf.j2
+      dest: /etc/httpd/conf/extra/foundry.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - foundry

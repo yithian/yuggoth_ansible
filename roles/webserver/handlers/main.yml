@@ -11,3 +11,8 @@
   service:
       name: httpd
       state: restarted
+
+- name: restart ddclient
+  service:
+      name: ddclient
+      state: restarted
