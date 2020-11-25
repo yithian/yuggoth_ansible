@@ -13,6 +13,8 @@
     ServerAdmin {{ user }}@{{ domain }}
     ServerName {{ foundry_host }}:{{ ssl_port }}
 
+    ProxyPreserveHost On
+    ProxyPass "/socket.io/" "ws://{{ foundry_server }}:{{ foundry_port }}/socket.io/"
     ProxyPass / http://{{ foundry_server }}:{{ foundry_port }}/
     ProxyPassReverse / http://{{ foundry_server }}:{{ foundry_port }}/
 
