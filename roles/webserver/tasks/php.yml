@@ -1,14 +1,14 @@
 ---
 - name: install php (and other requirements)
   pacman:
-      name: "{{ item }}"
-      state: installed
-  with_items:
+      name:
       - php
       - php-apache
       - php-apcu # optional by nextcloud
       - php-gd # required by nextcloud
       - php-intl # recommended by nextcloud
+      - php-imagick
+      state: installed
   notify: restart httpd
   tags:
       - php
