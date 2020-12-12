@@ -52,7 +52,6 @@
             state: restarted
             daemon_reload: yes
         when: ('apache' in updates.packages) or
-              ('passenger' in updates.packages) or
               ('php' in updates.packages) or
               ('php-apache' in updates.packages) or
               ('php-apcu-bc' in updates.packages) or
