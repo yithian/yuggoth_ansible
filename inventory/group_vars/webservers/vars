@@ -8,6 +8,7 @@ db_host: localhost
 # webserver storage
 www_mountpoint: "{{ vault_www_mountpoint }}"
 nc_mountpoint: "{{ vault_nc_mountpoint }}"
+foundry_mountpoint: "{{ vault_foundry_mountpoint }}"
 
 # nextcloud config
 nc_version: "{{ vault_nc_version }}"

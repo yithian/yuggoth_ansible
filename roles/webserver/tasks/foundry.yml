@@ -30,7 +30,7 @@
     dest: "/opt/{{ item }}"
     owner: 'foundryvtt'
     group: 'foundryvtt'
-    mode: 0770
+    mode: 0775
     state: directory
   with_items:
     - 'foundryvtt'
