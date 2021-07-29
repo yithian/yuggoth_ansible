@@ -22,6 +22,13 @@ nc_dbpassword: "{{ vault_nc_dbpassword }}"
 nc_release_channel: "{{ vault_nc_release_channel }}"
 nc_phone_region: "{{ vault_nc_phone_region }}"
 
+# airsonic config
+as_dbuser: "{{ vault_as_dbuser }}"
+as_dbpassword: "{{ vault_as_dbpassword }}"
+as_music_volume_mountpoint: "{{ vault_as_music_volume_mountpoint }}"
+as_encryption_key_password: "{{ vault_as_encryption_key_password }}"
+as_encryption_key_salt: "{{ vault_as_encryption_key_salt }}"
+
 # znc config
 znc_port: 6697
 

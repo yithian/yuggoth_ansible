@@ -1,0 +1,74 @@
+---
+- name: pull airsonic docker image
+  docker_image:
+      name: airsonicadvanced/airsonic-advanced
+      source: pull
+      state: present
+  tags:
+      - airsonic
+      - docker
+
+- name: create airsonic persistent storage
+  docker_volume:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - airsonic_data
+      - airsonic_music
+      - airsonic_playlists
+      - airsonic_podcasts
+  tags:
+      - airsonic
+      - docker
+
+- name: land airsonic config
+  template:
+      src: templates/airsonic/airsonic.properties.j2
+      dest: /var/lib/docker/volumes/airsonic_data/_data/airsonic.properties
+      owner: root
+      group: root
+      mode: 0644
+  notify: restart airsonic
+  tags:
+      - airsonic
+
+- name: mount nfs for music
+  mount:
+      src: "{{ storage_host }}:{{ as_music_volume }}"
+      name: "{{ as_music_volume_mountpoint }}"
+      fstype: nfs
+      opts: vers=3,comment=systemd.automount
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - airsonic
+      - storage
+
+- name: ensure airsonic is running
+  docker_container:
+      name: airsonic
+      image: "airsonicadvanced/airsonic-advanced"
+      volumes:
+        - airsonic_data:/var/airsonic
+        - airsonic_music:/var/music
+        - airsonic_playlists:/var/playlists
+        - airsonic_podcasts:/var/podcast
+      published_ports:
+        - "{{ airsonic_port }}:{{ airsonic_port }}"
+      detach: yes
+      restart_policy: always
+  tags:
+    - airsonic
+
+- name: land httpd airsonic config
+  template:
+      src: templates/httpd/extra/airsonic.conf.j2
+      dest: /etc/httpd/conf/extra/airsonic.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - airsonic
+      - httpd

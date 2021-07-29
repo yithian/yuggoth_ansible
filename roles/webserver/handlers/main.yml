@@ -16,3 +16,9 @@
   service:
       name: ddclient
       state: restarted
+
+- name: restart airsonic
+  docker_container:
+      name: airsonic
+      restart: yes
+      state: started
