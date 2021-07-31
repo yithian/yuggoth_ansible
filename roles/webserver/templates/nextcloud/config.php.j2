@@ -33,5 +33,13 @@ $CONFIG = array (
   'maintenance' => false,
   'appstore.experimental.enabled' => true,
   'htaccess.RewriteBase' => '/',
-  'updater.release.channel' => 'stable',
+  'updater.release.channel' => '{{ nc_release_channel }}',
+  'default_phone_region' => '{{ nc_phone_region }}',
+  'twofactor_enforced' => 'true',
+  'twofactor_enforced_groups' =>
+  array (
+  ),
+  'twofactor_enforced_excluded_groups' =>
+  array (
+  ),
 );

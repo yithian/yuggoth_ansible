@@ -19,6 +19,9 @@ nc_secret: "{{ vault_nc_secret }}"
 nc_dbuser: "{{ vault_nc_dbuser }}"
 nc_dbpassword: "{{ vault_nc_dbpassword }}"
 
+nc_release_channel: "{{ vault_nc_release_channel }}"
+nc_phone_region: "{{ vault_nc_phone_region }}"
+
 # znc config
 znc_port: 6697
 
