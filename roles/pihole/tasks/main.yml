@@ -1,5 +1,25 @@
 ---
-- name: ensure the pihole volume is ready
+- name: pull pihole docker image
+  docker_image:
+    name: pihole/pihole:latest
+    source: pull
+    state: present
+  tags:
+    - pihole
+    - docker
+
+- name: create pihole persistent storage
+  docker_volume:
+    name: "{{ item }}"
+    state: present
+  with_items:
+    - pihole_etc
+    - pihole_dnsmasq
+  tags:
+    - pihole
+    - docker
+
+- name: mount pihole volumes
   docker_volume:
     name: "{{ item }}"
     state: present
@@ -19,7 +39,7 @@
 - name: create a pihole container
   docker_container:
     name: pihole
-    image: pihole/pihole
+    image: pihole/pihole:latest
     state: started
     restart_policy: always
     published_ports:
@@ -27,15 +47,19 @@
       - "53:53/udp"
       - "67:67/udp"
       - "80:80/tcp"
-      - "443:443/tcp"
     env:
-      DNS1: 172.17.0.1#5353
+      TZ: "America/New_York"
+      # opendns upstream
+      PIHOLE_DNS_: 208.67.222.222;208.67.220.220
+      PIHOLE_DOMAIN: # fill in
+      VIRTUAL_HOST: # fill in
     volumes:
       - "{{ docker_pihole_etc_volume }}:/etc/pihole/"
       - "{{ docker_pihole_dnsmasqd_volume }}:/etc/dnsmasq.d/"
+    restart_policy: unless-stopped
     dns_servers:
       - 127.0.0.1
-      - 66.70.228.164
+      - 208.67.222.222
   tags:
     - pihole
     - container
