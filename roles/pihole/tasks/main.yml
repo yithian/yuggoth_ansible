@@ -19,22 +19,37 @@
     - pihole
     - docker
 
-- name: mount pihole volumes
-  docker_volume:
-    name: "{{ item }}"
-    state: present
-  with_items:
-    - "{{ docker_pihole_etc_volume }}"
-    - "{{ docker_pihole_dnsmasqd_volume }}"
+- name: mount nfs for pihole etc
+  mount:
+    src: "{{ storage_host }}:{{ pihole_etc_volume }}"
+    name: "{{ pihole_etc_mountpoint }}"
+    fstype: nfs
+    opts: vers=3,comment=systemd.automount
+    dump: 0
+    passno: 0
+    state: mounted
   tags:
     - docker
     - pihole
 
-- name: ensure systemd-resolved is not running
-  systemd:
-    name: systemd-resolved
-    state: stopped
-    enabled: no
+- name: mount nfs for pihole dnsmasq
+  mount:
+    src: "{{ storage_host }}:{{ pihole_dnsmasq_volume }}"
+    name: "{{ pihole_dnsmasq_mountpoint }}"
+    fstype: nfs
+    opts: vers=3,comment=systemd.automount
+    dump: 0
+    passno: 0
+    state: mounted
+  tags:
+    - docker
+    - pihole
+
+#- name: ensure systemd-resolved is not running
+#  systemd:
+#    name: systemd-resolved
+#    state: stopped
+#    enabled: no
 
 - name: create a pihole container
   docker_container:
@@ -43,19 +58,19 @@
     state: started
     restart_policy: always
     published_ports:
-      - "53:53/tcp"
-      - "53:53/udp"
-      - "67:67/udp"
-      - "80:80/tcp"
+      #- "53:53/tcp"
+      #- "53:53/udp"
+      #- "67:67/udp"
+      - "8080:80/tcp"
     env:
       TZ: "America/New_York"
       # opendns upstream
       PIHOLE_DNS_: 208.67.222.222;208.67.220.220
-      PIHOLE_DOMAIN: # fill in
-      VIRTUAL_HOST: # fill in
+      PIHOLE_DOMAIN: pihole.yuggoth.space
+      VIRTUAL_HOST:  pihole.yuggoth.space
     volumes:
-      - "{{ docker_pihole_etc_volume }}:/etc/pihole/"
-      - "{{ docker_pihole_dnsmasqd_volume }}:/etc/dnsmasq.d/"
+      - "{{ pihole_etc_volume }}:/etc/pihole/"
+      - "{{ pihole_dnsmasq_volume }}:/etc/dnsmasq.d/"
     restart_policy: unless-stopped
     dns_servers:
       - 127.0.0.1
