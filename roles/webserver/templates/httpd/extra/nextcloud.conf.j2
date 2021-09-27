@@ -30,8 +30,8 @@
     </Directory>
 
     SSLEngine on
-    SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
-    SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
+    SSLCertificateFile "{{ ssl_cert_file }}"
+    SSLCertificateKeyFile "{{ ssl_key_file }}"
 
     <FilesMatch "\.(cgi|shtml|phtml|php)$">
         SSLOptions +StdEnvVars

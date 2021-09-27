@@ -19,8 +19,8 @@
     ProxyPassReverse / http://{{ foundry_server }}:{{ foundry_port }}/
 
     SSLEngine on
-    SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
-    SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
+    SSLCertificateFile "{{ ssl_cert_file }}"
+    SSLCertificateKeyFile "{{ ssl_key_file }}"
 
     ErrorLog /var/log/httpd/ssl_{{ foundry_host }}-error_log
     CustomLog "/var/log/httpd/ssl_{{ foundry_host }}-request_log" \

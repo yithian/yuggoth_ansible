@@ -146,7 +146,7 @@ SSLEngine on
 #SSLCertificateFile "/etc/httpd/conf/server.crt"
 #SSLCertificateFile "/etc/httpd/conf/server-dsa.crt"
 #SSLCertificateFile "/etc/httpd/conf/server-ecc.crt"
-SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
+SSLCertificateFile "{{ ssl_cert_file }}"
 
 #   Server Private Key:
 #   If the key is not combined with the certificate, use this
@@ -157,7 +157,7 @@ SSLCertificateFile "/etc/letsencrypt/live/{{ web_host }}/fullchain.pem"
 #SSLCertificateKeyFile "/etc/httpd/conf/server.key"
 #SSLCertificateKeyFile "/etc/httpd/conf/server-dsa.key"
 #SSLCertificateKeyFile "/etc/httpd/conf/server-ecc.key"
-SSLCertificateKeyFile "/etc/letsencrypt/live/{{ web_host }}/privkey.pem"
+SSLCertificateKeyFile "{{ ssl_key_file }}"
 
 #   Server Certificate Chain:
 #   Point SSLCertificateChainFile at a file containing the

@@ -702,7 +702,7 @@ smtpd_tls_exclude_ciphers = aNULL, eNULL, EXPORT, DES, RC4, MD5, PSK, aECDH, EDH
 
 smtpd_tls_dh1024_param_file = $config_directory/dhparams.pem
 
-smtpd_tls_CAfile = /etc/letsencrypt/live/{{ web_host }}/fullchain.pem
+smtpd_tls_CAfile = {{ ssl_cert_file }}
 smtpd_tls_CApath = /etc/ssl/certs/
-smtpd_tls_cert_file = /etc/letsencrypt/live/{{ web_host }}/cert.pem
-smtpd_tls_key_file = /etc/letsencrypt/live/{{ web_host }}/privkey.pem
+smtpd_tls_cert_file = {{ ssl_cert_file }}
+smtpd_tls_key_file = {{ ssl_key_file }}
