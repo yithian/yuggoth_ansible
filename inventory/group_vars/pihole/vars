@@ -3,3 +3,6 @@
 pihole_container_name: pihole
 pihole_etc_mountpoint: "{{ vault_pihole_etc_mountpoint }}"
 pihole_dnsmasq_mountpoint: "{{ vault_pihole_dnsmasq_mountpoint }}"
+pihole_web_port: "{{ vault_pihole_web_port }}"
+pihole_dns_port: "{{ vault_pihole_dns_port }}"
+pihole_admin_password: "{{ vault_pihole_admin_password }}"

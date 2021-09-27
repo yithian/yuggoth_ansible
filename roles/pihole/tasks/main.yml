@@ -58,23 +58,24 @@
     state: started
     restart_policy: always
     published_ports:
-      #- "53:53/tcp"
-      #- "53:53/udp"
-      #- "67:67/udp"
-      - "8080:80/tcp"
+      - "{{ pihole_dns_port }}:53/tcp" # DNS
+      - "{{ pihole_dns_port }}:53/udp" # DNS
+      #- "67:67/udp" # DHCP
+      - "{{ pihole_web_port }}:80/tcp" # HTTP
     env:
       TZ: "America/New_York"
       # opendns upstream
-      PIHOLE_DNS_: 208.67.222.222;208.67.220.220
-      PIHOLE_DOMAIN: pihole.yuggoth.space
-      VIRTUAL_HOST:  pihole.yuggoth.space
+      PIHOLE_DNS_: 1.1.1.1;1.0.0.1
+      WEBPASSWORD: "{{ pihole_admin_password }}"
+      PIHOLE_DOMAIN: "{{ pihole_host }}"
+      VIRTUAL_HOST:  "{{ pihole_host }}"
     volumes:
       - "{{ pihole_etc_volume }}:/etc/pihole/"
       - "{{ pihole_dnsmasq_volume }}:/etc/dnsmasq.d/"
     restart_policy: unless-stopped
     dns_servers:
       - 127.0.0.1
-      - 208.67.222.222
+      - 1.1.1.1
   tags:
     - pihole
     - container
