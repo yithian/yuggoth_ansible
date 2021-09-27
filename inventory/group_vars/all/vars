@@ -33,8 +33,9 @@ celaeno_subdomain: "{{ vault_celaeno_subdomain }}"
 workstation_ip: "{{ vault_workstation_ip }}"
 workstation_subdomain: "{{ vault_workstation_subdomain }}"
 
-pihole_ip: "{{ vault_pihole_ip }}"
+pihole_server: "{{ vault_pihole_server }}"
 pihole_subdomain: "{{ vault_pihole_subdomain }}"
+pihole_host: "{{ vault_pihole_host }}"
 
 router_ip: "{{ vault_router_ip }}"
 router_subdomain: "{{ vault_router_subdomain }}"

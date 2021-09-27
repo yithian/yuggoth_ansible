@@ -78,3 +78,15 @@
   tags:
     - pihole
     - container
+
+- name: land httpd pihole config
+  template:
+      src: templates/httpd/extra/pihole.conf.j2
+      dest: /etc/httpd/conf/extra/pihole.conf
+      owner: root
+      group: root
+      mode: 0644
+  notify: reload httpd
+  tags:
+      - pihole
+      - httpd
