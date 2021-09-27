@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# set up convenience variables
+HEADERS=(-H "Authorization: Bearer {{ cloudflare_api_token }}" -H "Content-Type: application/json")
+API="https://api.cloudflare.com/client/v4"
+
+# get the zone id for {{ domain }}
+ZONE_ID=$(curl -s "${HEADERS[@]}" ${API}/zones?name={{ domain }} | jq -r '.result[0].id')
+
+# get the record IDs for {{ web_host }} and *.{{ domain }}
+WILDCARD_RECORD_ID=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_records?name=*.{{ domain }} | jq -r '.result[0].id')
+WWW_RECORD_ID=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_records?name={{ web_host }} | jq -r '.result[0].id')
+
+# compare the published records against the current IP
+# if they're different, update the record
+CURRENT_IP=$(curl -s https://ifconfig.me)
+
+for id in $WILDCARD_RECORD_ID $WWW_RECORD_ID ; do
+  published_ip=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_records/${id} | jq -r '.result.content')
+
+  if [ "${CURRENT_IP}" != "${published_ip}" ]; then
+    curl -s "${HEADERS[@]}" -X PATCH ${API}/zones/${ZONE_ID}/dns_records/${id} --data '{"content": ""}' > /dev/null
+    echo "updating record to ${CURRENT_IP}"
+  fi
+done

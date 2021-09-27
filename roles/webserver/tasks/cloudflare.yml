@@ -1,0 +1,20 @@
+---
+- name: create ddns script
+  template:
+      src: templates/cloudflare/ddns.sh.j2
+      dest: "{{ cloudflare_ddns_update_file }}"
+      owner: root
+      group: root
+      mode: 0770
+  tags:
+      - cloudflare
+
+- name: cron ddns script
+  cron:
+      name: update cloudflare dns
+      user: root
+      job: "{{ cloudflare_ddns_update_file }}"
+      minute: "*/5"
+      state: present
+  tags:
+      - cloudflare

@@ -61,6 +61,7 @@ storage_host_ip: "{{ vault_storage_host_ip }}"
 # cloudflare token for ddclient and certbot
 cloudflare_creds_file: "{{ vault_cloudflare_creds_file }}"
 cloudflare_api_token: "{{ vault_cloudflare_api_token }}"
+cloudflare_ddns_update_file: "{{ vault_cloudflare_ddns_update_file }}"
 
 # ssl cert for site use
 ssl_cert_name: "{{ vault_ssl_cert_name }}"

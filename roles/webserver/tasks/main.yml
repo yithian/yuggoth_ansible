@@ -6,4 +6,4 @@
 - import_tasks: tasks/nextcloud.yml
 - import_tasks: tasks/foundry.yml
 - import_tasks: tasks/airsonic.yml
-- import_tasks: tasks/ddclient.yml
+- import_tasks: tasks/cloudflare.yml
