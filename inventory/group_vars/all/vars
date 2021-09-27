@@ -24,6 +24,7 @@ foundry_subdomain: "{{ vault_foundry_subdomain }}"
 foundry_host: "{{ vault_foundry_host }}"
 airsonic_server: "{{ vault_airsonic_server }}"
 airsonic_port: "{{ vault_airsonic_port }}"
+airsonic_subdomain: "{{ vault_airsonic_subdomain }}"
 airsonic_host: "{{ vault_airsonic_host }}"
 
 celaeno_ip: "{{ vault_celaeno_ip }}"
@@ -56,3 +57,12 @@ pihole_dnsmasq_volume: "{{ vault_pihole_dnsmasq_volume }}"
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"
 storage_host_ip: "{{ vault_storage_host_ip }}"
+
+# cloudflare token for ddclient and certbot
+cloudflare_creds_file: "{{ vault_cloudflare_creds_file }}"
+cloudflare_api_token: "{{ vault_cloudflare_api_token }}"
+
+# ssl cert for site use
+ssl_cert_name: "{{ vault_ssl_cert_name }}"
+ssl_cert_file: "{{ vault_ssl_cert_file }}"
+ssl_key_file: "{{ vault_ssl_key_file }}"

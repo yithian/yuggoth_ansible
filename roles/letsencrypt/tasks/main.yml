@@ -1,29 +1,39 @@
 ---
 - name: install certbot
   pacman:
-      name: certbot
+      name:
+          - certbot
+          - certbot-apache
+          - certbot-dns-cloudflare
       state: installed
   tags:
       - ssl
 
-- name: install certbot-apache
-  pacman:
-      name: certbot-apache
-      state: installed
+- name: land Cloudflare creds file
+  ini_file:
+      path: "{{ cloudflare_creds_file }}"
+      mode: 0600
+      owner: root
+      group: root
+      section: null
+      option: dns_cloudflare_api_token
+      value: "{{ cloudflare_api_token }}"
+      state: present
   tags:
-      - ssl
+      - dns
+      - cloudflare
 
 - name: register with Let's Encrypt if necessary
   command: /usr/bin/certbot register -n -m {{ user }}@{{ domain }} --agree-tos
   args:
-      creates: /etc/letsencrypt/accounts/acme-v01.api.letsencrypt.org/directory/*
+      creates: /etc/letsencrypt/accounts/acme-v02.api.letsencrypt.org/directory/*
   tags:
       - ssl
 
 - name: get a Let's Encrypt cert if necessary
-  command: /usr/bin/certbot certonly --standalone -n -d {{ web_host }} -d {{ void_subdomain }}.{{ domain }} -d {{ mail_host }} -d {{ nc_host }} -d {{ foundry_host }} -d {{ airsonic_host }}
+  command: /usr/bin/certbot certonly -n --dns-cloudflare --dns-cloudflare-credentials {{ cloudflare_creds_file }} --preferred-challenges dns-01 -d {{ domain }},*.{{ domain }} --cert-name {{ ssl_cert_name }}
   args:
-      creates: /etc/letsencrypt/live/{{ web_host }}
+      creates: {{ ssl_cert_file }}
   tags:
       - ssl
 
