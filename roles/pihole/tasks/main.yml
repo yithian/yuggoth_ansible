@@ -45,11 +45,16 @@
     - docker
     - pihole
 
-#- name: ensure systemd-resolved is not running
-#  systemd:
-#    name: systemd-resolved
-#    state: stopped
-#    enabled: no
+- name: disable systemd-resolved stub listener
+  lineinfile:
+      path: /etc/systemd/resolved.conf
+      regexp: "#?DNSStubListener=yes"
+      line: "DNSStubListener=no"
+      state: present
+  notify:
+      - restart systemd-resolved
+  tags:
+      - systemd
 
 - name: create a pihole container
   docker_container:
@@ -58,8 +63,8 @@
     state: started
     restart_policy: always
     published_ports:
-      - "{{ pihole_dns_port }}:53/tcp" # DNS
-      - "{{ pihole_dns_port }}:53/udp" # DNS
+      - "53:53/tcp" # DNS
+      - "53:53/udp" # DNS
       #- "67:67/udp" # DHCP
       - "{{ pihole_web_port }}:80/tcp" # HTTP
     env:
