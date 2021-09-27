@@ -79,3 +79,4 @@
   notify: reload httpd
   tags:
       - foundry
+      - httpd
