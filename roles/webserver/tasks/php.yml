@@ -28,6 +28,18 @@
       - nextcloud
       - wordpress
 
+- name: configure imagick
+  copy:
+      src: files/php/conf.d/imagick.ini
+      dest: /etc/php/conf.d/imagick.ini
+      owner: root
+      group: root
+      mode: 0644
+  notify: restart httpd
+  tags:
+      - php
+      - nextcloud
+
 - name: configure apcu
   copy:
       src: files/php/conf.d/apcu.ini
