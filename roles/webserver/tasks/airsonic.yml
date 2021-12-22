@@ -1,13 +1,4 @@
 ---
-- name: pull airsonic docker image
-  docker_image:
-      name: airsonicadvanced/airsonic-advanced
-      source: pull
-      state: present
-  tags:
-      - airsonic
-      - docker
-
 - name: create airsonic persistent storage
   docker_volume:
       name: "{{ item }}"
@@ -54,6 +45,7 @@
         - airsonic_music:/var/music
         - airsonic_playlists:/var/playlists
         - airsonic_podcasts:/var/podcast
+      pull: true
       published_ports:
         - "{{ airsonic_port }}:{{ airsonic_port }}"
       detach: yes

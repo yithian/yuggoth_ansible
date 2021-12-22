@@ -1,13 +1,4 @@
 ---
-- name: pull pihole docker image
-  docker_image:
-    name: pihole/pihole:latest
-    source: pull
-    state: present
-  tags:
-    - pihole
-    - docker
-
 - name: create pihole persistent storage
   docker_volume:
     name: "{{ item }}"
@@ -62,6 +53,7 @@
     image: pihole/pihole:latest
     state: started
     restart_policy: always
+    pull: true
     published_ports:
       - "53:53/tcp" # DNS
       - "53:53/udp" # DNS

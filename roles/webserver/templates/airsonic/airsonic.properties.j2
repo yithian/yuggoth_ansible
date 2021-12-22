@@ -32,3 +32,19 @@ Theme=default
 LocaleLanguage=en
 LocaleCountry=
 LocaleVariant=
+DownloadBitrateLimit=0
+UploadBitrateLimit=0
+LdapEnabled=false
+LdapUrl=ldap://host.domain.com:389/cn=Users,dc=domain,dc=com
+LdapSearchFilter=(sAMAccountName={0})
+LdapManagerDn=
+LdapAutoShadowing=false
+SmtpServer={{ as_smtp_server }}
+SmtpEncryption=SSL/TLS
+SmtpPort=25
+SmtpUser=
+SmtpFrom=airsonic@{{ domain }}
+CaptchaEnabled=false
+ReCaptchaSiteKey={{ as_captcha_key }}
+UploadsFolder=%{['USER_MUSIC_FOLDERS'][0]}/Incoming
+GenreSeparators=;

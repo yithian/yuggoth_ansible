@@ -28,6 +28,8 @@ as_dbpassword: "{{ vault_as_dbpassword }}"
 as_music_volume_mountpoint: "{{ vault_as_music_volume_mountpoint }}"
 as_encryption_key_password: "{{ vault_as_encryption_key_password }}"
 as_encryption_key_salt: "{{ vault_as_encryption_key_salt }}"
+as_smtp_server: "{{ vault_as_smtp_server }}"
+as_captcha_key: "{{ vault_as_captcha_key }}"
 
 # znc config
 znc_port: 6697
