@@ -26,4 +26,10 @@
     ErrorLog /var/log/httpd/ssl_{{ pihole_host }}-error_log
     CustomLog "/var/log/httpd/ssl_{{ pihole_host }}-request_log" \
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
+
+    <Location />
+       Order deny,allow
+       Deny from all
+       Allow from {{ ansible_facts["default_ipv4"]["network"] }}/24
+    </Location>
 </VirtualHost>
