@@ -15,11 +15,13 @@ WWW_RECORD_ID=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_recor
 # if they're different, update the record
 CURRENT_IP=$(curl -s https://ifconfig.me)
 
-for id in $WILDCARD_RECORD_ID $WWW_RECORD_ID ; do
-  published_ip=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_records/${id} | jq -r '.result.content')
+if [[ "${?}" == 0 ]]; then
+  for id in $WILDCARD_RECORD_ID $WWW_RECORD_ID ; do
+    published_ip=$(curl -s "${HEADERS[@]}" -X GET ${API}/zones/${ZONE_ID}/dns_records/${id} | jq -r '.result.content')
 
-  if [ "${CURRENT_IP}" != "${published_ip}" ]; then
-    curl -s "${HEADERS[@]}" -X PATCH ${API}/zones/${ZONE_ID}/dns_records/${id} --data '{"content": ""}' > /dev/null
-    echo "updating record to ${CURRENT_IP}"
-  fi
-done
+    if [ "${CURRENT_IP}" != "${published_ip}" ]; then
+      curl -s "${HEADERS[@]}" -X PATCH ${API}/zones/${ZONE_ID}/dns_records/${id} --data '{"content": ""}' > /dev/null
+      echo "updating record to ${CURRENT_IP}"
+    fi
+  done
+fi
