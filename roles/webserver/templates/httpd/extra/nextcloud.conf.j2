@@ -15,18 +15,18 @@
     </IfModule>
 
     ServerAdmin {{ user }}@{{ domain }}
-    DocumentRoot /usr/share/webapps/nextcloud
+    DocumentRoot /usr/local/share/nextcloud
     ServerName {{ nc_host }}:{{ ssl_port }}
 
     <IfModule mod_alias.c>
-        Alias /cloud /usr/share/webapps/nextcloud/
+        Alias /cloud /usr/local/share/nextcloud/
     </IfModule>
 
-    <Directory /usr/share/webapps/nextcloud/>
+    <Directory /usr/local/share/nextcloud/>
         Options FollowSymlinks
         AllowOverride all
         Require all granted
-        #php_admin_value open_basedir "/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/share/webapps/nextcloud/:/etc/webapps/nextcloud:/dev/urandom"
+        #php_admin_value open_basedir "/srv/http/:/home/:/tmp/:/usr/share/pear/:/usr/local/share/nextcloud/:/etc/nextcloud:/dev/urandom"
     </Directory>
 
     SSLEngine on

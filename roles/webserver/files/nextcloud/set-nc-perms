@@ -6,7 +6,7 @@
 if [ -d "$2/apps" ]; then
   ncpath="$2"
 else
-  ncpath='/usr/share/webapps/nextcloud'
+  ncpath='/usr/local/share/nextcloud'
 fi
 
 htuser='http'
@@ -16,7 +16,6 @@ rootuser='root'
 runtime() {
   printf "Creating possible missing Directories\n"
   mkdir -p $ncpath/data
-  mkdir -p $ncpath/assets
   mkdir -p $ncpath/updater
 
   printf "chmod Files and Directories\n"
@@ -26,7 +25,6 @@ runtime() {
   printf "chown Directories\n"
   chown -R ${rootuser}:${htgroup} ${ncpath}/
   chown -R ${htuser}:${htgroup} ${ncpath}/apps/
-  chown -R ${htuser}:${htgroup} ${ncpath}/assets/
   chown -R ${htuser}:${htgroup} ${ncpath}/config/
   chown -R ${htuser}:${htgroup} ${ncpath}/data/
   chown -R ${htuser}:${htgroup} ${ncpath}/themes/

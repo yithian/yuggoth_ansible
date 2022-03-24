@@ -1,6 +1,5 @@
 [base]
 void.yuggoth.space
-pihole.yuggoth.space
 
 [dnsservers]
 pihole.yuggoth.space

@@ -17,6 +17,28 @@
       - nextcloud
       - database
 
+- name: set up base nextcloud filesystem
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: http
+    group: http
+    mode: 0750
+  with_items:
+      - /usr/local/share/nextcloud/
+      - /etc/nextcloud/
+      - /etc/nextcloud/config/
+  tags:
+      - nextcloud
+
+- name: link nextcloud config directory
+  file:
+    path: /usr/local/share/nextcloud/config
+    src: /etc/nextcloud/config/
+    state: link
+  tags:
+      - nextcloud
+
 - name: mount nextcloud storage
   mount:
       src: "{{ storage_host }}:{{ nc_volume }}"
@@ -71,7 +93,7 @@
 - name: configure nextcloud
   template:
       src: templates/nextcloud/config.php.j2
-      dest: /etc/webapps/nextcloud/config/config.php
+      dest: /etc/nextcloud/config/config.php
       owner: http
       group: http
       mode: 0640
@@ -85,7 +107,7 @@
       name: nextcloud cron.php
       user: http
       minute: "*/15"
-      job: php -f /usr/share/webapps/nextcloud/cron.php > /dev/null 2>&1
+      job: php -f /usr/local/share/nextcloud/cron.php > /dev/null 2>&1
       state: present
   tags:
       - nextcloud
@@ -95,7 +117,7 @@
   cron:
       name: nextcloud preview pre-generate
       user: http
-      job: /usr/share/webapps/nextcloud/occ preview:pre-generate > /dev/null 2>&1
+      job: /usr/local/share/nextcloud/occ preview:pre-generate > /dev/null 2>&1
       minute: "*/10"
       state: present
   tags:

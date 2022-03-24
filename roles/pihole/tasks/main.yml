@@ -66,6 +66,7 @@
       WEBPASSWORD: "{{ pihole_admin_password }}"
       PIHOLE_DOMAIN: "{{ pihole_host }}"
       VIRTUAL_HOST:  "{{ pihole_host }}"
+      RATE_LIMIT: "0/0"
     volumes:
       - "{{ pihole_etc_volume }}:/etc/pihole/"
       - "{{ pihole_dnsmasq_volume }}:/etc/dnsmasq.d/"

@@ -33,7 +33,7 @@
 - name: get a Let's Encrypt cert if necessary
   command: /usr/bin/certbot certonly -n --dns-cloudflare --dns-cloudflare-credentials {{ cloudflare_creds_file }} --preferred-challenges dns-01 -d {{ domain }},*.{{ domain }} --cert-name {{ ssl_cert_name }}
   args:
-      creates: {{ ssl_cert_file }}
+      creates: "{{ ssl_cert_file }}"
   tags:
       - ssl
 
