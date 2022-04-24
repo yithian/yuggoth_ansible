@@ -1,11 +1,10 @@
 ---
 - name: install docker
   pacman:
-      name: "{{ item }}"
+      name:
+        - docker
+        - python-docker
       state: present
-  with_items:
-      - docker
-      - python-docker
   tags:
       - docker
 
@@ -58,6 +57,16 @@
   docker_container:
       name: airsonic
       image: "airsonicadvanced/airsonic-advanced"
+      container_default_behavior: no_defaults
+      auto_remove: false
+      detach: true
+      init: no
+      interactive: no
+      memory: "0"
+      paused: no
+      privileged: no
+      read_only: no
+      tty: no
       volumes:
         - airsonic_data:/var/airsonic
         - airsonic_music:/var/music
@@ -70,6 +79,7 @@
       restart_policy: always
   tags:
     - airsonic
+    - container
 
 - name: land httpd airsonic config
   template:

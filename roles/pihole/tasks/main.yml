@@ -51,6 +51,16 @@
   docker_container:
     name: pihole
     image: pihole/pihole:latest
+    container_default_behavior: no_defaults
+    auto_remove: false
+    detach: true
+    init: no
+    interactive: no
+    memory: "0"
+    paused: no
+    privileged: no
+    read_only: no
+    tty: no
     state: started
     restart_policy: always
     pull: true
