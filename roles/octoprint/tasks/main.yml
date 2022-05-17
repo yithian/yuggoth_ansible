@@ -1,11 +1,25 @@
 ---
 - name: create octoprint persistent storage
   docker_volume:
-    name: octoprint_config
+    name: octoprint
     state: present
   tags:
     - octoprint
     - docker
+
+- name: mount nfs for octoprint persistent storage
+  mount:
+    src: "{{ storage_host }}:{{ octoprint_volume }}"
+    name: "{{ octoprint_mountpoint }}"
+    fstype: nfs
+    opts: vers=3,comment=systemd.automount
+    dump: 0
+    passno: 0
+    state: mounted
+  tags:
+    - octoprint
+    - docker
+    - storage
 
 - name: create an octoprint container
   docker_container:
@@ -32,7 +46,7 @@
       - /dev/video0:/dev/video0
       - /dev/ttyACM0:/dev/ttyACM0
     volumes:
-      - octoprint_config:/config
+      - octoprint:/octoprint
     restart_policy: unless-stopped
   tags:
     - octoprint

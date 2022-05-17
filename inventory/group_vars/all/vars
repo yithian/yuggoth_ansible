@@ -54,6 +54,7 @@ as_dbname: "{{ vault_as_dbname }}"
 foundry_volume: "{{ vault_foundry_volume }}"
 pihole_etc_volume: "{{ vault_pihole_etc_volume }}"
 pihole_dnsmasq_volume: "{{ vault_pihole_dnsmasq_volume }}"
+octoprint_volume: "{{ vault_octoprint_volume }}"
 
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"
