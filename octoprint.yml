@@ -1,0 +1,6 @@
+#!/usr/bin/env ansible-playbook
+---
+- hosts: octoprint
+  roles:
+    - docker
+    - octoprint

@@ -1,0 +1,39 @@
+---
+- name: create octoprint persistent storage
+  docker_volume:
+    name: octoprint_config
+    state: present
+  tags:
+    - octoprint
+    - docker
+
+- name: create an octoprint container
+  docker_container:
+    name: octoprint
+    image: octoprint/octoprint:latest
+    container_default_behavior: no_defaults
+    auto_remove: false
+    detach: true
+    init: no
+    interactive: no
+    memory: "0"
+    paused: no
+    privileged: no
+    read_only: no
+    tty: no
+    state: started
+    restart_policy: always
+    pull: true
+    published_ports:
+      - "80:80/tcp" # HTTP
+    env:
+      ENABLE_MJPG_STREAMER: "true"
+    devices:
+      - /dev/video0:/dev/video0
+      - /dev/ttyACM0:/dev/ttyACM0
+    volumes:
+      - octoprint_config:/config
+    restart_policy: unless-stopped
+  tags:
+    - octoprint
+    - container

@@ -1,5 +1,6 @@
 [base]
 void.yuggoth.space
+octo.yuggoth.space
 
 [dnsservers]
 pihole.yuggoth.space
@@ -18,3 +19,6 @@ void.yuggoth.space
 
 [storage]
 storage.yuggoth.space
+
+[octoprint]
+octo.yuggoth.space
