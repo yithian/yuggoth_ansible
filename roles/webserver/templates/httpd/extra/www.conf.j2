@@ -4,7 +4,7 @@
     DocumentRoot /srv/http/yuggoth/
     ServerName {{ web_host }}
 
-    Redirect permanent / https://{{ web_host }}/
+    Redirect temp / https://{{ web_host }}/
 
     ErrorLog /var/log/httpd/{{ web_host }}-error_log
     CustomLog /var/log/httpd/{{ web_host }}-access_log common
