@@ -28,8 +28,7 @@
           "%t %h %{SSL_PROTOCOL}x %{SSL_CIPHER}x \"%r\" %b"
 
     <Location />
-       Order deny,allow
-       Deny from all
+       Order Allow,Deny
        Allow from {{ ansible_facts["default_ipv4"]["network"] }}/24
     </Location>
 </VirtualHost>
