@@ -29,6 +29,19 @@
       - airsonic
       - docker
 
+- name: mount nfs for music
+  mount:
+      src: "{{ storage_host }}:{{ as_music_volume }}"
+      name: "{{ as_music_volume_mountpoint }}"
+      fstype: nfs
+      opts: vers=3,x-systemd.wanted-by=multi-user.target,x-systemd.automount
+      dump: 0
+      passno: 0
+      state: mounted
+  tags:
+      - airsonic
+      - storage
+
 - name: land airsonic config
   template:
       src: templates/airsonic/airsonic.properties.j2
@@ -39,19 +52,6 @@
   notify: restart airsonic
   tags:
       - airsonic
-
-- name: mount nfs for music
-  mount:
-      src: "{{ storage_host }}:{{ as_music_volume }}"
-      name: "{{ as_music_volume_mountpoint }}"
-      fstype: nfs
-      opts: vers=3,comment=systemd.automount
-      dump: 0
-      passno: 0
-      state: mounted
-  tags:
-      - airsonic
-      - storage
 
 - name: ensure airsonic is running
   docker_container:
@@ -75,8 +75,9 @@
       pull: true
       published_ports:
         - "{{ airsonic_port }}:{{ airsonic_port }}"
-      detach: yes
       restart_policy: always
+      env:
+        JAVA_OPTS='-Xmx1g'
   tags:
     - airsonic
     - container
