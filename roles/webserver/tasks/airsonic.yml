@@ -21,10 +21,7 @@
       name: "{{ item }}"
       state: present
   with_items:
-      - airsonic_data
       - airsonic_music
-      - airsonic_playlists
-      - airsonic_podcasts
   tags:
       - airsonic
       - docker
@@ -42,21 +39,10 @@
       - airsonic
       - storage
 
-- name: land airsonic config
-  template:
-      src: templates/airsonic/airsonic.properties.j2
-      dest: /var/lib/docker/volumes/airsonic_data/_data/airsonic.properties
-      owner: root
-      group: root
-      mode: 0644
-  notify: restart airsonic
-  tags:
-      - airsonic
-
-- name: ensure airsonic is running
+- name: ensure navidrome is running
   docker_container:
-      name: airsonic
-      image: "airsonicadvanced/airsonic-advanced"
+      name: navidrome
+      image: "deluan/navidrome:latest"
       container_default_behavior: no_defaults
       auto_remove: false
       detach: true
@@ -68,18 +54,14 @@
       read_only: no
       tty: no
       volumes:
-        - airsonic_data:/var/airsonic
-        - airsonic_music:/var/music
-        - airsonic_playlists:/var/playlists
-        - airsonic_podcasts:/var/podcast
+        - airsonic_data:/data
+        - airsonic_music:/music:ro
       pull: true
       published_ports:
         - "{{ airsonic_port }}:{{ airsonic_port }}"
       restart_policy: always
-      env:
-        JAVA_OPTS='-Xmx1g'
   tags:
-    - airsonic
+    - navidrome
     - container
 
 - name: land httpd airsonic config
