@@ -31,7 +31,7 @@
       src: "{{ storage_host }}:{{ as_music_volume }}"
       name: "{{ as_music_volume_mountpoint }}"
       fstype: nfs
-      opts: vers=3,x-systemd.wanted-by=multi-user.target,x-systemd.automount
+      opts: vers=3,comment=systemd.automount
       dump: 0
       passno: 0
       state: mounted
