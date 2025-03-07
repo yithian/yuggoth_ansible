@@ -1,24 +1,8 @@
 [base]
-void.yuggoth.space
-octo.yuggoth.space
-
-[dnsservers]
-pihole.yuggoth.space
-
-[pihole]
-void.yuggoth.space
-
-[mailservers]
-void.yuggoth.space
-
-[dbservers]
-void.yuggoth.space
+charon.yuggoth.space
 
 [webservers]
-void.yuggoth.space
+charon.yuggoth.space
 
 [storage]
 storage.yuggoth.space
-
-[octoprint]
-octo.yuggoth.space

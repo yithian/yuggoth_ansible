@@ -1,5 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- hosts: dnsservers
-  roles:
-      - dnsserver

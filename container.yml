@@ -1,6 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- hosts: webservers
-  roles:
-      - webserver
-      - pihole

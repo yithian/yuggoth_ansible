@@ -1,0 +1,40 @@
+---
+- name: create web proxy persistent storage
+  docker_volume:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - nginx_proxy_data
+      - nginx_proxy_letsencrypt
+  tags:
+      - storage
+      - proxy
+
+- name: ensure web proxy is running
+  docker_container:
+      name: nginx-proxy-manager
+      image: "jc21/nginx-proxy-manager:latest"
+      container_default_behavior: no_defaults
+      auto_remove: false
+      detach: true
+      init: no
+      interactive: no
+      memory: "0"
+      paused: no
+      privileged: no
+      read_only: no
+      tty: no
+      volumes:
+        - nginx_proxy_data:/data
+        - nginx_proxy_letsencrypt:/etc/letsencrypt
+      published_ports:
+        - "{{ web_port }}:{{ web_port }}"
+        - "{{ web_admin_port }}:{{ web_admin_port }}"
+        - "{{ ssl_port }}:{{ ssl_port }}"
+      pull: true
+      networks:
+        - name: yuggoth
+      restart_policy: unless-stopped
+  tags:
+    - container
+    - proxy

@@ -1,3 +1,0 @@
----
-vpn_subnet: "{{ vault_vpn_subnet }}"
-vpn_subnet_mask: "{{ vault_vpn_subnet_mask }}"

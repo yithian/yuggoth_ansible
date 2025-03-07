@@ -1,3 +1,0 @@
----
-- import_tasks: tasks/hosts.yml
-- import_tasks: tasks/dnsmasq.yml
