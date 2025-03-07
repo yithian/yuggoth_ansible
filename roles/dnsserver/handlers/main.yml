@@ -1,8 +1,0 @@
----
-- name: reload systemd
-  command: /usr/bin/systemctl daemon-reload
-
-- name: reload dnsmasq
-  service:
-      name: dnsmasq
-      state: reloaded

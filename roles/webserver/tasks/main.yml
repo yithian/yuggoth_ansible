@@ -1,9 +1,7 @@
 ---
-- import_tasks: tasks/httpd.yml
-- import_tasks: tasks/php.yml
-- import_tasks: tasks/ssl.yml
-- import_tasks: tasks/www.yml
-- import_tasks: tasks/nextcloud.yml
-- import_tasks: tasks/foundry.yml
-- import_tasks: tasks/airsonic.yml
+- import_tasks: tasks/docker.yml
+- import_tasks: tasks/music.yml
+- import_tasks: tasks/audiobooks.yml
+- import_tasks: tasks/staticweb.yml
+- import_tasks: tasks/proxy.yml
 - import_tasks: tasks/cloudflare.yml

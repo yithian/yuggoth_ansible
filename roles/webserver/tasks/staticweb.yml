@@ -1,0 +1,36 @@
+---
+- name: create staticweb volume
+  docker_volume:
+    name: static-web
+    driver_options:
+      type: nfs
+      o: "addr=storage.yuggoth.space,rw"
+      device: ":/nfs/www"
+    state: present
+  tags:
+      - storage
+      - staticweb
+
+- name: ensure static web container is running
+  docker_container:
+      name: www
+      image: "nginx:latest"
+      container_default_behavior: no_defaults
+      auto_remove: false
+      detach: true
+      interactive: no
+      memory: "0"
+      paused: no
+      privileged: no
+      read_only: no
+      tty: no
+      mounts:
+        - source: static-web
+          target: /usr/share/nginx/html
+      pull: true
+      networks:
+        - name: yuggoth
+      restart_policy: unless-stopped
+  tags:
+    - container
+    - staticweb

@@ -1,5 +1,0 @@
-#!/usr/bin/env ansible-playbook
----
-- hosts: dbservers
-  roles:
-      - dbserver

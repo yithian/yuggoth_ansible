@@ -1,4 +1,0 @@
----
-# variables used for znc
-znc_container_name: znc
-znc_docker_volume: znc-data

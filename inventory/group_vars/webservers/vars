@@ -1,39 +1,5 @@
 ---
 # webserver variables
 web_port: 80
+web_admin_port: 81
 ssl_port: 443
-
-db_host: localhost
-
-# webserver storage
-www_mountpoint: "{{ vault_www_mountpoint }}"
-nc_mountpoint: "{{ vault_nc_mountpoint }}"
-foundry_mountpoint: "{{ vault_foundry_mountpoint }}"
-
-# nextcloud config
-nc_version: "{{ vault_nc_version }}"
-nc_instanceid: "{{ vault_nc_instanceid }}"
-nc_passwordsalt: "{{ vault_nc_passwordsalt }}"
-nc_secret: "{{ vault_nc_secret }}"
-
-nc_dbuser: "{{ vault_nc_dbuser }}"
-nc_dbpassword: "{{ vault_nc_dbpassword }}"
-
-nc_release_channel: "{{ vault_nc_release_channel }}"
-nc_phone_region: "{{ vault_nc_phone_region }}"
-
-# airsonic config
-as_dbuser: "{{ vault_as_dbuser }}"
-as_dbpassword: "{{ vault_as_dbpassword }}"
-as_music_volume_mountpoint: "{{ vault_as_music_volume_mountpoint }}"
-as_encryption_key_password: "{{ vault_as_encryption_key_password }}"
-as_encryption_key_salt: "{{ vault_as_encryption_key_salt }}"
-as_smtp_server: "{{ vault_as_smtp_server }}"
-as_captcha_key: "{{ vault_as_captcha_key }}"
-
-# znc config
-znc_port: 6697
-
-# ddclient credentials
-ddclient_login: "{{ vault_ddclient_login }}"
-ddclient_password: "{{ vault_ddclient_password }}"

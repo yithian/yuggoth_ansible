@@ -1,0 +1,25 @@
+---
+- name: install docker
+  pacman:
+      name:
+        - docker
+        - python-docker
+      state: present
+  tags:
+      - docker
+
+- name: ensure docker is running
+  systemd:
+      name: docker
+      enabled: yes
+      state: started
+  tags:
+      - docker
+
+- name: ensure docker network is present
+  docker_network:
+      name: yuggoth
+      state: present
+  tags:
+      - docker
+      - network

@@ -1,8 +1,0 @@
----
-# postfix configs
-mailserver: "{{ vault_mailserver }}"
-relayhost: "{{ vault_relayhost }}"
-sasl_password_map: "{{ vault_sasl_password_map }}"
-
-# dkim config
-dkim_selector: "{{ vault_dkim_selector }}"

@@ -1,6 +1,0 @@
----
-- name: restart mariadb
-  command: /usr/bin/systemctl restart mariadb
-
-- name: reload systemd
-  command: /usr/bin/systemctl daemon-reload

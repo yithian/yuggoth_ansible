@@ -1,1 +1,0 @@
-octoprint_mountpoint: "{{ vault_octoprint_mountpoint }}"

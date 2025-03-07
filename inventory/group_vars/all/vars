@@ -10,52 +10,9 @@ shell: "{{ vault_shell }}"
 
 # site domain
 domain: "{{ vault_domain }}"
-void_ip: "{{ vault_void_ip }}"
-void_subdomain: "{{ vault_void_subdomain }}"
-web_subdomain: "{{ vault_web_subdomain }}"
-web_host: "{{ vault_web_host }}"
-mail_subdomain: "{{ vault_mail_subdomain }}"
-mail_host: "{{ vault_mail_host }}"
-nc_subdomain: "{{ vault_nc_subdomain }}"
-nc_host: "{{ vault_nc_host }}"
-foundry_server: "{{ vault_foundry_server }}"
-foundry_port: "{{ vault_foundry_port }}"
-foundry_subdomain: "{{ vault_foundry_subdomain }}"
-foundry_host: "{{ vault_foundry_host }}"
-airsonic_server: "{{ vault_airsonic_server }}"
-airsonic_port: "{{ vault_airsonic_port }}"
-airsonic_subdomain: "{{ vault_airsonic_subdomain }}"
-airsonic_host: "{{ vault_airsonic_host }}"
-
-celaeno_ip: "{{ vault_celaeno_ip }}"
-celaeno_subdomain: "{{ vault_celaeno_subdomain }}"
-
-workstation_ip: "{{ vault_workstation_ip }}"
-workstation_subdomain: "{{ vault_workstation_subdomain }}"
-
-pihole_ip: "{{ vault_pihole_ip }}"
-pihole_server: "{{ vault_pihole_server }}"
-pihole_subdomain: "{{ vault_pihole_subdomain }}"
-pihole_host: "{{ vault_pihole_host }}"
 
 router_ip: "{{ vault_router_ip }}"
 router_subdomain: "{{ vault_router_subdomain }}"
-
-blog_ip: "{{ vault_blog_ip }}"
-blog_subdomain: "{{ vault_blog_subdomain }}"
-
-# storage nfs volumes
-www_volume: "{{ vault_www_volume }}"
-db_volume: "{{ vault_db_volume }}"
-db_backup_volume: "{{ vault_db_backup_volume }}"
-nc_volume: "{{ vault_nc_volume }}"
-nc_dbname: "{{ vault_nc_dbname }}"
-as_music_volume: "{{ vault_as_music_volume }}"
-as_dbname: "{{ vault_as_dbname }}"
-foundry_volume: "{{ vault_foundry_volume }}"
-pihole_etc_volume: "{{ vault_pihole_etc_volume }}"
-pihole_dnsmasq_volume: "{{ vault_pihole_dnsmasq_volume }}"
-octoprint_volume: "{{ vault_octoprint_volume }}"
 
 storage_subdomain: "{{ vault_storage_subdomain }}"
 storage_host: "{{ vault_storage_host }}"
@@ -65,8 +22,3 @@ storage_host_ip: "{{ vault_storage_host_ip }}"
 cloudflare_creds_file: "{{ vault_cloudflare_creds_file }}"
 cloudflare_api_token: "{{ vault_cloudflare_api_token }}"
 cloudflare_ddns_update_file: "{{ vault_cloudflare_ddns_update_file }}"
-
-# ssl cert for site use
-ssl_cert_name: "{{ vault_ssl_cert_name }}"
-ssl_cert_file: "{{ vault_ssl_cert_file }}"
-ssl_key_file: "{{ vault_ssl_key_file }}"

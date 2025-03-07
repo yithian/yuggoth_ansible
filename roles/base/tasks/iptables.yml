@@ -1,14 +1,4 @@
 ---
-- name: land ip6tables config
-  copy:
-      src: files/iptables/ip6tables.rules
-      dest: /etc/iptables/ip6tables.rules
-      owner: root
-      group: root
-      mode: 0644
-  tags:
-      - firewall
-
 - name: land iptables config
   copy:
       src: files/iptables/iptables.rules
@@ -17,27 +7,6 @@
       group: root
       mode: 0644
   notify: reload iptables
-  tags:
-      - firewall
-
-- name: ensure iptables systemd override directory exists
-  file:
-      path: /etc/systemd/system/iptables.service.d
-      owner: root
-      group: root
-      mode: 0755
-      state: directory
-  notify: reload systemd
-  tags:
-      - firewall
-
-- name: land iptables systemd override
-  copy:
-      src: files/iptables/00-pre-network.conf
-      dest: /etc/systemd/system/iptables.service.d/00-pre-network.conf
-      owner: root
-      group: root
-      mode: 0644
   tags:
       - firewall
 

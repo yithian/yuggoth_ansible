@@ -1,0 +1,54 @@
+---
+- name: create audiobookshelf persistent storage
+  docker_volume:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - audiobookshelf_config
+      - audiobookshelf_metadata
+      - audiobookshelf_podcasts
+  tags:
+      - storage
+      - audiobooks
+
+- name: create audiobooks volume
+  docker_volume:
+    name: audiobooks
+    driver_options:
+      type: nfs
+      o: "addr=storage.yuggoth.space,rw"
+      device: ":/nfs/audiobooks"
+    state: present
+  tags:
+      - storage
+      - audiobooks
+
+- name: ensure audiobookshelf is running
+  docker_container:
+      name: audiobookshelf
+      image: "ghcr.io/advplyr/audiobookshelf:latest"
+      container_default_behavior: no_defaults
+      auto_remove: false
+      detach: true
+      interactive: no
+      memory: "0"
+      paused: no
+      privileged: no
+      read_only: no
+      tty: no
+      volumes:
+        - audiobookshelf_config:/config
+        - audiobookshelf_metadata:/metadata
+        - audiobookshelf_podcasts:/podcasts
+      mounts:
+        - source: audiobooks
+          target: /audiobooks
+      env:
+        TZ: America/New_York
+      pull: true
+      networks:
+        - name: yuggoth
+      restart_policy: unless-stopped
+  tags:
+    - container
+    - audiobooks

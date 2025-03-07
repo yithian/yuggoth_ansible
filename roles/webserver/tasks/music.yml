@@ -1,0 +1,51 @@
+---
+- name: create navidrome data volume
+  docker_volume:
+      name: "{{ item }}"
+      state: present
+  with_items:
+      - navidrome_data
+  tags:
+      - storage
+      - music
+
+- name: create music volume
+  docker_volume:
+    name: music
+    driver_options:
+      type: nfs
+      o: "addr=storage.yuggoth.space,rw"
+      device: ":/nfs/music"
+    state: present
+  tags:
+      - storage
+      - music
+
+- name: ensure navidrome is running
+  docker_container:
+      name: navidrome
+      image: "deluan/navidrome:latest"
+      container_default_behavior: no_defaults
+      auto_remove: false
+      detach: true
+      interactive: no
+      memory: "0"
+      paused: no
+      privileged: no
+      read_only: no
+      tty: no
+      volumes:
+        - navidrome_data:/data
+      mounts:
+        - source: music
+          target: /music
+      networks:
+        - name: yuggoth
+      env:
+        ND_IGNOREDARTICLES: "The El La Los Las Le Les Os As O A"
+        ND_ENABLEGRAVATAR: "true"
+      pull: true
+      restart_policy: unless-stopped
+  tags:
+    - container
+    - music
