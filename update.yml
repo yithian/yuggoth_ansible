@@ -46,21 +46,6 @@
             - remote-fs.target
             - systemd-networkd-wait-online
 
-      - name: restart httpd if needed
-        systemd:
-            name: httpd
-            state: restarted
-            daemon_reload: yes
-        when: ('apache' in updates.packages) or
-              ('php' in updates.packages) or
-              ('php-apache' in updates.packages) or
-              ('php-apcu-bc' in updates.packages) or
-              ('php-gd' in updates.packages) or
-              ('php-intl' in updates.packages) or
-              ('php-mcrypt' in updates.packages) or
-              ('openssl' in updates.packages) or
-              ('wordpress' in updates.packages)
-
       - name: restart other services if needed
         systemd:
             name: "{{ item }}"
@@ -69,16 +54,9 @@
         when: item in updates.packages
         with_items:
             - cronie
-            - fake-hwclock
-            - mariadb
-            - ddclient
-            - dnsmasq
-            - opendkim
-            - postfix
-            - spamassassin
             - docker
 
       - name: reboot if needed
         reboot:
             msg: Kernel updated, rebooting...
-        when: '"linux-aarch64" in updates.packages or "linux-raspberrypi4" in updates.packages'
+        when: '"linux" in updates.packages'
