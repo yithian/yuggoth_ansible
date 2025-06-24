@@ -44,6 +44,9 @@
       env:
         ND_IGNOREDARTICLES: "The El La Los Las Le Les Os As O A"
         ND_ENABLEGRAVATAR: "true"
+        ND_SCANNER_ENABLED: "true"
+        ND_SCANNER_SCHEDULE: "0 * * * *"
+        ND_SCANNER_WATCHERWAIT: "5s"
       pull: true
       restart_policy: unless-stopped
   tags:
